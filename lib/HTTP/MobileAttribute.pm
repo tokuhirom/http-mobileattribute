@@ -13,7 +13,7 @@ __END__
 
 =head1 NAME
 
-HTTP::MobileAttribute -
+HTTP::MobileAttribute - Yet Another HTTP::MobileAgent
 
 =head1 SYNOPSIS
 
