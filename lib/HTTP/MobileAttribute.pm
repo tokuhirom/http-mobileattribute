@@ -21,7 +21,7 @@ HTTP::MobileAttribute - Yet Another HTTP::MobileAgent
 
 =head1 DESCRIPTION
 
-HTTP::MobileAttribute is
+HTTP::MobileAttribute is Plaggable version of HTTP::MobileAgent.
 
 =head1 AUTHOR
 
@@ -30,6 +30,8 @@ Tokuhiro Matsuno E<lt>tokuhirom aaaatttt gmail dotottto commmmmE<gt>
 Kazuhiro Osawa
 
 =head1 SEE ALSO
+
+L<HTTP::MobileAgent>
 
 =head1 LICENSE
 
