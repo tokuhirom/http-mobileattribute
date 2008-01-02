@@ -5,11 +5,24 @@ use warnings;
 our $VERSION = '0.01';
 
 use Class::Component;
+use HTTP::MobileAttribute::Agent::NonMobile;
+
+sub get_agent {
+    my ($self, $stuff) = @_;
+
+    my $agent = $self->NEXT('get_agent' => $stuff);
+
+    if (ref($agent) =~ /^HTTP::MobileAttribute::Agent/) {
+        return $agent;
+    } else {
+        return HTTP::MobileAttribute::Agent::NonMobile->new;
+    }
+}
 
 1;
 __END__
 
-=for stopwords aaaatttt gmail dotottto commmmm Kazuhiro Osawa
+=for stopwords aaaatttt gmail dotottto commmmm Kazuhiro Osawa Plaggable
 
 =head1 NAME
 
