@@ -32,6 +32,12 @@ HTTP::MobileAttribute - Yet Another HTTP::MobileAgent
 
   use HTTP::MobileAttribute;
 
+=head1 WARNINGS
+
+WE ARE NOW TESTING THE CONCEPT.
+
+DO NOT USE THIS MODULE.
+
 =head1 DESCRIPTION
 
 HTTP::MobileAttribute is Plaggable version of HTTP::MobileAgent.
