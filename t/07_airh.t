@@ -20,7 +20,7 @@ for (@Tests) {
     ok $agent->is_airh_phone;
 
     for my $key (keys %data) {
-	is $agent->$key(), $data{$key}, "$key is $data{$key}";
+        is $agent->$key(), $data{$key}, "$key is $data{$key}";
     }
 }
 

@@ -47,17 +47,17 @@ for (@Tests) {
     isa_ok $agent, 'HTTP::MobileAttribute::DoCoMo';
     ok $agent->is_docomo && ! $agent->is_j_phone && !$agent->is_vodafone && ! $agent->is_ezweb;
     is $agent->name, 'DoCoMo';
-    is $agent->user_agent, $ua,		"ua is $ua";
-    is $agent->version, $data[0],	"version is $data[0]";
-    is $agent->html_version, $data[1],	"HTML version is $data[1]";
-    is $agent->model, $data[2],		"model is $data[2]";
-    is $agent->cache_size, $data[3],	"cache size is $data[3]";
-    is $agent->is_foma, $data[4],	"is_foma";
-    is $agent->vendor, $data[5],	"vendor";
-    is $agent->series, $data[6],	"cache size";
+    is $agent->user_agent, $ua,                "ua is $ua";
+    is $agent->version, $data[0],        "version is $data[0]";
+    is $agent->html_version, $data[1],        "HTML version is $data[1]";
+    is $agent->model, $data[2],                "model is $data[2]";
+    is $agent->cache_size, $data[3],        "cache size is $data[3]";
+    is $agent->is_foma, $data[4],        "is_foma";
+    is $agent->vendor, $data[5],        "vendor";
+    is $agent->series, $data[6],        "cache size";
     is $agent->xhtml_compliant, $data[8], "xhtml compliant $ua";
     if ($data[7]) {
-	is $agent->$_(), $data[7]->{$_},"testing $_" for keys %{$data[7]};
+        is $agent->$_(), $data[7]->{$_},"testing $_" for keys %{$data[7]};
     }
     is $agent->carrier, 'I' , "carrier is I";
     is $agent->carrier_longname, 'DoCoMo' ,  "carrier longname is DoCoMo";

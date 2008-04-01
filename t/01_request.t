@@ -35,8 +35,8 @@ SKIP: {
     # mock object
     package Apache;
     sub header_in {
-	my($r, $header) = @_;
-	return $r->{$header};
+        my($r, $header) = @_;
+        return $r->{$header};
     }
 
     package main;

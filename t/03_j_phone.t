@@ -9,15 +9,15 @@ my @Tests = (
     [ 'J-PHONE/3.0/J-PE03_a', '3.0', 'J-PE03_a', undef ],
     [ 'J-PHONE/4.0/J-SH51/SNJSHA3029293 SH/0001aa Profile/MIDP-1.0 Configuration/CLDC-1.0 Ext-Profile/JSCL-1.1.0',
       '4.0', 'J-SH51', 1, 'JSHA3029293', 'SH', '0001aa', {
-	  Profile =>'MIDP-1.0',
-	  Configuration => 'CLDC-1.0',
-	  'Ext-Profile' => 'JSCL-1.1.0',
+          Profile =>'MIDP-1.0',
+          Configuration => 'CLDC-1.0',
+          'Ext-Profile' => 'JSCL-1.1.0',
       } ],
     [ 'J-PHONE/4.0/J-SH51/SNXXXXXXXXX SH/0001a Profile/MIDP-1.0 Configuration/CLDC-1.0 Ext-Profile/JSCL-1.1.0',
       '4.0', 'J-SH51', 1, 'XXXXXXXXX', 'SH', '0001a', {
-	  Profile => 'MIDP-1.0',
-	  Configuration => 'CLDC-1.0',
-	  'Ext-Profile' => 'JSCL-1.1.0',
+          Profile => 'MIDP-1.0',
+          Configuration => 'CLDC-1.0',
+          'Ext-Profile' => 'JSCL-1.1.0',
       }],
     [ 'J-PHONE/5.0/V801SA', '5.0', 'V801SA', undef ],
     [ 'J-Phone/5.0/J-SH03 (compatible; Mozilla 4.0; MSIE 5.5; YahooSeeker)', '5.0', 'J-SH03', undef ],
@@ -31,28 +31,28 @@ for (@Tests) {
     ok !$agent->is_docomo && $agent->is_j_phone && $agent->is_vodafone && !$agent->is_ezweb;
     is $agent->name ,'J-PHONE';
 
-    is $agent->user_agent, $ua,		"ua is $ua";
-    is $agent->version, $data[0],	"version is $data[0]";
-    is $agent->model, $data[1],		"model is $data[1]";
+    is $agent->user_agent, $ua,                "ua is $ua";
+    is $agent->version, $data[0],        "version is $data[0]";
+    is $agent->model, $data[1],                "model is $data[1]";
     is $agent->packet_compliant, $data[2], "packet compliant?";
     if (@data > 3) {
-	is $agent->serial_number, $data[3],	"serial is $data[3]";
-	is $agent->vendor, $data[4],		"vendor is $data[4]";
-	is $agent->vendor_version, $data[5],	"vendor version is $data[5]";
-	is_deeply $agent->java_info, $data[6];
+        is $agent->serial_number, $data[3],        "serial is $data[3]";
+        is $agent->vendor, $data[4],                "vendor is $data[4]";
+        is $agent->vendor_version, $data[5],        "vendor version is $data[5]";
+        is_deeply $agent->java_info, $data[6];
     }
 
     if($ua eq 'J-PHONE/2.0/J-DN02'){
-	    ok $agent->is_type_c && ! $agent->is_type_p && ! $agent->is_type_w;
+            ok $agent->is_type_c && ! $agent->is_type_p && ! $agent->is_type_w;
     }
     if($ua eq 'J-PHONE/3.0/J-PE03_a'){
-	    ok $agent->is_type_c && ! $agent->is_type_p && ! $agent->is_type_w;
+            ok $agent->is_type_c && ! $agent->is_type_p && ! $agent->is_type_w;
     }
     if($ua eq 'J-PHONE/4.0/J-SH51/SNJSHA3029293 SH/0001aa Profile/MIDP-1.0 Configuration/CLDC-1.0 Ext-Profile/JSCL-1.1.0') {
-	    ok !$agent->is_type_c && $agent->is_type_p && !$agent->is_type_w;
+            ok !$agent->is_type_c && $agent->is_type_p && !$agent->is_type_w;
     }
     if($ua eq 'J-PHONE/5.0/V801SA'){
-	    ok !$agent->is_type_c && !$agent->is_type_p && $agent->is_type_w;
+            ok !$agent->is_type_c && !$agent->is_type_p && $agent->is_type_w;
     }
 
     is $agent->carrier, 'V' , "carrier is V";
