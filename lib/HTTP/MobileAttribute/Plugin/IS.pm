@@ -10,12 +10,12 @@ sub is_docomo: Method('is_docomo') {
 
 sub is_j_phone: Method('is_j_phone') {
     my ($self, $c) = @_;
-    return $c->carrier_longname eq 'JPhone' ? 1 : 0;
+    return $c->carrier_longname eq 'ThirdForce' ? 1 : 0;
 }
 
 sub is_vodafone: Method('is_vodafone') {
     my ($self, $c) = @_;
-    return $c->carrier_longname eq 'JPhone' ? 1 : 0;
+    return $c->carrier_longname eq 'ThirdForce' ? 1 : 0;
 }
 
 sub is_ezweb: Method('is_ezweb') {

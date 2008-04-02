@@ -1,5 +1,5 @@
 use strict;
-use Test::More tests => 256;
+use Test::More tests => 250;
 
 BEGIN { use_ok 'HTTP::MobileAttribute' }
 
@@ -27,7 +27,6 @@ for (@Tests) {
     my($ua, @data) = @$_;
     my $agent = HTTP::MobileAttribute->new($ua);
     isa_ok $agent, 'HTTP::MobileAttribute';
-    isa_ok $agent, 'HTTP::MobileAttribute::JPhone';
     ok !$agent->is_docomo && $agent->is_j_phone && $agent->is_vodafone && !$agent->is_ezweb;
     is $agent->name ,'J-PHONE';
 
@@ -56,7 +55,7 @@ for (@Tests) {
     }
 
     is $agent->carrier, 'V' , "carrier is V";
-    is $agent->carrier_longname, 'Vodafone' ,  "carrier longname is Vodafone";
+    is $agent->carrier_longname, 'ThirdForce' ,  "carrier longname is ThirdForce";
 }
 
 while (<DATA>) {

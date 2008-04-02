@@ -7,6 +7,8 @@ our $DefaultCacheSize = 5;
 
 sub initialize : Hook('initialize') {
     my ( $self, $c ) = @_;
+    return unless $c->carrier_longname eq 'DoCoMo';
+
     $self->parse( $c );
 }
 
@@ -14,6 +16,8 @@ sub initialize : Hook('initialize') {
 for my $method (qw/version model status bandwidth serial_number is_foma card_id xhtml_compliant comment/) {
     eval qq! sub $method :MobileMethod("$method,DoCoMo") { shift->{$method} }; !;
 }
+
+sub name : MobileMethod('name,DoCoMo') { shift->{name} }
 
 sub cache_size :MobileMethod('cache_size,DoCoMo') {
     my $self = shift;

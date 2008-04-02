@@ -8,7 +8,7 @@ use HTTP::MobileAttribute::CarrierDetecter;
 use Scalar::Util qw/refaddr/;
 
 __PACKAGE__->load_components(qw/Autocall::SingletonMethod/);
-__PACKAGE__->load_plugins(qw/Carrier IS Default::DoCoMo GPS/);
+__PACKAGE__->load_plugins(qw/Carrier IS Default::DoCoMo Default::ThirdForce GPS/);
 
 {
     no strict 'refs';
@@ -24,7 +24,7 @@ sub new {
     my $carrier_longname = HTTP::MobileAttribute::CarrierDetecter->detect($request->get('User-Agent'));
     my $self = $class->NEXT(
         'new' => +{
-            request => $request,
+            request          => $request,
             carrier_longname => $carrier_longname,
         }
     );
@@ -37,7 +37,6 @@ for my $accessor (qw/request carrier_longname/) {
     no strict 'refs';
     *{$accessor} = sub { shift->{$accessor} };
 }
-*name = *carrier_longname; # compatibility with HTTP::MobileAgent.
 
 sub user_agent { shift->request->get('User-Agent') }
 
@@ -78,6 +77,13 @@ HTTP::MobileAttribute is Plaggable version of HTTP::MobileAgent.
 
     - キャリヤ判別もプラグァーブル
     - トニカクぷらぐぁーぶる
+    - HTTP::MobileAgent とできるだけ互換性をもたす。かも。
+
+=head1 非互換メモ
+
+当たり前のことながら、$agent->isa はつかえないね。
+
+carrier_longname が Vodafone じゃなくて ThirdForce を返すよ
 
 =head1 AUTHOR
 

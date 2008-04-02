@@ -24,7 +24,7 @@ __END__
 
 ===
 --- input: J-PHONE/5.0/V801SA
---- expected: JPhone
+--- expected: ThirdForce
 
 ===
 --- input: KDDI-TS21 UP.Browser/6.0.2.276 (GUI) MMP/1.1

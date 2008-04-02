@@ -7,11 +7,11 @@ sub carrier :Method('carrier') {
     my ($self, $c) = @_;
 
     return +{
-        DoCoMo    => 'I',
-        JPhone    => 'V',
-        EZweb     => 'E',
-        AirHPhone => 'H',
-        NonMobile => 'n',
+        DoCoMo     => 'I',
+        ThirdForce => 'V',
+        EZweb      => 'E',
+        AirHPhone  => 'H',
+        NonMobile  => 'N',
     }->{ $c->carrier_longname };
 }
 

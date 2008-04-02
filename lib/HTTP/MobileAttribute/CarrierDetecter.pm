@@ -18,7 +18,7 @@ sub detect {
     my ($class, $user_agent) = @_;
 
     return   ($user_agent =~ /$MobileAgentRE/)
-                ? ($1 ? 'DoCoMo' : $2 ? 'JPhone' : $3 ? 'EZweb' : 'AirHPhone' )
+                ? ($1 ? 'DoCoMo' : $2 ? 'ThirdForce' : $3 ? 'EZweb' : 'AirHPhone' )
                 : 'NonMobile';
 }
 
