@@ -14,18 +14,18 @@ sub initialize : Hook('initialize') {
 
 # FIXME: ここなんとかして。どうにかして。なんか anonymous function だと Attribute がうまくあたらないからとりあえずこれで。
 for my $method (qw/version model status bandwidth serial_number is_foma card_id xhtml_compliant comment/) {
-    eval qq! sub $method :MobileMethod("$method,DoCoMo") { shift->{$method} }; !; ## no critic.
+    eval qq! sub $method :MobileMethod('DoCoMo') { shift->{$method} }; !; ## no critic.
     die $@ if $@;
 }
 
-sub name : MobileMethod('name,DoCoMo') { shift->{name} }
+sub name : MobileMethod('DoCoMo') { shift->{name} }
 
-sub cache_size :MobileMethod('cache_size,DoCoMo') {
+sub cache_size :MobileMethod('DoCoMo') {
     my $self = shift;
     return $self->{cache_size} || $DefaultCacheSize;
 }
 
-sub series :MobileMethod('series,DoCoMo') {
+sub series :MobileMethod('DoCoMo') {
     my $self  = shift;
     my $model = $self->model;
 
@@ -37,7 +37,7 @@ sub series :MobileMethod('series,DoCoMo') {
     return $1;
 }
 
-sub vendor :MobileMethod('vendor,DoCoMo') {
+sub vendor :MobileMethod('DoCoMo') {
     my $self  = shift;
     my $model = $self->model;
     $model =~ /^([A-Z]+)\d/;
@@ -56,7 +56,7 @@ our $DoCoMoHTMLVersionMap = [
     qr/702i|D851iWM|902i/ => '6.0',
 ];
 
-sub html_version: MobileMethod('html_version,DoCoMo') {
+sub html_version: MobileMethod('DoCoMo') {
     my ($self, $c) = @_;
 
     my @map = @$DoCoMoHTMLVersionMap;

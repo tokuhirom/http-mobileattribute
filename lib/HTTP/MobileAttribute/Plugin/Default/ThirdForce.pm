@@ -12,16 +12,16 @@ sub initialize : Hook('initialize') {
 
 # FIXME: ここなんとかして。どうにかして。なんか anonymous function だと Attribute がうまくあたらないからとりあえずこれで。
 for my $method (qw(name version model type packet_compliant serial_number vendor vendor_version java_info)) {
-    eval qq! sub $method :MobileMethod("$method,ThirdForce") { shift->{$method} }; !; ## no critic.
+    eval qq! sub $method :MobileMethod("ThirdForce") { shift->{$method} }; !; ## no critic.
     die $@ if $@;
 }
 
-sub is_type_c   :MobileMethod('is_type_c,ThirdForce')   { shift->{type} =~ /^C/ }
-sub is_type_p   :MobileMethod('is_type_p,ThirdForce')   { shift->{type} =~ /^P/ }
-sub is_type_w   :MobileMethod('is_type_w,ThirdForce')   { shift->{type} =~ /^W/ }
-sub is_type_3gc :MobileMethod('is_type_3gc,ThirdForce') { shift->{type} eq '3GC' }
+sub is_type_c   :MobileMethod('ThirdForce')   { shift->{type} =~ /^C/ }
+sub is_type_p   :MobileMethod('ThirdForce')   { shift->{type} =~ /^P/ }
+sub is_type_w   :MobileMethod('ThirdForce')   { shift->{type} =~ /^W/ }
+sub is_type_3gc :MobileMethod('ThirdForce') { shift->{type} eq '3GC' }
 
-sub xhtml_compliant :MobileMethod('xhtml_compliant,ThirdForce') {
+sub xhtml_compliant :MobileMethod('ThirdForce') {
     my $self = shift;
     return ( $self->is_type_w || $self->is_type_3gc ) ? 1 : 0;
 }

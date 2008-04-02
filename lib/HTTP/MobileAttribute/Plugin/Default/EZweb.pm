@@ -12,11 +12,11 @@ sub initialize : Hook('initialize') {
 
 # FIXME: ここなんとかして。どうにかして。なんか anonymous function だと Attribute がうまくあたらないからとりあえずこれで。
 for my $method (qw(name version model device_id server xhtml_compliant comment)) {
-    eval qq! sub $method :MobileMethod("$method,EZweb") { shift->{$method} }; !; ## no critic.
+    eval qq! sub $method :MobileMethod("EZweb") { shift->{$method} }; !; ## no critic.
     die $@ if $@;
 }
 
-sub is_tuka : MobileMethod('is_tuka,EZweb') {
+sub is_tuka : MobileMethod('EZweb') {
     my $self = shift;
     my $tuka = substr( $self->device_id, 2, 1 );
     if ( $self->xhtml_compliant ) {
@@ -28,7 +28,7 @@ sub is_tuka : MobileMethod('is_tuka,EZweb') {
     return;
 }
 
-sub is_win : MobileMethod('is_win,EZweb') {
+sub is_win : MobileMethod('EZweb') {
     my $self = shift;
     my $win = substr( $self->device_id, 2, 1 );
     $win eq '3' ? 1 : 0;

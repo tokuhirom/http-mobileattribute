@@ -4,11 +4,10 @@ use warnings;
 use base 'Class::Component::Attribute';
 
 sub register {
-    my ( $class, $plugin, $c, $method, $parameter, $code ) = @_;
-    $parameter =~ s/\s*//g;
-    my ($meth, $carrier ) = split /,/, $parameter;
+    my ( $class, $plugin, $c, $method, $carrier, $code ) = @_;
+
     if ($c->carrier_longname eq $carrier) {
-        $c->register_method( $meth => $plugin );
+        $c->register_method( $method => $plugin );
     }
 }
 
@@ -18,7 +17,7 @@ __END__
 
 =head1 SYNOPSIS
 
-    sub foo : MobileMethod('html_version,DoCoMo') {
+    sub foo : MobileMethod('DoCoMo') {
         # your codes here
     }
 
