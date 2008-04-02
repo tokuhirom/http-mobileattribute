@@ -5,27 +5,30 @@ our $VERSION = '0.01';
 
 use Class::Component;
 use HTTP::MobileAttribute::Agent::NonMobile;
+use HTTP::MobileAttribute::Request;
+use HTTP::MobileAttribute::CarrierDetecter;
 
-__PACKAGE__->load_components(
-    qw/
-      CarrierDetect::AirHPhone
-      CarrierDetect::EZWeb
-      CarrierDetect::ThirdForce
-      CarrierDetect::DoCoMo
-      /
-);
+__PACKAGE__->load_components(qw/Autocall::SingletonMethod/);
 
-sub get_agent {
-    my ($self, $stuff) = @_;
+sub new {
+    my ($class, $stuff) = @_;
 
-    my $agent = $self->NEXT('get_agent' => $stuff);
-
-    if (ref($agent) =~ /^HTTP::MobileAttribute::Agent/) {
-        return $agent;
-    } else {
-        return HTTP::MobileAttribute::Agent::NonMobile->new;
-    }
+    my $request = HTTP::MobileAttribute::Request->new($stuff);
+    my $carrier_long_name = HTTP::MobileAttribute::CarrierDetecter->detect($request->get('User-Agent'));
+    my $self = $class->NEXT(
+        'new' => +{
+            request => $request,
+            carrier_long_name => $carrier_long_name,
+        }
+    );
+    return $self;
 }
+
+for my $accessor (qw/request carrier_long_name/) {
+    no strict 'refs';
+    *{$accessor} = sub { shift->{$accessor} };
+}
+sub user_agent { shift->request->get('User-Agent') }
 
 1;
 __END__
@@ -39,6 +42,12 @@ HTTP::MobileAttribute - Yet Another HTTP::MobileAgent
 =head1 SYNOPSIS
 
   use HTTP::MobileAttribute;
+
+  HTTP::MobileAttribute->load_plugins(qw/Flash Image CarrierName/);
+
+  my $agent = HTTP::MobileAttribute->new;
+  $agent->is_supported_flash();
+  $agent->is_supported_gif();
 
 =head1 WARNINGS
 

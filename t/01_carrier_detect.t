@@ -2,22 +2,17 @@ use strict;
 use warnings;
 use Test::Base;
 use HTTP::MobileAttribute;
+HTTP::MobileAttribute->load_plugins(qw/CarrierName/);
 
 plan tests => 1*blocks;
 
 filters {
     input    => [qw/get_carrier/],
-    expected => [qw/append_prefix/],
 };
-
-sub append_prefix {
-    my $x = shift;
-    "HTTP::MobileAttribute::Agent::$x";
-}
 
 sub get_carrier {
     my $ua = shift;
-    ref HTTP::MobileAttribute->new->get_agent($ua);
+    HTTP::MobileAttribute->new($ua)->carrier_long_name;
 }
 
 run_is input => 'expected';
@@ -30,11 +25,11 @@ __END__
 
 ===
 --- input: J-PHONE/5.0/V801SA
---- expected: ThirdForce
+--- expected: JPhone
 
 ===
 --- input: KDDI-TS21 UP.Browser/6.0.2.276 (GUI) MMP/1.1
---- expected: EZWeb
+--- expected: EZweb
 
 ===
 --- input: Mozilla/2.0 (compatible; Ask Jeeves)
