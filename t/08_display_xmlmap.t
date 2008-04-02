@@ -6,7 +6,7 @@ if ($@) {
     plan skip_all => 'XML::Simple not installed';
 }
 else {
-    plan tests => 64;
+    plan tests => 49;
     $ENV{DOCOMO_MAP} = 't/DoCoMoMap.xml';
     use_ok 'HTTP::MobileAttribute';
 }
@@ -31,8 +31,6 @@ my @Tests = (
       { width => 96, height => 90, color => 1, depth => 256 } ],
     [ { HTTP_USER_AGENT => 'DoCoMo/1.0/N502i' },
       { width => 118, height => 128, color => '', depth => 4 } ],
-    [ { HTTP_USER_AGENT => "DoCoMo/1.0/D505i/c20/TC/W20H10" },
-      { width_bytes => 20, height_bytes => 10 } ],
     [ { HTTP_USER_AGENT => "DoCoMo/2.0 SH902i(c100;TB;W24H12)" },
       { width => 240, height => 240, color => 1, depth => 262144 } ],
     [ { HTTP_USER_AGENT => "DoCoMo/2.0 N902i(c100;TB;W24H12)" },
@@ -47,12 +45,13 @@ my @Tests = (
       { width => 240, height => 256, color => 1, depth => 262144 } ],
 );
 
+HTTP::MobileAttribute->load_plugins(qw/Display/);
+
 for (@Tests) {
     my($env, $values) = @$_;
     local *ENV = $env;
     my $ua = HTTP::MobileAttribute->new;
     my $display = $ua->display;
-    isa_ok $display, 'HTTP::MobileAttribute::Display';
     for my $method (keys %$values) {
         is $display->$method(), $values->{$method}, "$method = $values->{$method}";
     }
