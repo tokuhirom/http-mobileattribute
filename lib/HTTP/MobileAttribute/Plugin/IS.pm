@@ -18,6 +18,11 @@ sub is_vodafone: Method('is_vodafone') {
     return $c->carrier_longname eq 'ThirdForce' ? 1 : 0;
 }
 
+sub is_softbank: Method('is_softbank') {
+    my ($self, $c) = @_;
+    return $c->carrier_longname eq 'ThirdForce' ? 1 : 0;
+}
+
 sub is_ezweb: Method('is_ezweb') {
     my ($self, $c) = @_;
     return $c->carrier_longname eq 'EZweb' ? 1 : 0;
