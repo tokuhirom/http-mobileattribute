@@ -22,6 +22,11 @@ sub is_type_p   :MobileMethod('is_type_p,ThirdForce')   { shift->{type} =~ /^P/ 
 sub is_type_w   :MobileMethod('is_type_w,ThirdForce')   { shift->{type} =~ /^W/ }
 sub is_type_3gc :MobileMethod('is_type_3gc,ThirdForce') { shift->{type} eq '3GC' }
 
+sub xhtml_compliant :MobileMethod('xhtml_compliant,ThirdForce') {
+    my $self = shift;
+    return ( $self->is_type_w || $self->is_type_3gc ) ? 1 : 0;
+}
+
 sub user_agent { shift->{user_agent} }
 
 sub parse {
