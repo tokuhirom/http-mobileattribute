@@ -90,6 +90,10 @@ is_wap1, is_wap2. つかってないよね?
 
 __PACKAGE__->plugin_carrier('DoCoMo') ってやると一括で、この Plugin は DoCoMo 用ってことにするとか、そういうのがほしいのかも。
 
+=head2 まだディスプレイまわりの実装ができてない
+
+つくらないとねえ。
+
 =head2 メモリつかいすぎ疑惑
 
 Singleton Method って遅くね?どうなんよ?

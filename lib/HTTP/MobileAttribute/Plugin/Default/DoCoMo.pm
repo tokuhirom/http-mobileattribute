@@ -14,7 +14,8 @@ sub initialize : Hook('initialize') {
 
 # FIXME: ここなんとかして。どうにかして。なんか anonymous function だと Attribute がうまくあたらないからとりあえずこれで。
 for my $method (qw/version model status bandwidth serial_number is_foma card_id xhtml_compliant comment/) {
-    eval qq! sub $method :MobileMethod("$method,DoCoMo") { shift->{$method} }; !;
+    eval qq! sub $method :MobileMethod("$method,DoCoMo") { shift->{$method} }; !; ## no critic.
+    die $@ if $@;
 }
 
 sub name : MobileMethod('name,DoCoMo') { shift->{name} }
@@ -62,7 +63,7 @@ sub html_version: MobileMethod('html_version,DoCoMo') {
     while ( my ( $re, $version ) = splice( @map, 0, 2 ) ) {
         return $version if $self->model =~ /$re/;
     }
-    return undef;
+    return;
 }
 
 sub parse {

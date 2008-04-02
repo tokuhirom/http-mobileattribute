@@ -12,7 +12,7 @@ sub initialize : Hook('initialize') {
 
 # FIXME: ここなんとかして。どうにかして。なんか anonymous function だと Attribute がうまくあたらないからとりあえずこれで。
 for my $method (qw(name version model device_id server xhtml_compliant comment)) {
-    eval qq! sub $method :MobileMethod("$method,EZweb") { shift->{$method} }; !;
+    eval qq! sub $method :MobileMethod("$method,EZweb") { shift->{$method} }; !; ## no critic.
     die $@ if $@;
 }
 

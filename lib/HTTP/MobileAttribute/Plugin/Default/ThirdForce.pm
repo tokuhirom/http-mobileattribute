@@ -12,10 +12,9 @@ sub initialize : Hook('initialize') {
 
 # FIXME: ここなんとかして。どうにかして。なんか anonymous function だと Attribute がうまくあたらないからとりあえずこれで。
 for my $method (qw(name version model type packet_compliant serial_number vendor vendor_version java_info)) {
-    eval qq! sub $method :MobileMethod("$method,ThirdForce") { shift->{$method} }; !;
+    eval qq! sub $method :MobileMethod("$method,ThirdForce") { shift->{$method} }; !; ## no critic.
+    die $@ if $@;
 }
-
-#sub carrier_longname :MobileMethod('carrier_longname,ThirdForce') { 'Vodafone' }
 
 sub is_type_c   :MobileMethod('is_type_c,ThirdForce')   { shift->{type} =~ /^C/ }
 sub is_type_p   :MobileMethod('is_type_p,ThirdForce')   { shift->{type} =~ /^P/ }

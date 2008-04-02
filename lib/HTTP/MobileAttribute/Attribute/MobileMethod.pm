@@ -8,7 +8,7 @@ sub register {
     $parameter =~ s/\s*//g;
     my ($meth, $carrier ) = split /,/, $parameter;
     if ($c->carrier_longname eq $carrier) {
-        $c->register_method( $method => $plugin );
+        $c->register_method( $meth => $plugin );
     }
 }
 

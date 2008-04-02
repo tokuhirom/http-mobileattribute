@@ -10,7 +10,8 @@ sub initialize : Hook('initialize') {
 }
 
 for my $method (qw(name vendor model model_version browser_version cache_size)) {
-    eval qq! sub $method :MobileMethod("$method,AirHPhone") { shift->{$method} }; !;
+    eval qq! sub $method :MobileMethod("$method,AirHPhone") { shift->{$method} }; !; ## no critic.
+    die $@ if $@;
 }
 
 sub parse {
