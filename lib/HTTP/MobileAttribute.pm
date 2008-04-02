@@ -1,11 +1,19 @@
 package HTTP::MobileAttribute;
-
 use strict;
 use warnings;
 our $VERSION = '0.01';
 
 use Class::Component;
 use HTTP::MobileAttribute::Agent::NonMobile;
+
+__PACKAGE__->load_components(
+    qw/
+      CarrierDetect::AirHPhone
+      CarrierDetect::EZWeb
+      CarrierDetect::ThirdForce
+      CarrierDetect::DoCoMo
+      /
+);
 
 sub get_agent {
     my ($self, $stuff) = @_;
@@ -41,6 +49,15 @@ DO NOT USE THIS MODULE.
 =head1 DESCRIPTION
 
 HTTP::MobileAttribute is Plaggable version of HTTP::MobileAgent.
+
+っていうか、まあ日本人しかつかわないだろうから日本語で docs かくね。
+
+現時点では、とりあえずキャリヤ判定がデキルッポイ。
+
+=head1 コンセプト
+
+    - キャリヤ判別もプラグァーブル
+    - トニカクぷらぐぁーぶる
 
 =head1 AUTHOR
 

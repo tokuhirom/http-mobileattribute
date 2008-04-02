@@ -3,13 +3,6 @@ use warnings;
 use Test::Base;
 use HTTP::MobileAttribute;
 
-HTTP::MobileAttribute->load_components(qw/
-    CarrierDetect::AirHPhone
-    CarrierDetect::EZWeb
-    CarrierDetect::ThirdForce
-    CarrierDetect::DoCoMo
-/);
-
 plan tests => 1*blocks;
 
 filters {
