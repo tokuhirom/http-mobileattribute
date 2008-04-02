@@ -37,5 +37,8 @@ HTTP::MobileAttribute::CarrierDetecter - キャリヤ判別ルーチン
 
 =head1 DESCRIPTION
 
-ケータイノ UA カラきゃりやを判別するよ。
+User-Agent 文字列からケータイキャリヤを判別するよ。
 
+=head1 AUTHOR
+
+Tokuhiro Matsuno

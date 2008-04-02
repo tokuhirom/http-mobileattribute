@@ -38,7 +38,7 @@ sub user_agent { shift->request->get('User-Agent') }
 1;
 __END__
 
-=for stopwords aaaatttt gmail dotottto commmmm Kazuhiro Osawa Plaggable
+=for stopwords aaaatttt gmail dotottto commmmm Kazuhiro Osawa Plaggable DoCoMo ThirdForce Vodafone docs
 
 =head1 NAME
 
@@ -92,7 +92,7 @@ __PACKAGE__->plugin_carrier('DoCoMo') ってやると一括で、この Plugin �
 
 =head2 メモリつかいすぎ疑惑
 
-SingletonMethod って遅くね?どうなんよ?
+Singleton Method って遅くね?どうなんよ?
 
 =head1 AUTHOR
 
