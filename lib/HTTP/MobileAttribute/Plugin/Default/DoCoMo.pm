@@ -8,15 +8,11 @@ our $DefaultCacheSize = 5;
 sub initialize : Hook('initialize') {
     my ( $self, $c ) = @_;
     return unless $c->carrier_longname eq 'DoCoMo';
+    $self->mk_register_accessors( $c => qw/version model status bandwidth serial_number is_foma card_id xhtml_compliant comment/);
 
     $self->parse( $c );
 }
 
-# FIXME: ここなんとかして。どうにかして。なんか anonymous function だと Attribute がうまくあたらないからとりあえずこれで。
-for my $method (qw/version model status bandwidth serial_number is_foma card_id xhtml_compliant comment/) {
-    eval qq! sub $method :MobileMethod('DoCoMo') { shift->{$method} }; !; ## no critic.
-    die $@ if $@;
-}
 
 sub name : MobileMethod('DoCoMo') { shift->{name} }
 
