@@ -1,5 +1,5 @@
 use strict;
-use Test::More tests => 910;
+use Test::More tests => 878;
 
 BEGIN { use_ok 'HTTP::MobileAttribute' }
 
@@ -44,12 +44,11 @@ for (@Tests) {
     my($ua, @data) = @$_;
     my $agent = HTTP::MobileAttribute->new($ua);
     isa_ok $agent, 'HTTP::MobileAttribute';
-    isa_ok $agent, 'HTTP::MobileAttribute::DoCoMo';
     ok $agent->is_docomo && ! $agent->is_j_phone && !$agent->is_vodafone && ! $agent->is_ezweb;
     is $agent->name, 'DoCoMo';
     is $agent->user_agent, $ua,                "ua is $ua";
     is $agent->version, $data[0],        "version is $data[0]";
-    is $agent->html_version, $data[1],        "HTML version is $data[1]";
+    is $agent->html_version, $data[1],        " $ua HTML version is $data[1]";
     is $agent->model, $data[2],                "model is $data[2]";
     is $agent->cache_size, $data[3],        "cache size is $data[3]";
     is $agent->is_foma, $data[4],        "is_foma";
@@ -70,7 +69,6 @@ for (@Tests) {
     my $agent = HTTP::MobileAttribute->new;
     is $agent->xhtml_compliant, 1;
 }
-
 
 while (<DATA>) {
     next if /^#/;

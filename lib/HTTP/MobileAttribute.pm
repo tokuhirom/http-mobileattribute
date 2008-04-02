@@ -2,32 +2,43 @@ package HTTP::MobileAttribute;
 use strict;
 use warnings;
 our $VERSION = '0.01';
-
 use Class::Component;
-use HTTP::MobileAttribute::Agent::NonMobile;
 use HTTP::MobileAttribute::Request;
 use HTTP::MobileAttribute::CarrierDetecter;
+use Scalar::Util qw/refaddr/;
 
 __PACKAGE__->load_components(qw/Autocall::SingletonMethod/);
+__PACKAGE__->load_plugins(qw/Carrier IS Default::DoCoMo GPS/);
+
+{
+    no strict 'refs';
+    for my $carrier (qw/DoCoMo JPhone EZweb/) {
+        unshift @{"HTTP::MobileAttribute::_Agent::${carrier}::ISA"}, __PACKAGE__;
+    }
+}
 
 sub new {
     my ($class, $stuff) = @_;
 
     my $request = HTTP::MobileAttribute::Request->new($stuff);
-    my $carrier_long_name = HTTP::MobileAttribute::CarrierDetecter->detect($request->get('User-Agent'));
+    my $carrier_longname = HTTP::MobileAttribute::CarrierDetecter->detect($request->get('User-Agent'));
     my $self = $class->NEXT(
         'new' => +{
             request => $request,
-            carrier_long_name => $carrier_long_name,
+            carrier_longname => $carrier_longname,
         }
     );
+    $self->run_hook('initialize');
+    # $self = bless {%$self}, join('::', __PACKAGE__, '_Agent', $carrier_longname); # rebless to agent specific class.
     return $self;
 }
 
-for my $accessor (qw/request carrier_long_name/) {
+for my $accessor (qw/request carrier_longname/) {
     no strict 'refs';
     *{$accessor} = sub { shift->{$accessor} };
 }
+*name = *carrier_longname; # compatibility with HTTP::MobileAgent.
+
 sub user_agent { shift->request->get('User-Agent') }
 
 1;
