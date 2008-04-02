@@ -1,23 +1,24 @@
 use strict;
+use warnings;
 use Test::More tests => 9;
 
-BEGIN { use_ok 'HTTP::MobileAttribute' }
+BEGIN { use_ok 'HTTP::MobileAttribute::Request' }
 
 # various way to make request
 
 my $ua = "Mozilla/1.0";
 
 {
-    my $agent = HTTP::MobileAttribute->new($ua);
-    isa_ok $agent, 'HTTP::MobileAttribute';
-    is $agent->user_agent, $ua;
+    my $req = HTTP::MobileAttribute::Request->new($ua);
+    isa_ok $req, 'HTTP::MobileAttribute::Request::Env';
+    is $req->get('user_agent'), $ua;
 }
 
 {
     local $ENV{HTTP_USER_AGENT} = $ua;
-    my $agent = HTTP::MobileAttribute->new($ua);
-    isa_ok $agent, 'HTTP::MobileAttribute';
-    is $agent->user_agent, $ua;
+    my $req = HTTP::MobileAttribute::Request->new($ua);
+    isa_ok $req, 'HTTP::MobileAttribute::Request::Env';
+    is $req->get('user_agent'), $ua;
 }
 
 SKIP: {
@@ -26,9 +27,10 @@ SKIP: {
 
     my $header = HTTP::Headers->new;
     $header->header('User-Agent' => $ua);
-    my $agent = HTTP::MobileAttribute->new($header);
-    isa_ok $agent, 'HTTP::MobileAttribute';
-    is $agent->user_agent, $ua;
+
+    my $req = HTTP::MobileAttribute::Request->new($header);
+    isa_ok $req, 'HTTP::MobileAttribute::Request::HTTPHeaders';
+    is $req->get('user_agent'), $ua;
 }
 
 {
@@ -41,7 +43,7 @@ SKIP: {
 
     package main;
     my $r = bless { 'User-Agent' => $ua }, 'Apache';
-    my $agent = HTTP::MobileAttribute->new($r);
-    isa_ok $agent, 'HTTP::MobileAttribute';
-    is $agent->user_agent, $ua;
+    my $req = HTTP::MobileAttribute::Request->new($r);
+    isa_ok $req, 'HTTP::MobileAttribute::Request::Apache';
+    is $req->get('User-Agent'), $ua;
 }
