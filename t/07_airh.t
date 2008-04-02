@@ -1,7 +1,7 @@
 use strict;
 
 use strict;
-use Test::More tests => 18;
+use Test::More tests => 17;
 
 BEGIN { use_ok 'HTTP::MobileAttribute' }
 
@@ -16,7 +16,6 @@ for (@Tests) {
     my($ua, %data) = @$_;
     my $agent = HTTP::MobileAttribute->new($ua);
     isa_ok $agent, 'HTTP::MobileAttribute';
-    isa_ok $agent, 'HTTP::MobileAttribute::AirHPhone';
     ok $agent->is_airh_phone;
 
     for my $key (keys %data) {

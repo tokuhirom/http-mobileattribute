@@ -10,7 +10,7 @@ use Scalar::Util qw/refaddr/;
 __PACKAGE__->load_components(qw/Autocall::SingletonMethod/);
 __PACKAGE__->load_plugins(qw/
     Carrier IS GPS
-    Default::DoCoMo Default::ThirdForce Default::EZweb Default::NonMobile
+    Default::DoCoMo Default::ThirdForce Default::EZweb Default::NonMobile Default::AirHPhone
 /);
 
 sub new {
@@ -83,6 +83,16 @@ carrier_longname が Vodafone じゃなくて ThirdForce を返すよ
 =head2 廃止したメソッド
 
 is_wap1, is_wap2. つかってないよね?
+
+=head1 気になってること
+
+=head2 MobileMethod('html_version,DoCoMo') みたいなのがいっぱいあってまんどい。
+
+__PACKAGE__->plugin_carrier('DoCoMo') ってやると一括で、この Plugin は DoCoMo 用ってことにするとか、そういうのがほしいのかも。
+
+=head2 メモリつかいすぎ疑惑
+
+SingletonMethod って遅くね?どうなんよ?
 
 =head1 AUTHOR
 
