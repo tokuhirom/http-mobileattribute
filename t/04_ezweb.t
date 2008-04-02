@@ -1,29 +1,28 @@
 use strict;
-use Test::More tests => 508;
+use Test::More tests => 496;
 
 BEGIN { use_ok 'HTTP::MobileAttribute' }
 
 my @Tests = (
-    # ua, version, device_id, server, xhtml_compliant, comment, is_wap1, is_wap2
+    # ua, version, device_id, server, xhtml_compliant, comment
     [ 'UP.Browser/3.01-HI01 UP.Link/3.4.5.2',
-      '3.01', 'HI01', 'UP.Link/3.4.5.2', undef, undef, 1, undef ],
+      '3.01', 'HI01', 'UP.Link/3.4.5.2', undef, undef, ],
     [ 'KDDI-TS21 UP.Browser/6.0.2.276 (GUI) MMP/1.1',
-      '6.0.2.276 (GUI)', 'TS21', 'MMP/1.1', 1, undef, undef, 1 ],
+      '6.0.2.276 (GUI)', 'TS21', 'MMP/1.1', 1, undef, ],
     [ 'UP.Browser/3.04-TS14 UP.Link/3.4.4 (Google WAP Proxy/1.0)',
-      '3.04', 'TS14', 'UP.Link/3.4.4', undef, 'Google WAP Proxy/1.0', 1, undef ],
+      '3.04', 'TS14', 'UP.Link/3.4.4', undef, 'Google WAP Proxy/1.0', ],
     [ 'UP.Browser/3.04-TST4 UP.Link/3.4.5.6',
-      '3.04', 'TST4', 'UP.Link/3.4.5.6', undef, undef, 1, undef ],
+      '3.04', 'TST4', 'UP.Link/3.4.5.6', undef, undef, ],
     [ 'KDDI-KCU1 UP.Browser/6.2.0.5.1 (GUI) MMP/2.0',
-      '6.2.0.5.1 (GUI)', 'KCU1', 'MMP/2.0', 1, undef, undef, 1 ],
+      '6.2.0.5.1 (GUI)', 'KCU1', 'MMP/2.0', 1, undef,],
     [ 'KDDI-SN31 UP.Browser/6.2.0.7.3.129 (GUI) MMP/2.0',
-      '6.2.0.7.3.129 (GUI)','SN31','MMP/2.0', 1, undef, undef, 1 ],
+      '6.2.0.7.3.129 (GUI)','SN31','MMP/2.0', 1, undef, ],
 );
 
 for (@Tests) {
     my($ua, @data) = @$_;
     my $agent = HTTP::MobileAttribute->new($ua);
     isa_ok $agent, 'HTTP::MobileAttribute';
-    isa_ok $agent, 'HTTP::MobileAttribute::EZweb';
     is $agent->name, 'UP.Browser';
     ok !$agent->is_docomo && !$agent->is_j_phone && !$agent->is_vodafone && $agent->is_ezweb;
     is $agent->user_agent, $ua,        "ua is $ua";
@@ -33,8 +32,6 @@ for (@Tests) {
     is $agent->server, $data[2];
     is $agent->xhtml_compliant, $data[3];
     is $agent->comment, $data[4];
-    ok $agent->is_wap1 if $data[5];
-    ok $agent->is_wap2 if $data[6];
 
     if ($ua eq 'UP.Browser/3.04-TST4 UP.Link/3.4.5.6' 
         or $ua eq 'KDDI-KCU1 UP.Browser/6.2.0.5.1 (GUI) MMP/2.0'){

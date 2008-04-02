@@ -8,14 +8,10 @@ use HTTP::MobileAttribute::CarrierDetecter;
 use Scalar::Util qw/refaddr/;
 
 __PACKAGE__->load_components(qw/Autocall::SingletonMethod/);
-__PACKAGE__->load_plugins(qw/Carrier IS Default::DoCoMo Default::ThirdForce GPS/);
-
-{
-    no strict 'refs';
-    for my $carrier (qw/DoCoMo JPhone EZweb/) {
-        unshift @{"HTTP::MobileAttribute::_Agent::${carrier}::ISA"}, __PACKAGE__;
-    }
-}
+__PACKAGE__->load_plugins(qw/
+    Carrier IS GPS
+    Default::DoCoMo Default::ThirdForce Default::EZweb
+/);
 
 sub new {
     my ($class, $stuff) = @_;
@@ -29,7 +25,6 @@ sub new {
         }
     );
     $self->run_hook('initialize');
-    # $self = bless {%$self}, join('::', __PACKAGE__, '_Agent', $carrier_longname); # rebless to agent specific class.
     return $self;
 }
 
@@ -84,6 +79,10 @@ HTTP::MobileAttribute is Plaggable version of HTTP::MobileAgent.
 当たり前のことながら、$agent->isa はつかえないね。
 
 carrier_longname が Vodafone じゃなくて ThirdForce を返すよ
+
+=head2 廃止したメソッド
+
+is_wap1, is_wap2. つかってないよね?
 
 =head1 AUTHOR
 
