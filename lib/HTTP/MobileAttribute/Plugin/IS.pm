@@ -1,7 +1,7 @@
 package HTTP::MobileAttribute::Plugin::IS;
 use strict;
 use warnings;
-use base qw/Class::Component::Plugin/;
+use base qw/HTTP::MobileAttribute::Plugin/;
 
 sub is_docomo: Method('is_docomo') {
     my ($self, $c) = @_;

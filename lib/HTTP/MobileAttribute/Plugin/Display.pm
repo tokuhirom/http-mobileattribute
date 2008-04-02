@@ -1,7 +1,7 @@
 package HTTP::MobileAttribute::Plugin::Display;
 use strict;
 use warnings;
-use base qw/Class::Component::Plugin/;
+use base qw/HTTP::MobileAttribute::Plugin/;
 use HTTP::MobileAttribute;
 use HTTP::MobileAgent::DoCoMoDisplayMap qw/$DisplayMap/;
 

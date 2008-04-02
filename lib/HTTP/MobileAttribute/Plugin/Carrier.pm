@@ -1,7 +1,7 @@
 package HTTP::MobileAttribute::Plugin::Carrier;
 use strict;
 use warnings;
-use base qw/Class::Component::Plugin/;
+use base qw/HTTP::MobileAttribute::Plugin/;
 
 sub carrier :Method('carrier') {
     my ($self, $c) = @_;

@@ -1,7 +1,7 @@
 package HTTP::MobileAttribute::Plugin::Default::NonMobile;
 use strict;
 use warnings;
-use base qw/Class::Component::Plugin/;
+use base qw/HTTP::MobileAttribute::Plugin/;
 
 sub model           :MobileMethod('NonMobile') { '' }
 sub device_id       :MobileMethod('NonMobile') { '' }

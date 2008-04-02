@@ -1,7 +1,7 @@
 package HTTP::MobileAttribute::Plugin::Default::EZweb;
 use strict;
 use warnings;
-use base qw/Class::Component::Plugin/;
+use base qw/HTTP::MobileAttribute::Plugin/;
 
 sub initialize : Hook('initialize') {
     my ( $self, $c ) = @_;

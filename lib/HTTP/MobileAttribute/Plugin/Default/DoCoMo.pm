@@ -1,7 +1,7 @@
 package HTTP::MobileAttribute::Plugin::Default::DoCoMo;
 use strict;
 use warnings;
-use base qw/Class::Component::Plugin/;
+use base qw/HTTP::MobileAttribute::Plugin/;
 
 our $DefaultCacheSize = 5;
 

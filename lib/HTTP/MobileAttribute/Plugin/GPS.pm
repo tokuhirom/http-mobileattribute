@@ -1,7 +1,7 @@
 package HTTP::MobileAttribute::Plugin::GPS;
 use strict;
 use warnings;
-use base qw/Class::Component::Plugin/;
+use base qw/HTTP::MobileAttribute::Plugin/;
 
 our $DoCoMoGPSModels = { map { $_ => 1 } qw(F661i F505iGPS) };
 
