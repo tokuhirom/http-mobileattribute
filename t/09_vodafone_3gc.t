@@ -1,5 +1,5 @@
 use strict;
-use Test::More tests => 61;
+use Test::More tests => 57;
 
 BEGIN { use_ok 'HTTP::MobileAttribute' }
 
@@ -34,7 +34,6 @@ for (@Tests) {
     local $ENV{'HTTP_X_JPHONE_MSNAME'} = $data[1];
     my $agent = HTTP::MobileAttribute->new();
     isa_ok $agent, 'HTTP::MobileAttribute';
-    isa_ok $agent, 'HTTP::MobileAttribute::JPhone';
     ok !$agent->is_docomo && $agent->is_j_phone && $agent->is_vodafone && !$agent->is_ezweb;
     ok $agent->name eq 'Vodafone' || $agent->name =~ /^MOT/ ;
 
