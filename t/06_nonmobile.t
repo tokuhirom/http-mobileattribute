@@ -1,12 +1,11 @@
 use strict;
-use Test::More tests => 164 * 10;
+use Test::More tests => 164 * 9;
 use HTTP::MobileAttribute;
 
 while (<DATA>) {
     chomp;
     $ENV{HTTP_USER_AGENT} = $_;
     my $agent = HTTP::MobileAttribute->new;
-    isa_ok $agent, 'HTTP::MobileAttribute::NonMobile';
     ok ! $agent->is_docomo;
     ok ! $agent->is_j_phone;
     ok ! $agent->is_ezweb;

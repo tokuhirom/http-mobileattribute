@@ -23,4 +23,9 @@ sub is_ezweb: Method('is_ezweb') {
     return $c->carrier_longname eq 'EZweb' ? 1 : 0;
 }
 
+sub is_non_mobile: Method('is_non_mobile') {
+    my ($self, $c) = @_;
+    return $c->carrier_longname eq 'NonMobile' ? 1 : 0;
+}
+
 1;

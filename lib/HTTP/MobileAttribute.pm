@@ -10,7 +10,7 @@ use Scalar::Util qw/refaddr/;
 __PACKAGE__->load_components(qw/Autocall::SingletonMethod/);
 __PACKAGE__->load_plugins(qw/
     Carrier IS GPS
-    Default::DoCoMo Default::ThirdForce Default::EZweb
+    Default::DoCoMo Default::ThirdForce Default::EZweb Default::NonMobile
 /);
 
 sub new {
