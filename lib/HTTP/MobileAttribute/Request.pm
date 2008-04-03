@@ -33,7 +33,7 @@ sub new {
     if (! Class::Inspector->loaded($impl_class)) {
         # Continuing on our not-so-sexy route, we do not use 
         # UNIVERSAL::require here.
-        eval "require $impl_class";
+        eval "require $impl_class"; ## no critic.
         croak if $@;
     }
 

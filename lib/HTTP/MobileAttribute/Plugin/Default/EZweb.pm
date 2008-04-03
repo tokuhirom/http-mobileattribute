@@ -3,9 +3,9 @@ use strict;
 use warnings;
 use base qw/HTTP::MobileAttribute::Plugin/;
 
-sub initialize : Hook('initialize') {
+sub initialize : Hook('initialize_EZweb') {
     my ( $self, $c ) = @_;
-    return unless $c->carrier_longname eq 'EZweb';
+
     $self->mk_register_accessors( $c => qw(name version model device_id server xhtml_compliant comment));
 
     $self->parse( $c );

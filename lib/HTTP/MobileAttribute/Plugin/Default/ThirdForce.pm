@@ -3,9 +3,9 @@ use strict;
 use warnings;
 use base qw/HTTP::MobileAttribute::Plugin/;
 
-sub initialize : Hook('initialize') {
+sub initialize : Hook('initialize_ThirdForce') {
     my ($self, $c) = @_;
-    return unless $c->carrier_longname eq 'ThirdForce';
+
     $self->mk_register_accessors( $c => qw(name version model type packet_compliant serial_number vendor vendor_version java_info));
     $self->{user_agent} = $c->user_agent;
     $self->parse($c);

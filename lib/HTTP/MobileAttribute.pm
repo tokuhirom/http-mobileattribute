@@ -29,7 +29,7 @@ sub new {
         }
     );
     $self = bless {%$self}, "HTTP::MobileAttribute::Agent::$carrier_longname"; # rebless to carrier specific package.
-    $self->run_hook('initialize');
+    $self->run_hook("initialize_$carrier_longname");
     return $self;
 }
 
