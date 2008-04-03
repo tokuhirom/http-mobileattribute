@@ -151,6 +151,7 @@ Kazuhiro Osawa
     Tatsuhiko Miyagawa(original author of HTTP::MobileAgent)
     Satoshi Tanimoto
     Yoshiki Kurihara(Current mentainer of HTTP::MobileAgent)
+    Daisuke Maki
 
 =head1 SEE ALSO
 
