@@ -59,6 +59,8 @@ use base qw/HTTP::MobileAttribute/;
 1;
 __END__
 
+=encoding UTF-8
+
 =for stopwords aaaatttt gmail dotottto commmmm Kazuhiro Osawa Plaggable DoCoMo ThirdForce Vodafone docs
 
 =head1 NAME

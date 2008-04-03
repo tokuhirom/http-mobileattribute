@@ -25,6 +25,8 @@ sub detect {
 1;
 __END__
 
+=encoding UTF-8
+
 =head1 NAME
 
 HTTP::MobileAttribute::CarrierDetecter - キャリヤ判別ルーチン
