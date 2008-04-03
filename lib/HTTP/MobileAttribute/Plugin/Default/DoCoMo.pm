@@ -9,7 +9,7 @@ our $DefaultCacheSize = 5;
 sub initialize : Hook('initialize_DoCoMo') {
     my ( $self, $c ) = @_;
 
-    $self->mk_register_accessors( DoCoMo => qw/version model status bandwidth serial_number is_foma card_id xhtml_compliant comment/);
+    $self->mk_register_accessors( DoCoMo => qw/version model status bandwidth serial_number is_foma card_id comment/);
     $self->parse( $c );
 }
 
@@ -52,25 +52,38 @@ our $Ver60RE = qr/702i|D851iWM|902i/;
 sub html_version: CarrierMethod('DoCoMo') {
     my ($self, $c) = @_;
 
-    my $model = $self->model;
+    # I want memoize...
+    return $self->{__html_version} ||= do {
+        my $model = $self->model;
 
-    # id:tokuhirm doesn't like eval expansion, so I'm handrolling this bitch ;)
-    if ($model =~ /$Ver10RE/) {
-        return '1.0';
-    } elsif ($model =~ /$Ver20RE/) {
-        return '2.0';
-    } elsif ($model =~ /$Ver30RE/) {
-        return '3.0';
-    } elsif ($model =~ /$Ver40RE/) {
-        return '4.0';
-    } elsif ($model =~ /$Ver32RE/) {
-        return '3.2';
-    } elsif ($model =~ /$Ver50RE/) {
-        return '5.0';
-    } elsif ($model =~ /$Ver60RE/) {
-        return '6.0';
-    } 
-    return;
+        # id:tokuhirm doesn't like eval expansion, so I'm handrolling this bitch ;)
+        if ($model =~ /$Ver10RE/) {
+            return '1.0';
+        } elsif ($model =~ /$Ver20RE/) {
+            return '2.0';
+        } elsif ($model =~ /$Ver30RE/) {
+            return '3.0';
+        } elsif ($model =~ /$Ver40RE/) {
+            return '4.0';
+        } elsif ($model =~ /$Ver32RE/) {
+            return '3.2';
+        } elsif ($model =~ /$Ver50RE/) {
+            return '5.0';
+        } elsif ($model =~ /$Ver60RE/) {
+            return '6.0';
+        } 
+        return;
+    };
+}
+
+sub xhtml_compliant :CarrierMethod('DoCoMo') {
+    my ($self, $c) = @_;
+
+    return $self->{__xhtml_compliant} ||= (
+        ( $self->is_foma && !( $self->html_version && $self->html_version == 3.0 ) )
+            ? 1
+            : 0
+    );
 }
 
 sub parse {
@@ -93,12 +106,6 @@ sub parse {
         # DoCoMo/1.0/R692i/c10
         $self->_parse_main($main);
     }
-
-    $self->{xhtml_compliant} =
-        ( $self->is_foma
-            && !( $self->html_version && $self->html_version == 3.0 ) )
-        ? 1
-        : 0;
 
 }
 
