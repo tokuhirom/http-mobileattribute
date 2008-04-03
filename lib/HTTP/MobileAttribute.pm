@@ -7,7 +7,7 @@ use HTTP::MobileAttribute::Request;
 use HTTP::MobileAttribute::CarrierDetecter;
 use Scalar::Util qw/refaddr/;
 
-__PACKAGE__->load_components(qw/Autocall::SingletonMethod/);
+__PACKAGE__->load_components(qw/Autocall::InjectMethod/);
 __PACKAGE__->load_plugins(qw/
     Carrier IS GPS
     Default::DoCoMo Default::ThirdForce Default::EZweb Default::NonMobile Default::AirHPhone
@@ -24,6 +24,7 @@ sub new {
             carrier_longname => $carrier_longname,
         }
     );
+    $self = bless {%$self}, "HTTP::MobileAttribute::Agent::$carrier_longname"; # rebless to carrier specific package.
     $self->run_hook('initialize');
     return $self;
 }
@@ -34,6 +35,26 @@ for my $accessor (qw/request carrier_longname/) {
 }
 
 sub user_agent { shift->request->get('User-Agent') }
+
+package # hide from pause
+    HTTP::MobileAttribute::Agent::DoCoMo;
+use base qw/HTTP::MobileAttribute/;
+
+package # hide from pause
+    HTTP::MobileAttribute::Agent::EZweb;
+use base qw/HTTP::MobileAttribute/;
+
+package # hide from pause
+    HTTP::MobileAttribute::Agent::ThirdForce;
+use base qw/HTTP::MobileAttribute/;
+
+package # hide from pause
+    HTTP::MobileAttribute::Agent::AirHPhone;
+use base qw/HTTP::MobileAttribute/;
+
+package # hide from pause
+    HTTP::MobileAttribute::Agent::NonMobile;
+use base qw/HTTP::MobileAttribute/;
 
 1;
 __END__
@@ -85,10 +106,6 @@ carrier_longname が Vodafone じゃなくて ThirdForce を返すよ
 is_wap1, is_wap2. つかってないよね?
 
 =head1 気になってること
-
-=head2 CarrierMethod('DoCoMo') みたいなのがいっぱいあってまんどい。
-
-__PACKAGE__->plugin_carrier('DoCoMo') ってやると一括で、この Plugin は DoCoMo 用ってことにするとか、そういうのがほしいのかも。
 
 =head2 まだディスプレイまわりの実装ができてない
 
