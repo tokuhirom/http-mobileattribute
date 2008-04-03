@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use base qw/HTTP::MobileAttribute::Plugin/;
 use HTTP::MobileAttribute;
-use HTTP::MobileAgent::DoCoMoDisplayMap qw/$DisplayMap/;
+use HTTP::MobileAttribute::Plugin::Display::DoCoMoMap qw/$DisplayMap/;
 
 sub display : Method {
     my ($self, $c) = @_;
