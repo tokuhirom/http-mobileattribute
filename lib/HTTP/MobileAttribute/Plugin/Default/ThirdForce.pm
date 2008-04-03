@@ -11,12 +11,12 @@ sub initialize : Hook('initialize') {
     $self->parse($c);
 }
 
-sub is_type_c   :MobileMethod('ThirdForce') { shift->{type} =~ /^C/ }
-sub is_type_p   :MobileMethod('ThirdForce') { shift->{type} =~ /^P/ }
-sub is_type_w   :MobileMethod('ThirdForce') { shift->{type} =~ /^W/ }
-sub is_type_3gc :MobileMethod('ThirdForce') { shift->{type} eq '3GC' }
+sub is_type_c   :CarrierMethod('ThirdForce') { shift->{type} =~ /^C/ }
+sub is_type_p   :CarrierMethod('ThirdForce') { shift->{type} =~ /^P/ }
+sub is_type_w   :CarrierMethod('ThirdForce') { shift->{type} =~ /^W/ }
+sub is_type_3gc :CarrierMethod('ThirdForce') { shift->{type} eq '3GC' }
 
-sub xhtml_compliant :MobileMethod('ThirdForce') {
+sub xhtml_compliant :CarrierMethod('ThirdForce') {
     my $self = shift;
     return ( $self->is_type_w || $self->is_type_3gc ) ? 1 : 0;
 }

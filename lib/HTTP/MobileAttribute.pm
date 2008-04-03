@@ -86,7 +86,7 @@ is_wap1, is_wap2. つかってないよね?
 
 =head1 気になってること
 
-=head2 MobileMethod('html_version,DoCoMo') みたいなのがいっぱいあってまんどい。
+=head2 CarrierMethod('html_version,DoCoMo') みたいなのがいっぱいあってまんどい。
 
 __PACKAGE__->plugin_carrier('DoCoMo') ってやると一括で、この Plugin は DoCoMo 用ってことにするとか、そういうのがほしいのかも。
 

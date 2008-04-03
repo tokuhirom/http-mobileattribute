@@ -14,14 +14,14 @@ sub initialize : Hook('initialize') {
 }
 
 
-sub name : MobileMethod('DoCoMo') { shift->{name} }
+sub name : CarrierMethod('DoCoMo') { shift->{name} }
 
-sub cache_size :MobileMethod('DoCoMo') {
+sub cache_size :CarrierMethod('DoCoMo') {
     my $self = shift;
     return $self->{cache_size} || $DefaultCacheSize;
 }
 
-sub series :MobileMethod('DoCoMo') {
+sub series :CarrierMethod('DoCoMo') {
     my $self  = shift;
     my $model = $self->model;
 
@@ -33,7 +33,7 @@ sub series :MobileMethod('DoCoMo') {
     return $1;
 }
 
-sub vendor :MobileMethod('DoCoMo') {
+sub vendor :CarrierMethod('DoCoMo') {
     my $self  = shift;
     my $model = $self->model;
     $model =~ /^([A-Z]+)\d/;
@@ -52,7 +52,7 @@ our $DoCoMoHTMLVersionMap = [
     qr/702i|D851iWM|902i/ => '6.0',
 ];
 
-sub html_version: MobileMethod('DoCoMo') {
+sub html_version: CarrierMethod('DoCoMo') {
     my ($self, $c) = @_;
 
     my @map = @$DoCoMoHTMLVersionMap;

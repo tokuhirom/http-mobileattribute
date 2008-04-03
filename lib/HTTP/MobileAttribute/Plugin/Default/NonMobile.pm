@@ -3,8 +3,8 @@ use strict;
 use warnings;
 use base qw/HTTP::MobileAttribute::Plugin/;
 
-sub model           :MobileMethod('NonMobile') { '' }
-sub device_id       :MobileMethod('NonMobile') { '' }
-sub xhtml_compliant :MobileMethod('NonMobile') { 1 }
+sub model           :CarrierMethod('NonMobile') { '' }
+sub device_id       :CarrierMethod('NonMobile') { '' }
+sub xhtml_compliant :CarrierMethod('NonMobile') { 1 }
 
 1;

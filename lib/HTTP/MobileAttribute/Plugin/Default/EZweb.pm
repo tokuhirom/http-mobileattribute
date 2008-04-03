@@ -11,7 +11,7 @@ sub initialize : Hook('initialize') {
     $self->parse( $c );
 }
 
-sub is_tuka : MobileMethod('EZweb') {
+sub is_tuka : CarrierMethod('EZweb') {
     my $self = shift;
     my $tuka = substr( $self->device_id, 2, 1 );
     if ( $self->xhtml_compliant ) {
@@ -23,7 +23,7 @@ sub is_tuka : MobileMethod('EZweb') {
     return;
 }
 
-sub is_win : MobileMethod('EZweb') {
+sub is_win : CarrierMethod('EZweb') {
     my $self = shift;
     my $win = substr( $self->device_id, 2, 1 );
     $win eq '3' ? 1 : 0;

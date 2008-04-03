@@ -1,4 +1,4 @@
-package HTTP::MobileAttribute::Attribute::MobileMethod;
+package HTTP::MobileAttribute::Attribute::CarrierMethod;
 use strict;
 use warnings;
 use base 'Class::Component::Attribute';
