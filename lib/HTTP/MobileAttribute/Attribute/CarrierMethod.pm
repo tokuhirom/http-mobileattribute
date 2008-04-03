@@ -4,7 +4,22 @@ use warnings;
 use base 'Class::Component::Attribute';
 
 sub register {
-    my ( $class, $plugin, $c, $method, $carrier, $code ) = @_;
+    my ( $class, $plugin, $c, $method, $param, $code ) = @_;
+
+    my $carrier;
+    if (ref $param) {
+        my $original_method = $method;
+        my $proto           = ref $plugin;
+
+        $carrier = $param->[0];
+        $method  = $param->[1];
+        $plugin  = "${proto}::${carrier}";
+
+        no strict 'refs';
+        *{"${plugin}::${method}"} = *{"${proto}::${original_method}"};
+    } else {
+        $carrier = $param;
+    }
 
     $c->agent_class($carrier)->register_method( $method => $plugin );
 }
