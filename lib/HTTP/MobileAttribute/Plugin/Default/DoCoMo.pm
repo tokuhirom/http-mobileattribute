@@ -134,16 +134,23 @@ sub _parse_foma {
     $c->{model} = $1;
     $c->{model} = 'SH2101V' if $1 eq 'MST_v_SH2101V';    # Huh?
 
-    if ( $foma =~ s/^\((.*?)\)$// ) {
-        my @options = split /;/, $1;
-        for (@options) {
-            /^c(\d+)$/      and $c->{cache_size}    = $1, next;
-            /^ser(\w{15})$/ and $c->{serial_number} = $1, next;
-            /^icc(\w{20})$/ and $c->{card_id}       = $1, next;
-            /^(T[CDBJ])$/   and $c->{status}        = $1, next;
-            /^W(\d+)H(\d+)$/ and $c->{display_bytes} = "$1*$2", next;
-            $c->no_match;
-        }
+    $foma =~ /^\(/g or return;
+    while ($foma =~ /\G
+        (?:
+            c(\d+)      | # cache size
+            ser(\w{15}) | # serial_number
+            icc(\w{20}) | # card_id
+            (T[CDBJ])   | # status
+            W(\d+)H(\d+)  # display_bytes
+        )
+        [;\)]/gx)
+    {
+        $1         and $c->{cache_size}    = $1, next;
+        $2         and $c->{serial_number} = $2, next;
+        $3         and $c->{card_id}       = $3, next;
+        $4         and $c->{status}        = $4, next;
+        ($5 && $6) and $c->{display_bytes} = "$5*$6", next;
+        $c->no_match;
     }
 }
 
