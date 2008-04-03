@@ -6,12 +6,8 @@ use base qw/HTTP::MobileAttribute::Plugin/;
 sub initialize : Hook('initialize') {
     my ($self, $c) = @_;
     return unless $c->carrier_longname eq 'AirHPhone';
+    $self->mk_register_accessors( $c => qw(name vendor model model_version browser_version cache_size));
     $self->parse($c->user_agent);
-}
-
-for my $method (qw(name vendor model model_version browser_version cache_size)) {
-    eval qq! sub $method :MobileMethod("AirHPhone") { shift->{$method} }; !; ## no critic.
-    die $@ if $@;
 }
 
 sub parse {

@@ -6,14 +6,9 @@ use base qw/HTTP::MobileAttribute::Plugin/;
 sub initialize : Hook('initialize') {
     my ( $self, $c ) = @_;
     return unless $c->carrier_longname eq 'EZweb';
+    $self->mk_register_accessors( $c => qw(name version model device_id server xhtml_compliant comment));
 
     $self->parse( $c );
-}
-
-# FIXME: ここなんとかして。どうにかして。なんか anonymous function だと Attribute がうまくあたらないからとりあえずこれで。
-for my $method (qw(name version model device_id server xhtml_compliant comment)) {
-    eval qq! sub $method :MobileMethod("EZweb") { shift->{$method} }; !; ## no critic.
-    die $@ if $@;
 }
 
 sub is_tuka : MobileMethod('EZweb') {
