@@ -13,6 +13,8 @@ __PACKAGE__->load_plugins(qw/
     Default::DoCoMo Default::ThirdForce Default::EZweb Default::NonMobile Default::AirHPhone
 /);
 
+our %CARRIER_CLASSES;
+
 sub new {
     my ($class, $stuff) = @_;
 
@@ -22,11 +24,15 @@ sub new {
     # going through the hassle of doing Detector->detect, we simply
     # create a function that does the right thing and use it
     my $carrier_longname = HTTP::MobileAttribute::CarrierDetector::detect($request->get('User-Agent'));
-    my $carrier_class = $class->agent_class($carrier_longname);
 
-    for my $type (qw/ components plugins methods hooks /) {
-        my $method = "class_component_$type";
-        $carrier_class->$method($class->$method);
+    my $carrier_class = $CARRIER_CLASSES{ $carrier_longname };
+    if (! $carrier_class) {
+        $carrier_class = $class->agent_class($carrier_longname);
+        for my $type (qw/ components plugins methods hooks /) {
+            my $method = "class_component_$type";
+            $carrier_class->$method($class->$method);
+        }
+        $CARRIER_CLASSES{ $carrier_longname } = $carrier_class;
     }
 
     my $self = $carrier_class->NEXT(
