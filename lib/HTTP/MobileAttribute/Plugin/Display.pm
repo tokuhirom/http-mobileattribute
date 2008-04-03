@@ -7,7 +7,7 @@ use HTTP::MobileAttribute::Plugin::Display::DoCoMoMap qw/$DisplayMap/;
 
 my %ARG_DISPATCH = (
     ThirdForce => \&__thirdforce_args,
-    EZWeb      => \&__ezweb_args,
+    EZweb      => \&__ezweb_args,
     DoCoMo     => \&__docomo_args,
 );
 
@@ -57,6 +57,7 @@ sub __ezweb_args
         color  => ( defined $color && $color eq '1' ),
         depth  => 2**$depth,
     };
+}
 
 sub __docomo_args
 {

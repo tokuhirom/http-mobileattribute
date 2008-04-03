@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use Test::More tests => 28;
+use Test::More tests => 35;
 
 use HTTP::MobileAttribute;
 
@@ -35,6 +35,7 @@ for (@Tests) {
     local *ENV = $env;
     my $ua = HTTP::MobileAttribute->new;
     my $display = $ua->display;
+    ok $display, "Display for $env->{HTTP_USER_AGENT} is defined";
     for my $method (keys %$values) {
         is $display->$method(), $values->{$method}, "$method = $values->{$method}";
     }
