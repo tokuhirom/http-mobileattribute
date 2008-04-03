@@ -6,7 +6,7 @@ use base qw/HTTP::MobileAttribute::Plugin/;
 sub initialize : Hook('initialize_AirHPhone') {
     my ($self, $c) = @_;
 
-    $self->mk_register_accessors( $c => qw(name vendor model model_version browser_version cache_size));
+    $self->mk_register_accessors( AirHPhone => qw(name vendor model model_version browser_version cache_size));
     $self->parse($c->user_agent);
 }
 

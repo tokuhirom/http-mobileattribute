@@ -7,9 +7,10 @@ use HTTP::MobileAttribute::Request;
 use HTTP::MobileAttribute::CarrierDetector;
 use Scalar::Util qw/refaddr/;
 
-__PACKAGE__->load_components(qw/Autocall::InjectMethod/);
+__PACKAGE__->load_components(qw/DisableDynamicPlugin Autocall::InjectMethod/);
 __PACKAGE__->load_plugins(qw/
     Carrier IS GPS
+    Default::DoCoMo Default::ThirdForce Default::EZweb Default::NonMobile Default::AirHPhone
 /);
 
 sub new {
@@ -21,14 +22,21 @@ sub new {
     # going through the hassle of doing Detector->detect, we simply
     # create a function that does the right thing and use it
     my $carrier_longname = HTTP::MobileAttribute::CarrierDetector::detect($request->get('User-Agent'));
-    my $self = $class->NEXT(
+    my $carrier_class = $class->agent_class($carrier_longname);
+
+    for my $type (qw/ components plugins methods hooks /) {
+        my $method = "class_component_$type";
+        $carrier_class->$method($class->$method);
+    }
+
+    my $self = $carrier_class->NEXT(
         'new' => +{
             request          => $request,
             carrier_longname => $carrier_longname,
         }
     );
-    $self = bless {%$self}, "HTTP::MobileAttribute::Agent::$carrier_longname"; # rebless to carrier specific package.
-    $self->load_plugins("Default::$carrier_longname");
+
+    $self->run_hook("instance_clear"); # clear instance data
     $self->run_hook("initialize_$carrier_longname");
     return $self;
 }
@@ -39,6 +47,8 @@ for my $accessor (qw/request carrier_longname/) {
 }
 
 sub user_agent { shift->request->get('User-Agent') }
+
+sub agent_class { 'HTTP::MobileAttribute::Agent::' . $_[1] }
 
 package # hide from pause
     HTTP::MobileAttribute::Agent::DoCoMo;

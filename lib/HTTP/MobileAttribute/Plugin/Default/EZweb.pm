@@ -6,7 +6,7 @@ use base qw/HTTP::MobileAttribute::Plugin/;
 sub initialize : Hook('initialize_EZweb') {
     my ( $self, $c ) = @_;
 
-    $self->mk_register_accessors( $c => qw(name version model device_id server xhtml_compliant comment));
+    $self->mk_register_accessors( EZweb => qw(name version model device_id server xhtml_compliant comment));
 
     $self->parse( $c );
 }

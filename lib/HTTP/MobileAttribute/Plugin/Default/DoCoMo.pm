@@ -5,11 +5,11 @@ use base qw/HTTP::MobileAttribute::Plugin/;
 
 our $DefaultCacheSize = 5;
 
+
 sub initialize : Hook('initialize_DoCoMo') {
     my ( $self, $c ) = @_;
 
-    $self->mk_register_accessors( $c => qw/version model status bandwidth serial_number is_foma card_id xhtml_compliant comment/);
-
+    $self->mk_register_accessors( DoCoMo => qw/version model status bandwidth serial_number is_foma card_id xhtml_compliant comment/);
     $self->parse( $c );
 }
 
