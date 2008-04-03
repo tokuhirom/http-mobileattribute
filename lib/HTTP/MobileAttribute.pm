@@ -8,10 +8,10 @@ use HTTP::MobileAttribute::CarrierDetector;
 use Scalar::Util qw/refaddr/;
 
 __PACKAGE__->load_components(qw/DisableDynamicPlugin Autocall::InjectMethod/);
-__PACKAGE__->load_plugins(qw/
-    Carrier IS GPS
-    Default::DoCoMo Default::ThirdForce Default::EZweb Default::NonMobile Default::AirHPhone
-/);
+__PACKAGE__->load_plugins(
+    qw(Carrier IS GPS),
+    map({ "Default::$_" } qw/DoCoMo ThirdForce EZweb NonMobile AirHPhone/),
+);
 
 our %CARRIER_CLASSES;
 
