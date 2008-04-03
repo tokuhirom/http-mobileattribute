@@ -10,11 +10,6 @@ sub initialize : CarrierMethod('ThirdForce') {
     $self->parse($c);
 }
 
-sub is_type_c   :CarrierMethod('ThirdForce') { $_[1]->{type} =~ /^C/ }
-sub is_type_p   :CarrierMethod('ThirdForce') { $_[1]->{type} =~ /^P/ }
-sub is_type_w   :CarrierMethod('ThirdForce') { $_[1]->{type} =~ /^W/ }
-sub is_type_3gc :CarrierMethod('ThirdForce') { $_[1]->{type} eq '3GC' }
-
 sub xhtml_compliant :CarrierMethod('ThirdForce') {
     my ($self, $c) = @_;
     return ( $c->is_type_w || $c->is_type_3gc ) ? 1 : 0;

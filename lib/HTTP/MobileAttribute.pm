@@ -7,8 +7,9 @@ use HTTP::MobileAttribute::Request;
 use HTTP::MobileAttribute::CarrierDetector;
 
 __PACKAGE__->load_components(qw/DisableDynamicPlugin Autocall::InjectMethod/);
+# TODO: I want to remove IS::ThirdForce from default plugins.
 __PACKAGE__->load_plugins(
-    qw(Carrier IS GPS),
+    qw(Carrier IS IS::ThirdForce GPS),
     map({ "Default::$_" } qw/DoCoMo ThirdForce EZweb NonMobile AirHPhone/),
 );
 
@@ -129,7 +130,7 @@ carrier_longname が Vodafone じゃなくて ThirdForce を返すよ
 is_* で、もはやこの判定つかわんだろうというようなものは削ってある。具体的には
 
     EZweb: is_wap1, is_wap2, is_win, is_tuka
-    DoCoMo->series
+    DoCoMo->series, is_foma
 
 のあたり。つかってないよね?使ってる人いたら、Plugin::IS::DoCoMo とかのあたりにつくればいいよ
 
