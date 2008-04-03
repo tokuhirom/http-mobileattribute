@@ -38,8 +38,8 @@ sub new {
         request          => $request,
         carrier_longname => $carrier_longname,
     });
+    $self->initialize();
 
-    $self->run_hook("initialize_$carrier_longname");
     return $self;
 }
 

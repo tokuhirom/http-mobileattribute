@@ -6,7 +6,7 @@ use base qw/HTTP::MobileAttribute::Plugin/;
 our $DefaultCacheSize = 5;
 
 
-sub initialize : Hook('initialize_DoCoMo') {
+sub initialize : CarrierMethod('DoCoMo') {
     my ( $self, $c ) = @_;
 
     $self->mk_register_accessors( DoCoMo => qw/version model status bandwidth serial_number is_foma card_id comment name/);

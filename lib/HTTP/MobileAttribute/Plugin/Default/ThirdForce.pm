@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use base qw/HTTP::MobileAttribute::Plugin/;
 
-sub initialize : Hook('initialize_ThirdForce') {
+sub initialize : CarrierMethod('ThirdForce') {
     my ($self, $c) = @_;
 
     $self->mk_register_accessors( ThirdForce => qw(name version model type packet_compliant serial_number vendor vendor_version java_info));
