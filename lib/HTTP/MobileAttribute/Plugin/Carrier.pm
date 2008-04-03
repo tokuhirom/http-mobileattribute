@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use base qw/HTTP::MobileAttribute::Plugin/;
 
-sub carrier :Method('carrier') {
+sub carrier :Method {
     my ($self, $c) = @_;
 
     return +{
