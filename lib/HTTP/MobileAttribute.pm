@@ -121,6 +121,12 @@ Tokuhiro Matsuno E<lt>tokuhirom aaaatttt gmail dotottto commmmmE<gt>
 
 Kazuhiro Osawa
 
+=head1 THANKS TO
+
+    Tatsuhiko Miyagawa(original author of HTTP::MobileAgent)
+    Satoshi Tanimoto
+    Yoshiki Kurihara(Current mentainer of HTTP::MobileAgent)
+
 =head1 SEE ALSO
 
 L<HTTP::MobileAgent>
