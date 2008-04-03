@@ -4,21 +4,23 @@ use warnings;
 use Carp;
 use Class::Inspector;
 use Scalar::Util qw/blessed/;
+use HTTP::MobileAttribute::Request::Env;
+use HTTP::MobileAttribute::Request::Apache;
+use HTTP::MobileAttribute::Request::HTTPHeaders;
 
 sub new {
     my ($class, $stuff) = @_;
 
     # This is the not-so-sexy approach that uses less code than the original
-    my $impl_base = __PACKAGE__;
     my $impl_class;
     if (! $stuff || ! ref $stuff ) {
         # first, if $stuff is not defined or is not a reference...
-        $impl_class = join("::", $impl_base, "Env");
+        $impl_class = join("::", __PACKAGE__, "Env");
     } elsif (blessed($stuff)) {
         # or, if it's blessed, check if they are of appropriate types
         foreach my $pkg qw(Apache HTTP::Headers) {
             if ($stuff->isa($pkg)) {
-                $impl_class = join("::", $impl_base, $pkg);
+                $impl_class = join("::", __PACKAGE__, $pkg);
                  # XXX Hack. Will only work for HTTPHeaders
                 $impl_class =~ s/HTTP::Headers$/HTTPHeaders/;
                 last;
@@ -30,18 +32,7 @@ sub new {
         croak "unknown request type: $stuff";
     }
 
-    if (! Class::Inspector->loaded($impl_class)) {
-        # Continuing on our not-so-sexy route, we do not use 
-        # UNIVERSAL::require here.
-        eval "require $impl_class"; ## no critic.
-        croak if $@;
-    }
-
-    return bless {
-        impl => $impl_class->new($stuff)
-    }, $class;
+    return $impl_class->new($stuff);
 }
-
-sub get { shift->{impl}->get(@_) }
 
 1;
