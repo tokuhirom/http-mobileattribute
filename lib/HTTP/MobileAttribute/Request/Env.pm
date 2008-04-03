@@ -1,18 +1,13 @@
 package HTTP::MobileAttribute::Request::Env;
 use strict;
 use warnings;
-use Scalar::Util qw/blessed/;
 
 sub new {
     my ($class, $stuff) = @_;
 
-    if ( not defined $stuff ) {
-        return bless { env => \%ENV }, __PACKAGE__; 
-    } elsif ( not ref $stuff ) {
-        return bless { env => { HTTP_USER_AGENT => $stuff } }, __PACKAGE__; 
-    } else {
-        return $class->next::method($stuff);
-    }
+    # %ENV is global, so localize to %env
+    my %env = ! defined $stuff ? %ENV : (HTTP_USER_AGENT => $stuff);
+    return bless { env => \%env }, $class;
 }
 
 sub get {
