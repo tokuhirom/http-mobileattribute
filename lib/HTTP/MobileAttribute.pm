@@ -17,7 +17,11 @@ sub new {
     my ($class, $stuff) = @_;
 
     my $request = HTTP::MobileAttribute::Request->new($stuff);
-    my $carrier_longname = HTTP::MobileAttribute::CarrierDetector->detect($request->get('User-Agent'));
+
+    # XXX carrier name detection is actually simple, so instead of
+    # going through the hassle of doing Detector->detect, we simply
+    # create a function that does the right thing and use it
+    my $carrier_longname = HTTP::MobileAttribute::CarrierDetector::detect($request->get('User-Agent'));
     my $self = $class->NEXT(
         'new' => +{
             request          => $request,

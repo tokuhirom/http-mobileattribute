@@ -11,7 +11,7 @@ filters {
 
 sub get_carrier {
     my $ua = shift;
-    HTTP::MobileAttribute::CarrierDetector->detect($ua);
+    HTTP::MobileAttribute::CarrierDetector::detect($ua);
 }
 
 run_is input => 'expected';
