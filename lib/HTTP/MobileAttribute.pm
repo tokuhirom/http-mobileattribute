@@ -10,7 +10,6 @@ use Scalar::Util qw/refaddr/;
 __PACKAGE__->load_components(qw/Autocall::InjectMethod/);
 __PACKAGE__->load_plugins(qw/
     Carrier IS GPS
-    Default::DoCoMo Default::ThirdForce Default::EZweb Default::NonMobile Default::AirHPhone
 /);
 
 sub new {
@@ -29,6 +28,7 @@ sub new {
         }
     );
     $self = bless {%$self}, "HTTP::MobileAttribute::Agent::$carrier_longname"; # rebless to carrier specific package.
+    $self->load_plugins("Default::$carrier_longname");
     $self->run_hook("initialize_$carrier_longname");
     return $self;
 }
