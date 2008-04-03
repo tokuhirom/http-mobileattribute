@@ -41,13 +41,13 @@ sub vendor :CarrierMethod('DoCoMo') {
 }
 
 # see also L<WWW::MobileCarrierJP::DoCoMo::HTMLVersion>
-my $Ver10RE = qr/[DFNP]501i/;
-my $Ver20RE = qr/502i|821i|209i|691i|(?:F|N|P|KO)210i|^F671i$/;
-my $Ver30RE = qr/(?:D210i|SO210i)|503i|211i|SH251i|692i|200[12]|2101V/;
-my $Ver32RE = qr/eggy|P751v/;
-my $Ver40RE = qr/504i|251i|^F671iS$|^F661i$|^F672i$|212i|SO213i|2051|2102V|2701|850i/;
-my $Ver50RE = qr/505i|506i|252i|253i|P213i|600i|700i|701i|800i|880i|SH851i|P851i|881i|900i|901i/;
-my $Ver60RE = qr/702i|D851iWM|902i/;
+our $Ver10RE = qr/[DFNP]501i/;
+our $Ver20RE = qr/502i|821i|209i|691i|(?:F|N|P|KO)210i|^F671i$/;
+our $Ver30RE = qr/(?:D210i|SO210i)|503i|211i|SH251i|692i|200[12]|2101V/;
+our $Ver32RE = qr/eggy|P751v/;
+our $Ver40RE = qr/504i|251i|^F671iS$|^F661i$|^F672i$|212i|SO213i|2051|2102V|2701|850i/;
+our $Ver50RE = qr/505i|506i|252i|253i|P213i|600i|700i|701i|800i|880i|SH851i|P851i|881i|900i|901i/;
+our $Ver60RE = qr/702i|D851iWM|902i/;
 
 sub html_version: CarrierMethod('DoCoMo') {
     my ($self, $c) = @_;
