@@ -13,6 +13,11 @@ __PACKAGE__->load_plugins(
 );
 
 our %CARRIER_CLASSES;
+sub load_plugin {
+    my $class = shift;
+    %CARRIER_CLASSES = ();
+    $class->SUPER::load_plugin(@_);
+}
 
 sub new {
     my ($class, $stuff) = @_;
