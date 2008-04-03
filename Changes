@@ -1,4 +1,9 @@
 Revision history for Perl extension HTTP::MobileAttribute
 
+0.02
+
+        - Performance Tuning(68x faster)
+          by lestrrat++ & yappo++
+
 0.01    Thu Jan  3 01:52:45 2008
         - original version
