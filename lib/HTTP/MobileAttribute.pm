@@ -35,12 +35,10 @@ sub new {
         $CARRIER_CLASSES{ $carrier_longname } = $carrier_class;
     }
 
-    my $self = $carrier_class->NEXT(
-        'new' => +{
-            request          => $request,
-            carrier_longname => $carrier_longname,
-        }
-    );
+    my $self = $carrier_class->SUPER::new({
+        request          => $request,
+        carrier_longname => $carrier_longname,
+    });
 
     $self->run_hook("initialize_$carrier_longname");
     return $self;
