@@ -11,26 +11,6 @@ sub initialize : CarrierMethod('EZweb') {
     $self->parse( $c );
 }
 
-sub is_tuka : CarrierMethod('EZweb') {
-    my ($self, $c) = @_;
-
-    my $tuka = substr( $c->device_id, 2, 1 );
-
-    if ( $c->xhtml_compliant ) {
-        return 1 if $tuka eq 'U';
-    }
-    else {
-        return 1 if $tuka eq 'T';
-    }
-    return;
-}
-
-sub is_win : CarrierMethod('EZweb') {
-    my ($self, $c) = @_;
-    my $win = substr( $c->device_id, 2, 1 );
-    $win eq '3' ? 1 : 0;
-}
-
 sub parse {
     my ( $self, $c ) = @_;
 

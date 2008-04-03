@@ -126,7 +126,12 @@ carrier_longname が Vodafone じゃなくて ThirdForce を返すよ
 
 =head2 廃止したメソッド
 
-is_wap1, is_wap2, DoCoMo->series. つかってないよね?
+is_* で、もはやこの判定つかわんだろうというようなものは削ってある。具体的には
+
+    EZweb: is_wap1, is_wap2, is_win, is_tuka
+    DoCoMo->series
+
+のあたり。つかってないよね?使ってる人いたら、Plugin::IS::DoCoMo とかのあたりにつくればいいよ
 
 =head1 気になってること
 
