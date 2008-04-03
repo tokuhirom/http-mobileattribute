@@ -1,5 +1,5 @@
 use strict;
-use Test::More tests => 496;
+use Test::More tests => 484;
 
 BEGIN { use_ok 'HTTP::MobileAttribute' }
 
@@ -32,19 +32,6 @@ for (@Tests) {
     is $agent->server, $data[2];
     is $agent->xhtml_compliant, $data[3];
     is $agent->comment, $data[4];
-
-    if ($ua eq 'UP.Browser/3.04-TST4 UP.Link/3.4.5.6' 
-        or $ua eq 'KDDI-KCU1 UP.Browser/6.2.0.5.1 (GUI) MMP/2.0'){
-        ok $agent->is_tuka;
-    } else {
-        ok !$agent->is_tuka;
-    }
-
-    if ($ua eq 'KDDI-SN31 UP.Browser/6.2.0.7.3.129 (GUI) MMP/2.0'){
-        ok $agent->is_win;
-    } else {
-        ok !$agent->is_win;
-    }
 }
 
 while (<DATA>) {
