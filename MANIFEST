@@ -17,7 +17,7 @@ inc/Test/Builder/Module.pm
 inc/Test/More.pm
 lib/HTTP/MobileAttribute.pm
 lib/HTTP/MobileAttribute/Attribute/CarrierMethod.pm
-lib/HTTP/MobileAttribute/CarrierDetecter.pm
+lib/HTTP/MobileAttribute/CarrierDetector.pm
 lib/HTTP/MobileAttribute/Plugin.pm
 lib/HTTP/MobileAttribute/Plugin/Carrier.pm
 lib/HTTP/MobileAttribute/Plugin/Default/AirHPhone.pm

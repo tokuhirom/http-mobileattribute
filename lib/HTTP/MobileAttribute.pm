@@ -4,7 +4,7 @@ use warnings;
 our $VERSION = '0.01';
 use Class::Component;
 use HTTP::MobileAttribute::Request;
-use HTTP::MobileAttribute::CarrierDetecter;
+use HTTP::MobileAttribute::CarrierDetector;
 use Scalar::Util qw/refaddr/;
 
 __PACKAGE__->load_components(qw/Autocall::InjectMethod/);
@@ -17,7 +17,7 @@ sub new {
     my ($class, $stuff) = @_;
 
     my $request = HTTP::MobileAttribute::Request->new($stuff);
-    my $carrier_longname = HTTP::MobileAttribute::CarrierDetecter->detect($request->get('User-Agent'));
+    my $carrier_longname = HTTP::MobileAttribute::CarrierDetector->detect($request->get('User-Agent'));
     my $self = $class->NEXT(
         'new' => +{
             request          => $request,

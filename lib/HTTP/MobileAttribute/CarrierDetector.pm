@@ -1,4 +1,4 @@
-package HTTP::MobileAttribute::CarrierDetecter;
+package HTTP::MobileAttribute::CarrierDetector;
 use strict;
 use warnings;
 

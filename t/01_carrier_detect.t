@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 use Test::Base;
-use HTTP::MobileAttribute::CarrierDetecter;
+use HTTP::MobileAttribute::CarrierDetector;
 
 plan tests => 1*blocks;
 
@@ -11,7 +11,7 @@ filters {
 
 sub get_carrier {
     my $ua = shift;
-    HTTP::MobileAttribute::CarrierDetecter->detect($ua);
+    HTTP::MobileAttribute::CarrierDetector->detect($ua);
 }
 
 run_is input => 'expected';
