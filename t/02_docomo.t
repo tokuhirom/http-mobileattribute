@@ -1,5 +1,5 @@
 use strict;
-use Test::More tests => 878;
+use Test::More tests => 846;
 
 BEGIN { use_ok 'HTTP::MobileAttribute' }
 
@@ -53,7 +53,6 @@ for (@Tests) {
     is $agent->cache_size, $data[3],        "cache size is $data[3]";
     is $agent->is_foma, $data[4],        "is_foma";
     is $agent->vendor, $data[5],        "vendor";
-    is $agent->series, $data[6],        "cache size";
     is $agent->xhtml_compliant, $data[8], "xhtml compliant $ua";
     if ($data[7]) {
         is $agent->$_(), $data[7]->{$_},"testing $_" for keys %{$data[7]};

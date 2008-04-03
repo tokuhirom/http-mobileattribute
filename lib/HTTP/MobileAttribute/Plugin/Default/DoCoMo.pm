@@ -18,18 +18,6 @@ sub cache_size :CarrierMethod('DoCoMo') {
     return $c->{cache_size} || $DefaultCacheSize;
 }
 
-sub series :CarrierMethod('DoCoMo') {
-    my ($self, $c) = @_;
-    my $model = $c->model;
-
-    if ( $c->is_foma && $model =~ /\d{4}/ ) {
-        return 'FOMA';
-    }
-
-    $model =~ /(\d{3}i)/;
-    return $1;
-}
-
 sub vendor :CarrierMethod('DoCoMo') {
     my ($self, $c) = @_;
     my $model = $c->model;

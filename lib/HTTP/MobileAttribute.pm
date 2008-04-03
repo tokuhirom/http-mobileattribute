@@ -126,13 +126,13 @@ carrier_longname が Vodafone じゃなくて ThirdForce を返すよ
 
 =head2 廃止したメソッド
 
-is_wap1, is_wap2. つかってないよね?
+is_wap1, is_wap2, DoCoMo->series. つかってないよね?
 
 =head1 気になってること
 
 =head2 メモリつかいすぎ疑惑
 
-Singleton Method って遅くね?どうなんよ?
+まあ、たしょうメモリはいっぱいつかうよね。
 
 =head1 AUTHOR
 
