@@ -19,10 +19,8 @@ sub mk_register_accessors {
 }
 
 sub instance_clear : Hook('instance_clear') {
-    my($self, $c) = @_;
-    for my $key (keys %{ $self }) {
-        delete $self->{$key} unless $key eq 'config' || $key eq '__method_registerd';
-    }
+    my @keys = grep { !/^(?:config|__method_registerd)$/ } keys %{ $_[0] };
+    delete @{$_[0]}{@keys};
 }
 
 1;
