@@ -5,7 +5,6 @@ our $VERSION = '0.02';
 use Class::Component;
 use HTTP::MobileAttribute::Request;
 use HTTP::MobileAttribute::CarrierDetector;
-use Scalar::Util qw/refaddr/;
 
 __PACKAGE__->load_components(qw/DisableDynamicPlugin Autocall::InjectMethod/);
 __PACKAGE__->load_plugins(
