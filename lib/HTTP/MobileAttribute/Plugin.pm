@@ -3,6 +3,15 @@ use strict;
 use warnings;
 use base qw/Class::Component::Plugin/;
 
+sub class_component_load_attribute_resolver {
+    my ($class, $pkg) = @_;
+    if ($pkg eq 'CarrierMethod') {
+        return 'HTTP::MobileAttribute::Attribute::CarrierMethod';
+    } else {
+        return; # normal resolution
+    }
+}
+
 sub mk_register_accessors {
     my $self    = shift;
     return if $self->{__method_registerd};

@@ -25,7 +25,7 @@ for (@Tests) {
     # can't get the 3GC's "model" from user-agent.
     local $ENV{'HTTP_X_JPHONE_MSNAME'} = $data[1];
     my $agent = HTTP::MobileAttribute->new();
-    isa_ok $agent, 'HTTP::MobileAttribute';
+    isa_ok $agent, 'HTTP::MobileAttribute::Agent::ThirdForce';
     ok !$agent->is_docomo && !$agent->is_ezweb;
     ok $agent->is_j_phone && $agent->is_vodafone && $agent->is_softbank;
     ok $agent->name eq 'Vodafone' || $agent->name eq 'SoftBank' || $agent->name =~ /^MOT/ ;
@@ -50,7 +50,7 @@ while (<DATA>) {
     my($ua,$model) = split(/,/,$_);
     local $ENV{HTTP_USER_AGENT} = $ua;
     my $agent = HTTP::MobileAttribute->new;
-    isa_ok $agent, 'HTTP::MobileAttribute', $ua;
+    isa_ok $agent, 'HTTP::MobileAttribute::Agent::ThirdForce', $ua;
     ok $agent->name && ($agent->name,'Vodafone' || $agent->name =~ /^MOT/);
     ok !$agent->is_docomo && $agent->is_vodafone && !$agent->is_ezweb;
     ok $agent->is_type_3gc;

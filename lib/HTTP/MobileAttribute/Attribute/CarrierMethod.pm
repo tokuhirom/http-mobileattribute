@@ -6,7 +6,9 @@ use base 'Class::Component::Attribute';
 sub register {
     my ( $class, $plugin, $c, $method, $carrier, $code ) = @_;
 
-    $c->agent_class($carrier)->register_method( $method => $plugin );
+    if ($c =~ /::$carrier$/) {
+        $c->register_method( $method => $plugin );
+    }
 }
 
 1;
