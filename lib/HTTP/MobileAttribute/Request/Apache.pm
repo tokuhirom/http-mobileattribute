@@ -6,11 +6,7 @@ use Scalar::Util qw/blessed/;
 sub new {
     my ($class, $stuff) = @_;
 
-    if ( blessed($stuff) && $stuff->isa('Apache') ) {
-        return bless { r => $stuff }, __PACKAGE__; 
-    } else {
-        return $class->next::method($stuff);
-    }
+    return bless { r => $stuff }, __PACKAGE__; 
 }
 
 sub get {
