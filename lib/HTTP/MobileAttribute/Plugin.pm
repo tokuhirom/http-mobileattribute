@@ -12,15 +12,10 @@ sub mk_register_accessors {
     my $pkg = HTTP::MobileAttribute->agent_class($carrier);
     for my $method (@_) {
         no strict 'refs';
-        *{"$class\::$method"} = sub { shift->{$method} };
+        *{"$class\::$method"} = sub { $_[1]->{$method} };
         $pkg->register_method( $method => $self );
     }
     $self->{__method_registerd} = 1;
-}
-
-sub instance_clear : Hook('instance_clear') {
-    my @keys = grep { $_ ne 'config' && $_ ne '__method_registerd' } keys %{ $_[0] };
-    delete @{$_[0]}{@keys};
 }
 
 1;

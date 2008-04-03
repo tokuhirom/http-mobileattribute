@@ -42,7 +42,6 @@ sub new {
         }
     );
 
-    $self->run_hook("instance_clear"); # clear instance data
     $self->run_hook("initialize_$carrier_longname");
     return $self;
 }

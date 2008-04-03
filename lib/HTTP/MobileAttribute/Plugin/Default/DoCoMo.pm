@@ -9,23 +9,20 @@ our $DefaultCacheSize = 5;
 sub initialize : Hook('initialize_DoCoMo') {
     my ( $self, $c ) = @_;
 
-    $self->mk_register_accessors( DoCoMo => qw/version model status bandwidth serial_number is_foma card_id comment/);
+    $self->mk_register_accessors( DoCoMo => qw/version model status bandwidth serial_number is_foma card_id comment name/);
     $self->parse( $c );
 }
 
-
-sub name : CarrierMethod('DoCoMo') { shift->{name} }
-
 sub cache_size :CarrierMethod('DoCoMo') {
-    my $self = shift;
-    return $self->{cache_size} || $DefaultCacheSize;
+    my ($self, $c) = @_;
+    return $c->{cache_size} || $DefaultCacheSize;
 }
 
 sub series :CarrierMethod('DoCoMo') {
-    my $self  = shift;
-    my $model = $self->model;
+    my ($self, $c) = @_;
+    my $model = $c->model;
 
-    if ( $self->is_foma && $model =~ /\d{4}/ ) {
+    if ( $c->is_foma && $model =~ /\d{4}/ ) {
         return 'FOMA';
     }
 
@@ -34,8 +31,8 @@ sub series :CarrierMethod('DoCoMo') {
 }
 
 sub vendor :CarrierMethod('DoCoMo') {
-    my $self  = shift;
-    my $model = $self->model;
+    my ($self, $c) = @_;
+    my $model = $c->model;
     $model =~ /^([A-Z]+)\d/;
     return $1;
 }
@@ -53,8 +50,8 @@ sub html_version: CarrierMethod('DoCoMo') {
     my ($self, $c) = @_;
 
     # I want memoize...
-    return $self->{__html_version} ||= do {
-        my $model = $self->model;
+    return $c->{__html_version} ||= do {
+        my $model = $c->model;
 
         # id:tokuhirm doesn't like eval expansion, so I'm handrolling this bitch ;)
         if ($model =~ /$Ver10RE/) {
@@ -79,8 +76,8 @@ sub html_version: CarrierMethod('DoCoMo') {
 sub xhtml_compliant :CarrierMethod('DoCoMo') {
     my ($self, $c) = @_;
 
-    return $self->{__xhtml_compliant} ||= (
-        ( $self->is_foma && !( $self->html_version && $self->html_version == 3.0 ) )
+    return $c->{__xhtml_compliant} ||= (
+        ( $c->is_foma && !( $c->html_version && $c->html_version == 3.0 ) )
             ? 1
             : 0
     );
@@ -93,59 +90,59 @@ sub parse {
 
     if ( $foma_or_comment && $foma_or_comment =~ s/^\((.*)\)$/$1/ ) {
         # DoCoMo/1.0/P209is (Google CHTML Proxy/1.0)
-        $self->{comment} = $1;
-        $self->_parse_main($main);
+        $c->{comment} = $1;
+        $self->_parse_main($c, $main);
     }
     elsif ($foma_or_comment) {
         # DoCoMo/2.0 N2001(c10;ser0123456789abcde;icc01234567890123456789)
-        $self->{is_foma} = 1;
-        @{$self}{qw(name version)} = split m!/!, $main;
-        $self->_parse_foma($foma_or_comment);
+        $c->{is_foma} = 1;
+        @{$c}{qw(name version)} = split m!/!, $main;
+        $self->_parse_foma($c, $foma_or_comment);
     }
     else {
         # DoCoMo/1.0/R692i/c10
-        $self->_parse_main($main);
+        $self->_parse_main($c, $main);
     }
 
 }
 
 sub _parse_main {
-    my ( $self, $main ) = @_;
+    my ( $self, $c, $main ) = @_;
     my ( $name, $version, $model, $cache, @rest ) = split m!/!, $main;
-    $self->{name}    = $name;
-    $self->{version} = $version;
-    $self->{model}   = $model;
-    $self->{model}   = 'SH505i' if $self->{model} eq 'SH505i2';
+    $c->{name}    = $name;
+    $c->{version} = $version;
+    $c->{model}   = $model;
+    $c->{model}   = 'SH505i' if $c->{model} eq 'SH505i2';
 
     if ($cache) {
-        $cache =~ s/^c// or return $self->no_match;
-        $self->{cache_size} = $cache;
+        $cache =~ s/^c// or return $c->no_match;
+        $c->{cache_size} = $cache;
     }
 
     for (@rest) {
-        /^ser(\w{11})$/  and do { $self->{serial_number} = $1;      next };
-        /^(T[CDBJ])$/    and do { $self->{status}        = $1;      next };
-        /^s(\d+)$/       and do { $self->{bandwidth}     = $1;      next };
-        /^W(\d+)H(\d+)$/ and do { $self->{display_bytes} = "$1*$2"; next; };
+        /^ser(\w{11})$/  and do { $c->{serial_number} = $1;      next };
+        /^(T[CDBJ])$/    and do { $c->{status}        = $1;      next };
+        /^s(\d+)$/       and do { $c->{bandwidth}     = $1;      next };
+        /^W(\d+)H(\d+)$/ and do { $c->{display_bytes} = "$1*$2"; next; };
     }
 }
 
 sub _parse_foma {
-    my ( $self, $foma ) = @_;
+    my ( $self, $c, $foma ) = @_;
 
-    $foma =~ s/^([^\(]+)// or return $self->no_match;
-    $self->{model} = $1;
-    $self->{model} = 'SH2101V' if $1 eq 'MST_v_SH2101V';    # Huh?
+    $foma =~ s/^([^\(]+)// or return $c->no_match;
+    $c->{model} = $1;
+    $c->{model} = 'SH2101V' if $1 eq 'MST_v_SH2101V';    # Huh?
 
     if ( $foma =~ s/^\((.*?)\)$// ) {
         my @options = split /;/, $1;
         for (@options) {
-            /^c(\d+)$/      and $self->{cache_size}    = $1, next;
-            /^ser(\w{15})$/ and $self->{serial_number} = $1, next;
-            /^icc(\w{20})$/ and $self->{card_id}       = $1, next;
-            /^(T[CDBJ])$/   and $self->{status}        = $1, next;
-            /^W(\d+)H(\d+)$/ and $self->{display_bytes} = "$1*$2", next;
-            $self->no_match;
+            /^c(\d+)$/      and $c->{cache_size}    = $1, next;
+            /^ser(\w{15})$/ and $c->{serial_number} = $1, next;
+            /^icc(\w{20})$/ and $c->{card_id}       = $1, next;
+            /^(T[CDBJ])$/   and $c->{status}        = $1, next;
+            /^W(\d+)H(\d+)$/ and $c->{display_bytes} = "$1*$2", next;
+            $c->no_match;
         }
     }
 }
