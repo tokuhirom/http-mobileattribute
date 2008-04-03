@@ -41,24 +41,35 @@ sub vendor :CarrierMethod('DoCoMo') {
 }
 
 # see also L<WWW::MobileCarrierJP::DoCoMo::HTMLVersion>
-our $DoCoMoHTMLVersionMap = [
-    # regex => version
-    qr/[DFNP]501i/                                         => '1.0',
-    qr/502i|821i|209i|691i|(F|N|P|KO)210i|^F671i$/         => '2.0',
-    qr/(D210i|SO210i)|503i|211i|SH251i|692i|200[12]|2101V/ => '3.0',
-    qr/504i|251i|^F671iS$|^F661i$|^F672i$|212i|SO213i|2051|2102V|2701|850i/ => '4.0',
-    qr/eggy|P751v/ => '3.2',
-    qr/505i|506i|252i|253i|P213i|600i|700i|701i|800i|880i|SH851i|P851i|881i|900i|901i/ => '5.0',
-    qr/702i|D851iWM|902i/ => '6.0',
-];
+my $Ver10RE = qr/[DFNP]501i/;
+my $Ver20RE = qr/502i|821i|209i|691i|(?:F|N|P|KO)210i|^F671i$/;
+my $Ver30RE = qr/(?:D210i|SO210i)|503i|211i|SH251i|692i|200[12]|2101V/;
+my $Ver32RE = qr/eggy|P751v/;
+my $Ver40RE = qr/504i|251i|^F671iS$|^F661i$|^F672i$|212i|SO213i|2051|2102V|2701|850i/;
+my $Ver50RE = qr/505i|506i|252i|253i|P213i|600i|700i|701i|800i|880i|SH851i|P851i|881i|900i|901i/;
+my $Ver60RE = qr/702i|D851iWM|902i/;
 
 sub html_version: CarrierMethod('DoCoMo') {
     my ($self, $c) = @_;
 
-    my @map = @$DoCoMoHTMLVersionMap;
-    while ( my ( $re, $version ) = splice( @map, 0, 2 ) ) {
-        return $version if $self->model =~ /$re/;
-    }
+    my $model = $self->model;
+
+    # id:tokuhirm doesn't like eval expansion, so I'm handrolling this bitch ;)
+    if ($model =~ /$Ver10RE/) {
+        return '1.0';
+    } elsif ($model =~ /$Ver20RE/) {
+        return '2.0';
+    } elsif ($model =~ /$Ver30RE/) {
+        return '3.0';
+    } elsif ($model =~ /$Ver40RE/) {
+        return '4.0';
+    } elsif ($model =~ /$Ver32RE/) {
+        return '3.2';
+    } elsif ($model =~ /$Ver50RE/) {
+        return '5.0';
+    } elsif ($model =~ /$Ver60RE/) {
+        return '6.0';
+    } 
     return;
 }
 
