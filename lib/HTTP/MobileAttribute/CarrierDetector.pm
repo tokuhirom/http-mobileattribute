@@ -36,13 +36,13 @@ __END__
 
 =head1 NAME
 
-HTTP::MobileAttribute::CarrierDetecter - キャリヤ判別ルーチン
+HTTP::MobileAttribute::CarrierDetector - キャリヤ判別ルーチン
 
 =head1 SYNOPSIS
 
-    use HTTP::MobileAttribute::CarrierDetecter;
+    use HTTP::MobileAttribute::CarrierDetector;
 
-    HTTP::MobileAttribute::CarrierDetecter::detect('DoCoMo/1.0/NM502i'); # => DoCoMo
+    HTTP::MobileAttribute::CarrierDetector::detect('DoCoMo/1.0/NM502i'); # => DoCoMo
 
 =head1 DESCRIPTION
 
