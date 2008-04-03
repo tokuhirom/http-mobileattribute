@@ -5,15 +5,15 @@ our $VERSION = '0.02';
 use Class::Component;
 use HTTP::MobileAttribute::Request;
 use HTTP::MobileAttribute::CarrierDetector;
+use Scalar::Util qw/refaddr/;
 
-__PACKAGE__->load_components(
-    qw/
-        DisableDynamicPlugin Autocall::InjectMethod
-    /
-);
+__PACKAGE__->load_components(qw/DisableDynamicPlugin Autocall::InjectMethod/);
 __PACKAGE__->load_plugins(
-    qw(Carrier IS GPS)
+    qw(Carrier IS GPS),
+    map({ "Default::$_" } qw/DoCoMo ThirdForce EZweb NonMobile AirHPhone/),
 );
+
+our %CARRIER_CLASSES;
 
 sub new {
     my ($class, $stuff) = @_;
@@ -24,88 +24,54 @@ sub new {
     # going through the hassle of doing Detector->detect, we simply
     # create a function that does the right thing and use it
     my $carrier_longname = HTTP::MobileAttribute::CarrierDetector::detect($request->get('User-Agent'));
-    my $carrier_class = $class->agent_class($carrier_longname);
 
-    my $agent = $carrier_class->new(
-        +{
-            request          => $request,
-            carrier_longname => $carrier_longname,
+    my $carrier_class = $CARRIER_CLASSES{ $carrier_longname };
+    if (! $carrier_class) {
+        $carrier_class = $class->agent_class($carrier_longname);
+        for my $type (qw/ components plugins methods hooks /) {
+            my $method = "class_component_$type";
+            $carrier_class->$method($class->$method);
         }
-    );
-
-    $agent->run_hook("initialize_$carrier_longname");
-    return $agent;
-}
-
-sub carriers { qw/DoCoMo ThirdForce EZweb NonMobile AirHPhone/ }
-
-sub agent_class { 'HTTP::MobileAttribute::Agent::' . $_[1] }
-
-sub load_components {
-    my ($class, @plugins) = @_;
-
-    for my $carrier (carriers()) {
-        __PACKAGE__->agent_class($carrier)->load_components(@plugins);
+        $CARRIER_CLASSES{ $carrier_longname } = $carrier_class;
     }
+
+    my $self = $carrier_class->SUPER::new({
+        request          => $request,
+        carrier_longname => $carrier_longname,
+    });
+
+    $self->run_hook("initialize_$carrier_longname");
+    return $self;
 }
-
-sub load_plugins {
-    my ($class, @plugins) = @_;
-
-    for my $carrier (carriers()) {
-        __PACKAGE__->agent_class($carrier)->load_plugins(@plugins);
-    }
-}
-
-BEGIN {
-    for my $carrier (carriers()) {
-        no strict 'refs';
-        *{__PACKAGE__->agent_class($carrier) . '::class_component_load_plugin_resolver'} = sub {
-            my ($self, $plugin) = @_;
-            "HTTP::MobileAttribute::Plugin::$plugin";
-        };
-    }
-};
-
-package # hide from pause
-    HTTP::MobileAttribute::Agent::Base;
-
-sub user_agent { shift->request->get('User-Agent') }
 
 for my $accessor (qw/request carrier_longname/) {
     no strict 'refs';
     *{$accessor} = sub { shift->{$accessor} };
 }
 
+sub user_agent { shift->request->get('User-Agent') }
+
+sub agent_class { 'HTTP::MobileAttribute::Agent::' . $_[1] }
+
 package # hide from pause
     HTTP::MobileAttribute::Agent::DoCoMo;
-use Class::Component;
-use base qw/HTTP::MobileAttribute::Agent::Base/;
-__PACKAGE__->load_plugins("Default::DoCoMo");
+use base qw/HTTP::MobileAttribute/;
 
 package # hide from pause
     HTTP::MobileAttribute::Agent::EZweb;
-use Class::Component;
-use base qw/HTTP::MobileAttribute::Agent::Base/;
-__PACKAGE__->load_plugins("Default::EZweb");
+use base qw/HTTP::MobileAttribute/;
 
 package # hide from pause
     HTTP::MobileAttribute::Agent::ThirdForce;
-use Class::Component;
-use base qw/HTTP::MobileAttribute::Agent::Base/;
-__PACKAGE__->load_plugins("Default::ThirdForce");
+use base qw/HTTP::MobileAttribute/;
 
 package # hide from pause
     HTTP::MobileAttribute::Agent::AirHPhone;
-use Class::Component;
-use base qw/HTTP::MobileAttribute::Agent::Base/;
-__PACKAGE__->load_plugins("Default::AirHPhone");
+use base qw/HTTP::MobileAttribute/;
 
 package # hide from pause
     HTTP::MobileAttribute::Agent::NonMobile;
-use Class::Component;
-use base qw/HTTP::MobileAttribute::Agent::Base/;
-__PACKAGE__->load_plugins("Default::NonMobile");
+use base qw/HTTP::MobileAttribute/;
 
 1;
 __END__

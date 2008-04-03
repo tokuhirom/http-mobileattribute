@@ -15,7 +15,7 @@ my @Tests = (
 for (@Tests) {
     my($ua, %data) = @$_;
     my $agent = HTTP::MobileAttribute->new($ua);
-    isa_ok $agent, 'HTTP::MobileAttribute::Agent::AirHPhone';
+    isa_ok $agent, 'HTTP::MobileAttribute';
     ok $agent->is_airh_phone;
 
     for my $key (keys %data) {
@@ -28,7 +28,7 @@ while (<DATA>) {
     chomp;
     local $ENV{HTTP_USER_AGENT} = $_;
     my $agent = HTTP::MobileAttribute->new;
-    isa_ok $agent, 'HTTP::MobileAttribute::Agent::AirHPhone', "$_";
+    isa_ok $agent, 'HTTP::MobileAttribute', "$_";
     ok $agent->is_airh_phone;
 }
 

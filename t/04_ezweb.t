@@ -22,7 +22,7 @@ my @Tests = (
 for (@Tests) {
     my($ua, @data) = @$_;
     my $agent = HTTP::MobileAttribute->new($ua);
-    isa_ok $agent, 'HTTP::MobileAttribute::Agent::EZweb';
+    isa_ok $agent, 'HTTP::MobileAttribute';
     is $agent->name, 'UP.Browser';
     ok !$agent->is_docomo && !$agent->is_j_phone && !$agent->is_vodafone && $agent->is_ezweb;
     is $agent->user_agent, $ua,        "ua is $ua";
@@ -52,7 +52,7 @@ while (<DATA>) {
     chomp;
     local $ENV{HTTP_USER_AGENT} = $_;
     my $agent = HTTP::MobileAttribute->new;
-    isa_ok $agent, 'HTTP::MobileAttribute::Agent::EZweb', "$_";
+    isa_ok $agent, 'HTTP::MobileAttribute', "$_";
     is $agent->name, 'UP.Browser';
     ok !$agent->is_docomo && !$agent->is_j_phone && !$agent->is_vodafone && $agent->is_ezweb;
 }
