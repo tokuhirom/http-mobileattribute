@@ -1,7 +1,19 @@
 use strict;
 use warnings;
 use Test::Base;
-use HTTP::MobileAttribute plugins => [qw/Core Display/];
+use YAML;
+use File::Spec::Functions;
+use HTTP::MobileAttribute plugins => [
+    'Core',
+    {
+        module => 'Display',
+        config => +{
+            DoCoMoMap => YAML::LoadFile(
+                catfile(qw/t Plugins assets DoCoMoDisplayMap.yaml/)
+            )
+        }
+    }
+];
 
 plan tests => 1*blocks;
 

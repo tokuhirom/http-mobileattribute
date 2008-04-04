@@ -3,7 +3,6 @@ use strict;
 use warnings;
 use base qw/HTTP::MobileAttribute::Plugin/;
 use HTTP::MobileAttribute;
-use HTTP::MobileAttribute::Plugin::Display::DoCoMoMap qw/$DisplayMap/;
 
 sub thirdforce :CarrierMethod('ThirdForce', 'display') {
     my ($self, $c) = @_;
@@ -42,7 +41,7 @@ sub ezweb :CarrierMethod('EZweb', 'display') {
 
 sub docomo :CarrierMethod('DoCoMo', 'display') {
     my ($self, $c) = @_;
-    return HTTP::MobileAttribute::Plugin::Display::Display->new($DisplayMap->{ uc( $c->model ) });
+    return HTTP::MobileAttribute::Plugin::Display::Display->new($self->config->{DoCoMoMap}->{ uc( $c->model ) });
 }
 
 package HTTP::MobileAttribute::Plugin::Display::Display;
