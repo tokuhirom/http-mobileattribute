@@ -18,7 +18,7 @@ sub import
         # とりあえず動かすためだけに全部つっこんでみた。
         # Plugin::Core とかにして必須アイテムは一発ロードできるように
         # するとよいのかも
-        [ qw(Carrier IS IS::ThirdForce GPS XHTMLCompliant HTMLVersion),
+        [ qw(Carrier IS IS::ThirdForce GPS XHTMLCompliant),
             map({ "Parser::$_" } qw/DoCoMo ThirdForce EZweb NonMobile AirHPhone/) ]
     ;
 

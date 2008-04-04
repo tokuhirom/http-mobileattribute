@@ -40,6 +40,8 @@ my @Tests = (
     [ "DoCoMo/1.0/F661i/c10/TB", '1.0', '4.0', 'F661i', 10, undef, 'F', '661i', { is_gps => 1 }, 0 ],
 );
 
+HTTP::MobileAttribute->load_plugins(qw/HTMLVersion/);
+
 for (@Tests) {
     my($ua, @data) = @$_;
     my $agent = HTTP::MobileAttribute->new($ua);
