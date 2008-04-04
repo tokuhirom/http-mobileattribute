@@ -166,7 +166,10 @@ carrier_longname が Vodafone じゃなくて ThirdForce を返すよ
 
 =head2 廃止したメソッド
 
-is_* で、もはやこの判定つかわんだろうというようなものは削ってある。具体的には
+可能な限り、HTTP::MobileAgent とメソッド名に互換性を持たせてある。
+ただし、今時どうみてもつかわんだろうというようなものは削ってある。
+
+具体的には
 
     EZweb: is_wap1, is_wap2, is_win, is_tuka
     DoCoMo->series, is_foma
