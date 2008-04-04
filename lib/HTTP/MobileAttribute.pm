@@ -61,7 +61,7 @@ sub new {
     });
 
     $self->create_accessors_delayed();
-    $self->initialize();
+    $self->parse();
 
     return $self;
 }

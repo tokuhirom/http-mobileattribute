@@ -5,12 +5,6 @@ use base qw/HTTP::MobileAttribute::Plugin/;
 
 __PACKAGE__->accessors('DoCoMo' => [qw/version model status bandwidth serial_number is_foma card_id comment name/]);
 
-sub initialize : CarrierMethod('DoCoMo') {
-    my ( $self, $c ) = @_;
-
-    $self->parse( $c );
-}
-
 # see also L<WWW::MobileCarrierJP::DoCoMo::HTMLVersion>
 our $Ver10RE = qr/[DFNP]501i/;
 our $Ver20RE = qr/502i|821i|209i|691i|(?:F|N|P|KO)210i|^F671i$/;
@@ -47,7 +41,7 @@ sub html_version: CarrierMethod('DoCoMo') {
     };
 }
 
-sub parse {
+sub parse :CarrierMethod('DoCoMo') {
     my ( $self, $c ) = @_;
 
     my ( $main, $foma_or_comment ) = split / /, $c->user_agent, 2;

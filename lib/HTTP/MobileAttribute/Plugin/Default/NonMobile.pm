@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use base qw/HTTP::MobileAttribute::Plugin/;
 
-sub initialize      :CarrierMethod('NonMobile') { } # nop
+sub parse           :CarrierMethod('NonMobile') { } # nop
 sub model           :CarrierMethod('NonMobile') { '' }
 sub device_id       :CarrierMethod('NonMobile') { '' }
 

@@ -5,13 +5,7 @@ use base qw/HTTP::MobileAttribute::Plugin/;
 
 __PACKAGE__->accessors( AirHPhone => [qw/name vendor model model_version browser_version cache_size/]);
 
-sub initialize : CarrierMethod('AirHPhone') {
-    my ($self, $c) = @_;
-
-    $self->parse($c);
-}
-
-sub parse {
+sub parse :CarrierMethod('AirHPhone') {
     my ($self, $c) = @_;
     $c->user_agent =~ m!^Mozilla/3\.0\((WILLCOM|DDIPOCKET);(.*)\)! or $self->no_match;
     $c->{name} = $1;

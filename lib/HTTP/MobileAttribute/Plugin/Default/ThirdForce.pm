@@ -5,13 +5,7 @@ use base qw/HTTP::MobileAttribute::Plugin/;
 
 __PACKAGE__->accessors( 'ThirdForce' => [qw(name version model type packet_compliant serial_number vendor vendor_version java_info)] );
 
-sub initialize : CarrierMethod('ThirdForce') {
-    my ($self, $c) = @_;
-
-    $self->parse($c);
-}
-
-sub parse {
+sub parse :CarrierMethod('ThirdForce') {
     my ($self, $c) = @_;
 
     my $user_agent = $c->user_agent;
