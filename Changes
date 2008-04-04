@@ -1,5 +1,11 @@
 Revision history for Perl extension HTTP::MobileAttribute
 
+0.04 still alpha.
+
+    - default plugin is only Parser::*
+    - Plugin::Display: use $self->config.
+    - fixed dependencies: Class::Component 0.14.
+
 0.03 alpha.
 
     - performance tuning(by lestrat&yappo&tokuhirom).

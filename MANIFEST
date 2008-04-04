@@ -22,7 +22,6 @@ lib/HTTP/MobileAttribute/Plugin.pm
 lib/HTTP/MobileAttribute/Plugin/Carrier.pm
 lib/HTTP/MobileAttribute/Plugin/Core.pm
 lib/HTTP/MobileAttribute/Plugin/Display.pm
-lib/HTTP/MobileAttribute/Plugin/Display/DoCoMoMap.pm
 lib/HTTP/MobileAttribute/Plugin/GPS.pm
 lib/HTTP/MobileAttribute/Plugin/IS.pm
 lib/HTTP/MobileAttribute/Plugin/IS/ThirdForce.pm
@@ -46,12 +45,11 @@ t/01_request.t
 t/02_docomo.t
 t/03_j_phone.t
 t/04_ezweb.t
-t/05_display.t
 t/06_nonmobile.t
 t/07_airh.t
-t/08_display_xmlmap.t
 t/09_vodafone_3gc.t
 t/10_softbank.t
 t/11_softbank_base.t
-t/DoCoMoMap.xml
+t/Plugins/assets/DoCoMoDisplayMap.yaml
+t/Plugins/Display.t
 t/Plugins/GPS.t
