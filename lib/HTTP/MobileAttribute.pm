@@ -7,11 +7,9 @@ use HTTP::MobileAttribute::Request;
 use HTTP::MobileAttribute::CarrierDetector;
 
 __PACKAGE__->load_components(qw/DisableDynamicPlugin Autocall::InjectMethod/);
-# TODO: I want to remove IS::ThirdForce from default plugins.
 
 # XXX: This really affects the first time H::MobileAttribute gets loaded
-sub import
-{
+sub import {
     my $class   = shift;
     my %args    = @_;
     my $plugins = delete $args{plugins} || [ 'Core' ];
