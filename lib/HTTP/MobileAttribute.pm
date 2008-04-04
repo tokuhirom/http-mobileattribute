@@ -8,10 +8,25 @@ use HTTP::MobileAttribute::CarrierDetector;
 
 __PACKAGE__->load_components(qw/DisableDynamicPlugin Autocall::InjectMethod/);
 # TODO: I want to remove IS::ThirdForce from default plugins.
-__PACKAGE__->load_plugins(
-    qw(Carrier IS IS::ThirdForce GPS XHTMLCompliant),
-    map({ "Default::$_" } qw/DoCoMo ThirdForce EZweb NonMobile AirHPhone/),
-);
+
+# XXX: This really affects the first time H::MobileAttribute gets loaded
+sub import
+{
+    my $class   = shift;
+    my %args    = @_;
+    my $plugins = $args{plugins} ||
+        # とりあえず動かすためだけに全部つっこんでみた。
+        # Plugin::Core とかにして必須アイテムは一発ロードできるように
+        # するとよいのかも
+        [ qw(Carrier IS IS::ThirdForce GPS XHTMLCompliant),
+            map({ "Default::$_" } qw/DoCoMo ThirdForce EZweb NonMobile AirHPhone/) ]
+    ;
+
+    if (ref $plugins ne 'ARRAY') {
+        $plugins = [ $plugins ];
+    }
+    $class->load_plugins(@$plugins);
+}
 
 our %CARRIER_CLASSES;
 sub load_plugin {
