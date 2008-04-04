@@ -1,4 +1,4 @@
-package HTTP::MobileAttribute::Plugin::Default::NonMobile;
+package HTTP::MobileAttribute::Plugin::Parser::NonMobile;
 use strict;
 use warnings;
 use base qw/HTTP::MobileAttribute::Plugin/;

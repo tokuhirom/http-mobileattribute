@@ -1,4 +1,4 @@
-package HTTP::MobileAttribute::Plugin::Default::EZweb;
+package HTTP::MobileAttribute::Plugin::Parser::EZweb;
 use strict;
 use warnings;
 use base qw/HTTP::MobileAttribute::Plugin/;

@@ -19,7 +19,7 @@ sub import
         # Plugin::Core とかにして必須アイテムは一発ロードできるように
         # するとよいのかも
         [ qw(Carrier IS IS::ThirdForce GPS XHTMLCompliant HTMLVersion),
-            map({ "Default::$_" } qw/DoCoMo ThirdForce EZweb NonMobile AirHPhone/) ]
+            map({ "Parser::$_" } qw/DoCoMo ThirdForce EZweb NonMobile AirHPhone/) ]
     ;
 
     if (ref $plugins ne 'ARRAY') {

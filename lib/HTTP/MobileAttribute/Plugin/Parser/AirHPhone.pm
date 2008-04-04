@@ -1,4 +1,4 @@
-package HTTP::MobileAttribute::Plugin::Default::AirHPhone;
+package HTTP::MobileAttribute::Plugin::Parser::AirHPhone;
 use strict;
 use warnings;
 use base qw/HTTP::MobileAttribute::Plugin/;

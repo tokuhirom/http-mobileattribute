@@ -1,4 +1,4 @@
-package HTTP::MobileAttribute::Plugin::Default::DoCoMo;
+package HTTP::MobileAttribute::Plugin::Parser::DoCoMo;
 use strict;
 use warnings;
 use base qw/HTTP::MobileAttribute::Plugin/;
