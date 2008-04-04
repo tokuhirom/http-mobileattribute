@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use base qw/HTTP::MobileAttribute::Plugin/;
 
-__PACKAGE__->accessors('DoCoMo' => [qw/version model status bandwidth serial_number is_foma card_id comment name/]);
+__PACKAGE__->accessors('DoCoMo' => [qw/version model status bandwidth serial_number card_id comment name/]);
 
 sub parse :CarrierMethod('DoCoMo') {
     my ( $self, $c ) = @_;
@@ -17,7 +17,6 @@ sub parse :CarrierMethod('DoCoMo') {
     }
     elsif ($foma_or_comment) {
         # DoCoMo/2.0 N2001(c10;ser0123456789abcde;icc01234567890123456789)
-        $c->{is_foma} = 1;
         @{$c}{qw(name version)} = split m!/!, $main;
         $self->_parse_foma($c, $foma_or_comment);
     }

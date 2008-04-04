@@ -163,10 +163,9 @@ carrier_longname が Vodafone じゃなくて ThirdForce を返すよ
 
 具体的には
 
-    EZweb: is_wap1, is_wap2, is_win, is_tuka
-    DoCoMo->series, is_foma
+    DoCoMo: series
 
-のあたり。つかってないよね?使ってる人いたら、Plugin::IS::DoCoMo とかのあたりにつくればいいよ
+なんだけど、つかってないよね?もし使ってる人いたら実装してください。
 
 あと、 DoCoMo の、たぶん当時はつかってたんだろうけど今はつかってないっぽいものも消してある(もともとつけられるからつけただけなのかもしらんけど)。
 
