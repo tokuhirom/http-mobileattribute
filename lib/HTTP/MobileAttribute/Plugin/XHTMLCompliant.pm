@@ -6,8 +6,7 @@ use base qw/HTTP::MobileAttribute::Plugin/;
 sub docomo :CarrierMethod('DoCoMo', 'xhtml_compliant') {
     my ($self, $c) = @_;
 
-    # TOOD: should not depend to html_version.
-    return ( $c->is_foma && !( $c->html_version && $c->html_version == 3.0 ) )
+    return ( $c->is_foma && $c->model !~ qr/(?:D210i|SO210i)|503i|211i|SH251i|692i|200[12]|2101V/ )
             ? 1
             : 0;
 }
