@@ -23,7 +23,6 @@ sub import
         $plugins = [ $plugins ];
     }
     $class->load_plugins(@$plugins);
-    $class->class_component_reinitialize(%args);
 }
 
 our %CARRIER_CLASSES;
