@@ -122,7 +122,7 @@ __END__
 
 =encoding UTF-8
 
-=for stopwords aaaatttt gmail dotottto commmmm Kazuhiro Osawa Plaggable DoCoMo ThirdForce Vodafone docs
+=for stopwords aaaatttt gmail dotottto commmmm Kazuhiro Osawa Plaggable DoCoMo ThirdForce Vodafone docs Daisuke Maki
 
 =head1 NAME
 
@@ -177,6 +177,7 @@ is_* で、もはやこの判定つかわんだろうというようなものは
 
     vendor
     cache_size
+    html_version
 
 =head1 気になってること
 
@@ -190,12 +191,13 @@ Tokuhiro Matsuno E<lt>tokuhirom aaaatttt gmail dotottto commmmmE<gt>
 
 Kazuhiro Osawa
 
+Daisuke Maki
+
 =head1 THANKS TO
 
     Tatsuhiko Miyagawa(original author of HTTP::MobileAgent)
     Satoshi Tanimoto
     Yoshiki Kurihara(Current mentainer of HTTP::MobileAgent)
-    Daisuke Maki(Great Performance Tuning)
 
 =head1 SEE ALSO
 

@@ -1,5 +1,6 @@
 use strict;
-use Test::More tests => 782;
+use warnings;
+use Test::More tests => 750;
 
 BEGIN { use_ok 'HTTP::MobileAttribute' }
 
@@ -40,8 +41,6 @@ my @Tests = (
     [ "DoCoMo/1.0/F661i/c10/TB", '1.0', '4.0', 'F661i', 10, undef, 'F', '661i', { is_gps => 1 }, 0 ],
 );
 
-HTTP::MobileAttribute->load_plugins(qw/HTMLVersion/);
-
 for (@Tests) {
     my($ua, @data) = @$_;
     my $agent = HTTP::MobileAttribute->new($ua);
@@ -50,7 +49,6 @@ for (@Tests) {
     is $agent->name, 'DoCoMo';
     is $agent->user_agent, $ua,                "ua is $ua";
     is $agent->version, $data[0],        "version is $data[0]";
-    is $agent->html_version, $data[1],        " $ua HTML version is $data[1]";
     is $agent->model, $data[2],                "model is $data[2]";
     is $agent->is_foma, $data[4],        "is_foma";
     is $agent->xhtml_compliant, $data[8], "xhtml compliant $ua";
