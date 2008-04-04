@@ -3,10 +3,11 @@ use strict;
 use warnings;
 use base qw/HTTP::MobileAttribute::Plugin/;
 
+__PACKAGE__->accessors('DoCoMo' => [qw/version model status bandwidth serial_number is_foma card_id comment name/]);
+
 sub initialize : CarrierMethod('DoCoMo') {
     my ( $self, $c ) = @_;
 
-    $self->mk_register_accessors( DoCoMo => qw/version model status bandwidth serial_number is_foma card_id comment name/);
     $self->parse( $c );
 }
 

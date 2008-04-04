@@ -59,6 +59,8 @@ sub new {
         request          => $request,
         carrier_longname => $carrier_longname,
     });
+
+    $self->create_accessors_delayed();
     $self->initialize();
 
     return $self;
@@ -72,6 +74,28 @@ for my $accessor (qw/request carrier_longname/) {
 sub user_agent { shift->request->get('User-Agent') }
 
 sub agent_class { 'HTTP::MobileAttribute::Agent::' . $_[1] }
+
+my @delayed_accessors;
+
+sub create_accessors_delayed {
+    my ($self, ) = @_;
+
+    while (my $accessor_info = pop @delayed_accessors) {
+        for my $method (@{ $accessor_info->{accessors} }) {
+            no strict 'refs';
+            *{"$accessor_info->{package}::$method"} = sub { $_[1]->{$method} };
+            $self->agent_class($accessor_info->{carrier})->register_method(
+                $method => $accessor_info->{package}
+            );
+        }
+    }
+}
+
+sub register_accessors_delayed {
+    my ($self, $accessor_info) = @_;
+
+    push @delayed_accessors, $accessor_info;
+}
 
 package # hide from pause
     HTTP::MobileAttribute::Agent::DoCoMo;

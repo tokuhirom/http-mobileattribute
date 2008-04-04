@@ -3,10 +3,11 @@ use strict;
 use warnings;
 use base qw/HTTP::MobileAttribute::Plugin/;
 
+__PACKAGE__->accessors( AirHPhone => [qw/name vendor model model_version browser_version cache_size/]);
+
 sub initialize : CarrierMethod('AirHPhone') {
     my ($self, $c) = @_;
 
-    $self->mk_register_accessors( AirHPhone => qw(name vendor model model_version browser_version cache_size));
     $self->parse($c);
 }
 

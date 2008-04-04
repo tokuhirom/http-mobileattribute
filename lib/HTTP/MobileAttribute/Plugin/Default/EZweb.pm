@@ -3,10 +3,10 @@ use strict;
 use warnings;
 use base qw/HTTP::MobileAttribute::Plugin/;
 
+__PACKAGE__->accessors('EZweb' => [qw/name version model device_id server comment/]);
+
 sub initialize : CarrierMethod('EZweb') {
     my ( $self, $c ) = @_;
-
-    $self->mk_register_accessors( EZweb => qw(name version model device_id server comment));
 
     $self->parse( $c );
 }
