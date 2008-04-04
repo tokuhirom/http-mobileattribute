@@ -14,7 +14,7 @@ sub import
 {
     my $class   = shift;
     my %args    = @_;
-    my $plugins = $args{plugins} ||
+    my $plugins = delete $args{plugins} ||
         # とりあえず動かすためだけに全部つっこんでみた。テストを分離させて、Core 以外はとっぱらうべき
         [ qw(Core Carrier IS IS::ThirdForce XHTMLCompliant) ]
     ;
@@ -23,6 +23,7 @@ sub import
         $plugins = [ $plugins ];
     }
     $class->load_plugins(@$plugins);
+    $class->class_component_reinitialize(%args);
 }
 
 our %CARRIER_CLASSES;
