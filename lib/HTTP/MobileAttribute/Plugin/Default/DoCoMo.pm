@@ -46,16 +46,6 @@ sub html_version: CarrierMethod('DoCoMo') {
     };
 }
 
-sub xhtml_compliant :CarrierMethod('DoCoMo') {
-    my ($self, $c) = @_;
-
-    return $c->{__xhtml_compliant} ||= (
-        ( $c->is_foma && !( $c->html_version && $c->html_version == 3.0 ) )
-            ? 1
-            : 0
-    );
-}
-
 sub parse {
     my ( $self, $c ) = @_;
 

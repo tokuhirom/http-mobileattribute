@@ -9,7 +9,7 @@ use HTTP::MobileAttribute::CarrierDetector;
 __PACKAGE__->load_components(qw/DisableDynamicPlugin Autocall::InjectMethod/);
 # TODO: I want to remove IS::ThirdForce from default plugins.
 __PACKAGE__->load_plugins(
-    qw(Carrier IS IS::ThirdForce GPS),
+    qw(Carrier IS IS::ThirdForce GPS XHTMLCompliant),
     map({ "Default::$_" } qw/DoCoMo ThirdForce EZweb NonMobile AirHPhone/),
 );
 
@@ -134,7 +134,7 @@ is_* で、もはやこの判定つかわんだろうというようなものは
 
 のあたり。つかってないよね?使ってる人いたら、Plugin::IS::DoCoMo とかのあたりにつくればいいよ
 
-あと、DoCoMo の、たぶん当時はつかってたんだろうけど今はつかってないっぽいものも消してある(もともとつけられるからつけただけなのかもしらんけど)。
+あと、 DoCoMo の、たぶん当時はつかってたんだろうけど今はつかってないっぽいものも消してある(もともとつけられるからつけただけなのかもしらんけど)。
 
     vendor
     cache_size

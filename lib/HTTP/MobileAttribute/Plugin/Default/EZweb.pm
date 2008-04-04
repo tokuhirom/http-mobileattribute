@@ -6,7 +6,7 @@ use base qw/HTTP::MobileAttribute::Plugin/;
 sub initialize : CarrierMethod('EZweb') {
     my ( $self, $c ) = @_;
 
-    $self->mk_register_accessors( EZweb => qw(name version model device_id server xhtml_compliant comment));
+    $self->mk_register_accessors( EZweb => qw(name version model device_id server comment));
 
     $self->parse( $c );
 }
@@ -17,7 +17,6 @@ sub parse {
     my $ua = $c->user_agent;
     if ( $ua =~ s/^KDDI\-// ) {
         # KDDI-TS21 UP.Browser/6.0.2.276 (GUI) MMP/1.1
-        $c->{xhtml_compliant} = 1;
         my ( $device, $browser, $opt, $server ) = split / /, $ua, 4;
         $c->{device_id} = $device;
 
