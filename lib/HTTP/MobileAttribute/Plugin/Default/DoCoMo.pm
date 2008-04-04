@@ -3,26 +3,11 @@ use strict;
 use warnings;
 use base qw/HTTP::MobileAttribute::Plugin/;
 
-our $DefaultCacheSize = 5;
-
-
 sub initialize : CarrierMethod('DoCoMo') {
     my ( $self, $c ) = @_;
 
     $self->mk_register_accessors( DoCoMo => qw/version model status bandwidth serial_number is_foma card_id comment name/);
     $self->parse( $c );
-}
-
-sub cache_size :CarrierMethod('DoCoMo') {
-    my ($self, $c) = @_;
-    return $c->{cache_size} || $DefaultCacheSize;
-}
-
-sub vendor :CarrierMethod('DoCoMo') {
-    my ($self, $c) = @_;
-    my $model = $c->model;
-    $model =~ /^([A-Z]+)\d/;
-    return $1;
 }
 
 # see also L<WWW::MobileCarrierJP::DoCoMo::HTMLVersion>

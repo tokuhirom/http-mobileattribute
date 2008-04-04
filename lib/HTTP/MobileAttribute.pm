@@ -134,6 +134,11 @@ is_* で、もはやこの判定つかわんだろうというようなものは
 
 のあたり。つかってないよね?使ってる人いたら、Plugin::IS::DoCoMo とかのあたりにつくればいいよ
 
+あと、DoCoMo の、たぶん当時はつかってたんだろうけど今はつかってないっぽいものも消してある(もともとつけられるからつけただけなのかもしらんけど)。
+
+    vendor
+    cache_size
+
 =head1 気になってること
 
 =head2 メモリつかいすぎ疑惑
@@ -151,7 +156,7 @@ Kazuhiro Osawa
     Tatsuhiko Miyagawa(original author of HTTP::MobileAgent)
     Satoshi Tanimoto
     Yoshiki Kurihara(Current mentainer of HTTP::MobileAgent)
-    Daisuke Maki
+    Daisuke Maki(Great Performance Tuning)
 
 =head1 SEE ALSO
 
