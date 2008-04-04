@@ -1,5 +1,18 @@
 Revision history for Perl extension HTTP::MobileAttribute
 
+0.03 alpha.
+
+    - performance tuning(by lestrat&yappo&tokuhirom).
+    - added more test codes.
+    - remove GPS from default plugins
+    - document updated.
+    - remove html_version.
+    - renamed Default::* => Parser::*
+    - Agent::*->xhtml_compliant moved to Plugin::XHTMLComplient.
+    - remove Default::DoCoMo->cache_size, Default::DoCoMo->vendor, Default::DoCoMo->series
+    - remove Default::EZweb->is_(win|tuka)
+    - CarrierMethod is now simple.
+
 0.02
 
         - Performance Tuning(68x faster)
