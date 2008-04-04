@@ -1,7 +1,8 @@
 use strict;
-use Test::More tests => 57;
+use warnings;
+use Test::More tests => 56;
 
-BEGIN { use_ok 'HTTP::MobileAttribute' }
+use HTTP::MobileAttribute plugins => [qw/Core IS IS::ThirdForce/];
 
 my @Tests = (
     [ 'Vodafone/1.0/V802SE/SEJ001/SNXXXXXXXXX Browser/SEMC-Browser/4.1 Profile/MIDP-2.0 Configuration/CLDC-1.10', 

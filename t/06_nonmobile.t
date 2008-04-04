@@ -1,6 +1,6 @@
 use strict;
 use Test::More tests => 164 * 9;
-use HTTP::MobileAttribute;
+use HTTP::MobileAttribute plugins => [qw/Core IS XHTMLCompliant Carrier/];
 
 while (<DATA>) {
     chomp;

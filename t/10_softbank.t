@@ -1,7 +1,6 @@
 use strict;
-use Test::More tests => 31;
-
-BEGIN { use_ok 'HTTP::MobileAttribute' }
+use Test::More tests => 30;
+use HTTP::MobileAttribute plugins => [qw/Core IS Carrier IS::ThirdForce/];
 
 my @Tests = (
     [ 'SoftBank/1.0/910T/TJ001/SNXXXXXXXXX Browser/NetFront/3.3 Profile/MIDP-2.0 Configuration/CLDC-1.1',

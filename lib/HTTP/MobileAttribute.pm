@@ -14,10 +14,7 @@ sub import
 {
     my $class   = shift;
     my %args    = @_;
-    my $plugins = delete $args{plugins} ||
-        # とりあえず動かすためだけに全部つっこんでみた。テストを分離させて、Core 以外はとっぱらうべき
-        [ qw(Core Carrier IS IS::ThirdForce XHTMLCompliant) ]
-    ;
+    my $plugins = delete $args{plugins} || [ 'Core' ];
 
     if (ref $plugins ne 'ARRAY') {
         $plugins = [ $plugins ];

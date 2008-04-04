@@ -1,9 +1,7 @@
 use strict;
-
-use strict;
-use Test::More tests => 17;
-
-BEGIN { use_ok 'HTTP::MobileAttribute' }
+use warnings;
+use Test::More tests => 16;
+use HTTP::MobileAttribute plugins => [qw/Core IS/];
 
 my @Tests = (
     # ua, method_hash

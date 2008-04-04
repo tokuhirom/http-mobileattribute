@@ -1,8 +1,7 @@
 use strict;
 use warnings;
-use Test::More tests => 750;
-
-BEGIN { use_ok 'HTTP::MobileAttribute' }
+use Test::More tests => 748;
+use HTTP::MobileAttribute plugins => [qw/Core XHTMLCompliant IS Carrier/];
 
 my @Tests = (
     # ua, version, html_version, model, cache_size, is_foma, vendor, series, options, xhtml_compliant
@@ -38,10 +37,8 @@ my @Tests = (
     [ "DoCoMo/2.0 N2051(c100;TB)", '2.0', '4.0', 'N2051', 100, 1, 'N', 'FOMA', {}, 1 ],
     [ "DoCoMo/1.0/D505i/c20/TC/W20H10", '1.0', '5.0', 'D505i', 20, undef, 'D', '505i', { status => 'TC' }, 0 ],
     [ "DoCoMo/1.0/SH505i2/c20/TB/W20H10", '1.0', '5.0', 'SH505i', 20, undef, 'SH', '505i', { status => 'TB' }, 0 ],
-    [ "DoCoMo/1.0/F661i/c10/TB", '1.0', '4.0', 'F661i', 10, undef, 'F', '661i', { is_gps => 1 }, 0 ],
+    [ "DoCoMo/1.0/F661i/c10/TB", '1.0', '4.0', 'F661i', 10, undef, 'F', '661i', { }, 0 ],
 );
-
-HTTP::MobileAttribute->load_plugins(qw/GPS/);
 
 for (@Tests) {
     my($ua, @data) = @$_;

@@ -1,7 +1,7 @@
 use strict;
-use Test::More tests => 484;
-
-BEGIN { use_ok 'HTTP::MobileAttribute' }
+use warnings;
+use Test::More tests => 483;
+use HTTP::MobileAttribute plugins => [qw/XHTMLCompliant Core IS/];
 
 my @Tests = (
     # ua, version, device_id, server, xhtml_compliant, comment

@@ -1,7 +1,6 @@
 use strict;
-use Test::More tests => 250;
-
-BEGIN { use_ok 'HTTP::MobileAttribute' }
+use Test::More tests => 249;
+use HTTP::MobileAttribute plugins => [qw/Core Carrier IS IS::ThirdForce/];
 
 my @Tests = (
     # ua, version, model, packet_compliant, serial_number, vendor, vendor_version, java_infos
