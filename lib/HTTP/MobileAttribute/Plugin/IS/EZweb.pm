@@ -19,3 +19,39 @@ sub is_wap1 : CarrierMethod('EZweb') { !$_[1]->xhtml_compliant }
 sub is_wap2 : CarrierMethod('EZweb') { $_[1]->xhtml_compliant }
 
 1;
+__END__
+
+=head1 NAME
+
+HTTP::MobileAttribute::Plugin::IS::DoCoMo - is_* plugin for HTTP::MobileAttribute
+
+=head1 METHODS
+
+=over 4
+
+=item is_win
+
+returns if the agent is win model
+
+=item is_tuka
+
+returns if the agent is TU‐KA model.
+
+=item is_wap1
+
+returns if the agent is wap1
+
+=item is_wap2
+
+returns if the agent is wap2
+
+=back
+
+=head1 AUTHORS
+
+Yoshiki Kurihara
+
+=head1 SEE ALSO
+
+L<HTTP::MobileAttribute>
+
