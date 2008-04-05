@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use Test::More tests => 725;
+use Test::More tests => 555;
 use HTTP::MobileAttribute plugins => [qw/Core XHTMLCompliant IS IS::DoCoMo Carrier/];
 
 my @Tests = (
@@ -43,7 +43,6 @@ my @Tests = (
 for (@Tests) {
     my($ua, @data) = @$_;
     my $agent = HTTP::MobileAttribute->new($ua);
-    isa_ok $agent, 'HTTP::MobileAttribute';
     ok $agent->is_docomo && ! $agent->is_j_phone && !$agent->is_vodafone && ! $agent->is_ezweb;
     is $agent->name, 'DoCoMo';
     is $agent->user_agent, $ua,                "ua is $ua";
@@ -73,7 +72,6 @@ while (<DATA>) {
     chomp;
     local $ENV{HTTP_USER_AGENT} = $_;
     my $agent = HTTP::MobileAttribute->new;
-    isa_ok $agent, 'HTTP::MobileAttribute', "$_";
     is $agent->name, 'DoCoMo';
     ok $agent->is_docomo && ! $agent->is_j_phone && ! $agent->is_ezweb;
 }

@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use Test::More tests => 56;
+use Test::More tests => 50;
 
 use HTTP::MobileAttribute plugins => [qw/Core IS IS::ThirdForce/];
 
@@ -34,7 +34,6 @@ for (@Tests) {
     # can't get the 3GC's "model" from user-agent.
     local $ENV{'HTTP_X_JPHONE_MSNAME'} = $data[1];
     my $agent = HTTP::MobileAttribute->new();
-    isa_ok $agent, 'HTTP::MobileAttribute';
     ok !$agent->is_docomo && $agent->is_j_phone && $agent->is_vodafone && !$agent->is_ezweb;
     ok $agent->name eq 'Vodafone' || $agent->name =~ /^MOT/ ;
 
@@ -58,7 +57,6 @@ while (<DATA>) {
     my($ua,$model) = split(/,/,$_);
     local $ENV{HTTP_USER_AGENT} = $ua;
     my $agent = HTTP::MobileAttribute->new;
-    isa_ok $agent, 'HTTP::MobileAttribute', $ua;
     ok $agent->name && ($agent->name,'Vodafone' || $agent->name =~ /^MOT/);
     ok !$agent->is_docomo && $agent->is_vodafone && !$agent->is_ezweb;
     ok $agent->is_type_3gc;
