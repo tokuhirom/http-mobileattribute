@@ -7,9 +7,11 @@ sub register {
     my ( $class, $plugin, $c, $method, $param, $code ) = @_;
 
     if (ref $param) {
-        $c->agent_class($param->[0])->register_method( $param->[1] => { plugin => $plugin, method => $method } );
+        return unless $c =~ $param->[0];
+        $c->register_method( $param->[1] => { plugin => $plugin, method => $method } );
     } else {
-        $c->agent_class($param)->register_method( $method => $plugin );
+        return unless $c =~ $param;
+        $c->register_method( $method => $plugin );
     }
 }
 

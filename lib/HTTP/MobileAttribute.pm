@@ -2,11 +2,9 @@ package HTTP::MobileAttribute;
 use strict;
 use warnings;
 our $VERSION = '0.04';
-use Class::Component;
 use HTTP::MobileAttribute::Request;
 use HTTP::MobileAttribute::CarrierDetector;
-
-__PACKAGE__->load_components(qw/DisableDynamicPlugin Autocall::InjectMethod/);
+use UNIVERSAL::require;
 
 # XXX: This really affects the first time H::MobileAttribute gets loaded
 sub import {
@@ -20,12 +18,13 @@ sub import {
     $class->load_plugins(@$plugins);
 }
 
-our %CARRIER_CLASSES;
-sub load_plugin {
-    my $class = shift;
-    %CARRIER_CLASSES = ();
-    $class->SUPER::load_plugin(@_);
-}
+sub carriers { qw/DoCoMo AirHPhone ThirdForce EZweb NonMobile/ }
+
+BEGIN {
+    for (carriers()) {
+        "HTTP::MobileAttribute::Agent::$_"->use or die $@;
+    }
+};
 
 sub new {
     my ($class, $stuff) = @_;
@@ -37,77 +36,24 @@ sub new {
     # create a function that does the right thing and use it
     my $carrier_longname = HTTP::MobileAttribute::CarrierDetector::detect($request->get('User-Agent'));
 
-    my $carrier_class = $CARRIER_CLASSES{ $carrier_longname };
-    if (! $carrier_class) {
-        $carrier_class = $class->agent_class($carrier_longname);
-        for my $type (qw/ components plugins methods hooks /) {
-            my $method = "class_component_$type";
-            $carrier_class->$method($class->$method);
-        }
-        $CARRIER_CLASSES{ $carrier_longname } = $carrier_class;
-    }
-
-    my $self = $carrier_class->SUPER::new({
+    my $self = $class->agent_class($carrier_longname)->new({
         request          => $request,
         carrier_longname => $carrier_longname,
     });
-
-    $self->create_accessors_delayed();
-    $self->parse();
-
+    $self->parse;
     return $self;
 }
 
-for my $accessor (qw/request carrier_longname/) {
-    no strict 'refs';
-    *{$accessor} = sub { shift->{$accessor} };
-}
-
-sub user_agent { shift->request->get('User-Agent') }
-
 sub agent_class { 'HTTP::MobileAttribute::Agent::' . $_[1] }
 
-my @delayed_accessors;
+sub load_plugins {
+    my ($class, @plugins) = @_;
 
-sub create_accessors_delayed {
-    my ($self, ) = @_;
-
-    while (my $accessor_info = pop @delayed_accessors) {
-        for my $method (@{ $accessor_info->{accessors} }) {
-            no strict 'refs';
-            *{"$accessor_info->{package}::$method"} = sub { $_[1]->{$method} };
-            $self->agent_class($accessor_info->{carrier})->register_method(
-                $method => $accessor_info->{package}
-            );
-        }
+    for my $carrier (carriers()) {
+        $class->agent_class($carrier)->load_plugins(@plugins);
     }
 }
 
-sub register_accessors_delayed {
-    my ($self, $accessor_info) = @_;
-
-    push @delayed_accessors, $accessor_info;
-}
-
-package # hide from pause
-    HTTP::MobileAttribute::Agent::DoCoMo;
-use base qw/HTTP::MobileAttribute/;
-
-package # hide from pause
-    HTTP::MobileAttribute::Agent::EZweb;
-use base qw/HTTP::MobileAttribute/;
-
-package # hide from pause
-    HTTP::MobileAttribute::Agent::ThirdForce;
-use base qw/HTTP::MobileAttribute/;
-
-package # hide from pause
-    HTTP::MobileAttribute::Agent::AirHPhone;
-use base qw/HTTP::MobileAttribute/;
-
-package # hide from pause
-    HTTP::MobileAttribute::Agent::NonMobile;
-use base qw/HTTP::MobileAttribute/;
 
 1;
 __END__
