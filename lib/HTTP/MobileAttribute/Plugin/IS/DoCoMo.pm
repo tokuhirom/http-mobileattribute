@@ -9,6 +9,8 @@ sub is_foma : CarrierMethod('DoCoMo') { $_[1]->version eq '2.0' }
 1;
 __END__
 
+=for stopwords Yoshiki Kurihara TUKA WAP1 WAP2 FOMA
+
 =head1 NAME
 
 HTTP::MobileAttribute::Plugin::IS::DoCoMo - is_* plugin for HTTP::MobileAttribute

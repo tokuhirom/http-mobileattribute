@@ -21,6 +21,8 @@ sub is_wap2 : CarrierMethod('EZweb') { $_[1]->xhtml_compliant }
 1;
 __END__
 
+=for stopwords Yoshiki Kurihara TUKA WAP1 WAP2
+
 =head1 NAME
 
 HTTP::MobileAttribute::Plugin::IS::DoCoMo - is_* plugin for HTTP::MobileAttribute
@@ -35,15 +37,15 @@ returns if the agent is win model
 
 =item is_tuka
 
-returns if the agent is TU‐KA model.
+returns if the agent is TUKA model.
 
 =item is_wap1
 
-returns if the agent is wap1
+returns if the agent is WAP1
 
 =item is_wap2
 
-returns if the agent is wap2
+returns if the agent is WAP2
 
 =back
 
