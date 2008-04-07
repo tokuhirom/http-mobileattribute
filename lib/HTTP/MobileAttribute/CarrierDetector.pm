@@ -58,6 +58,8 @@ User-Agent 文字列からケータイキャリヤを判別するよ。
 
 キャリヤを判定します。
 
+=back
+
 =head1 AUTHOR
 
 Tokuhiro Matsuno
