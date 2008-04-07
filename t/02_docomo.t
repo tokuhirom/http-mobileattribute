@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 use Test::More tests => 555;
-use HTTP::MobileAttribute plugins => [qw/Core XHTMLCompliant IS IS::DoCoMo Carrier/];
+use HTTP::MobileAttribute plugins => [qw/Core XHTMLCompliant IS IS::DoCoMo CarrierLetter/];
 
 my @Tests = (
     # ua, version, html_version, model, cache_size, is_foma, vendor, series, options, xhtml_compliant

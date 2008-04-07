@@ -1,6 +1,6 @@
 use strict;
 use Test::More tests => 182;
-use HTTP::MobileAttribute plugins => [qw/Core Carrier IS IS::ThirdForce/];
+use HTTP::MobileAttribute plugins => [qw/Core CarrierLetter IS IS::ThirdForce/];
 
 my @Tests = (
     # ua, version, model, packet_compliant, serial_number, vendor, vendor_version, java_infos

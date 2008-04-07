@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 use Test::Base;
-use HTTP::MobileAttribute plugins => [qw/Core XHTMLCompliant Carrier IS::ThirdForce/];
+use HTTP::MobileAttribute plugins => [qw/Core XHTMLCompliant CarrierLetter IS::ThirdForce/];
 
 filters {
     input => [qw/functions/],

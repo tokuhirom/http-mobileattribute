@@ -1,4 +1,4 @@
-package HTTP::MobileAttribute::Plugin::Carrier;
+package HTTP::MobileAttribute::Plugin::CarrierLetter;
 use strict;
 use warnings;
 use base qw/HTTP::MobileAttribute::Plugin/;
@@ -22,11 +22,11 @@ __END__
 
 =head1 NAME
 
-HTTP::MobileAttribute::Plugin::Carrier - キャリヤをあらわす1文字を得る
+HTTP::MobileAttribute::Plugin::CarrierLetter - キャリヤをあらわす1文字を得る
 
 =head1 SYNOPSIS
 
-    use HTTP::MobileAttribute plugins => ['Carrier'];
+    use HTTP::MobileAttribute plugins => ['CarrierLetter'];
 
     HTTP::MobileAttribute->new($ua)->carrier; # => 'I'
 
