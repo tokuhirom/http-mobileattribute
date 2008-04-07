@@ -1,5 +1,9 @@
 Revision history for Perl extension HTTP::MobileAttribute
 
+0.06
+
+    No changes.
+
 0.05 It's beta.
 
     - added Plugin::IS::DoCoMo, Plugin::IS::EZweb(by clouder++)
