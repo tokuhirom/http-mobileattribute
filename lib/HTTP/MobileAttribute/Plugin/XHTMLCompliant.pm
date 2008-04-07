@@ -33,6 +33,8 @@ __END__
 
 =encoding UTF-8
 
+=for stopwords XHTML
+
 =head1 NAME
 
 HTTP::MobileAttribute::Plugin::XHTMLCompliant - XHTML 対応しているの?

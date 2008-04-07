@@ -11,11 +11,11 @@ sub is_type_3gc :CarrierMethod('ThirdForce') { $_[1]->type eq '3GC' }
 1;
 __END__
 
-=for stopwords Yoshiki Kurihara TUKA WAP1 WAP2 FOMA
+=for stopwords Yoshiki Kurihara TUKA WAP1 WAP2 FOMA ThirdForce
 
 =head1 NAME
 
-HTTP::MobileAttribute::Plugin::IS::ThirdForce - is_* plugin for thirdforce phones.
+HTTP::MobileAttribute::Plugin::IS::ThirdForce - is_* plugin for ThirdForce phones.
 
 =head1 METHODS
 
