@@ -53,6 +53,8 @@ __END__
 
 =encoding UTF-8
 
+=for stopwords DoCoMo
+
 =head1 NAME
 
 HTTP::MobileAttribute::Plugin::Display - ディスプレイサイズの情報を得る
@@ -77,7 +79,7 @@ HTTP::MobileAttribute::Plugin::Display - ディスプレイサイズの情報を
 このオブジェクトは width, height, color, depth の 4 種類の属性をもっています。
 
 DoCoMo は、HTTP Header 等からこの情報をうけとることができないので、データをプラグインにわたす必要があります。
-この情報は、DoCoMo からマシンリーダブルな形式では提供されていないので L<WWW::MobileCarrierJP> 等を駆使してスクレイピングする必要があります。
+この情報は、 DoCoMo からマシンリーダブルな形式では提供されていないので L<WWW::MobileCarrierJP> 等を駆使してスクレイピングする必要があります。
 
 =head1 AUTHORS
 
