@@ -31,3 +31,26 @@ sub mk_accessors {
 }
 
 1;
+__END__
+
+=encoding utf-8
+
+=head1 NAME
+
+HTTP::MobileAttribute::Agent::Base - Agent の Abstract ベースクラス
+
+=head1 DESCRIPTION
+
+HTTP::MobileAttribute::Agent::* の抽象基底クラスです。
+
+HTTP::MobileAttribute::Agent::* は、UserAgent を parse し、その属性をアクセサとして提供します。
+UserAgent からとれる以上の情報は提供しないところがミソです。
+
+=head1 AUTHOR
+
+Tokuhiro Matsuno
+
+=head1 SEE ALSO
+
+L<HTTP::MobileAttribute>
+
