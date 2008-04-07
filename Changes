@@ -1,5 +1,12 @@
 Revision history for Perl extension HTTP::MobileAttribute
 
+0.05 It's beta.
+
+    - added Plugin::IS::DoCoMo, Plugin::IS::EZweb(by clouder++)
+    - Plugin::Carrier was renamed to Plugin::CarrierLetter
+    - added docs!
+    - added Agent::* and removed Plugin::Parser::*
+
 0.04 still alpha.
 
     - default plugin is only Parser::*
