@@ -48,6 +48,16 @@ HTTP::MobileAttribute::CarrierDetector - キャリヤ判別ルーチン
 
 User-Agent 文字列からケータイキャリヤを判別するよ。
 
+=head1 METHOD
+
+=over 4
+
+=item detect
+
+    HTTP::MobileAttribute::CarrierDetector::detect('DoCoMo/1.0/NM502i'); # => DoCoMo
+
+キャリヤを判定します。
+
 =head1 AUTHOR
 
 Tokuhiro Matsuno
