@@ -2,6 +2,7 @@ package HTTP::MobileAttribute::Agent::Base;
 use strict;
 use warnings;
 require Class::Component;
+use Carp;
 
 sub import {
     my $pkg = caller(0);
@@ -9,6 +10,7 @@ sub import {
     no strict 'refs';
 
     *{"$pkg\::mk_accessors"} = \&mk_accessors;
+    *{"$pkg\::no_match"}     = \&_no_match;
     *{"$pkg\::user_agent"}   = sub { $_[0]->request->get('User-Agent') };
     *{"$pkg\::class_component_load_plugin_resolver"} = sub { "HTTP::MobileAttribute::Plugin::$_[1]" };
     $pkg->mk_accessors(qw/request carrier_longname/);
@@ -19,6 +21,18 @@ sub import {
     Class::Component::Implement->init($pkg);
 
     $pkg->load_components(qw/DisableDynamicPlugin Autocall::InjectMethod/);
+}
+
+sub _no_match {
+    my $self = shift;
+
+    if ($^W) {
+        carp(
+            $self->user_agent,
+            ": no match. Might be new variants. ",
+            "please contact the author of HTTP::MobileAgent!"
+        );
+    }
 }
 
 sub mk_accessors {
