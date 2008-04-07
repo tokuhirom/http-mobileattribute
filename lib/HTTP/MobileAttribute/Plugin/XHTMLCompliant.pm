@@ -29,3 +29,25 @@ sub third_force :CarrierMethod('ThirdForce', 'xhtml_compliant') {
 }
 
 1;
+__END__
+
+=encoding UTF-8
+
+=head1 NAME
+
+HTTP::MobileAttribute::Plugin::XHTMLCompliant - XHTML 対応しているの?
+
+=head1 SYNOPSIS
+
+    use HTTP::MobileAttribute plugins => [qw/XHTMLCompliant IS::ThirdForce/];
+
+    HTTP::MobileAttribute->new($ua)->xhtml_compliant;
+
+=head1 AUTHORS
+
+Tokuhiro Matsuno
+
+=head1 SEE ALSO
+
+L<HTTP::MobileAttribute>
+
