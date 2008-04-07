@@ -16,3 +16,28 @@ sub carrier :Method {
 }
 
 1;
+__END__
+
+=encoding UTF-8
+
+=head1 NAME
+
+HTTP::MobileAttribute::Plugin::Carrier - キャリヤをあらわす1文字を得る
+
+=head1 SYNOPSIS
+
+    use HTTP::MobileAttribute plugins => ['Carrier'];
+
+    HTTP::MobileAttribute->new($ua)->carrier; # => 'I'
+
+=head1 DESCRIPTION
+
+I,E,V,H,N といった1文字でキャリヤをあらわす文字を返します。
+
+=head1 AUTHORS
+
+Tokuhiro Matsuno
+
+=head1 SEE ALSO
+
+L<HTTP::MobileAttribute>
