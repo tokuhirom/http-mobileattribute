@@ -23,6 +23,11 @@ sub is_softbank: Method {
     return $c->carrier_longname eq 'ThirdForce' ? 1 : 0;
 }
 
+sub is_thirdforce: Method {
+    my ($self, $c) = @_;
+    return $c->carrier_longname eq 'ThirdForce' ? 1 : 0;
+}
+
 sub is_ezweb: Method {
     my ($self, $c) = @_;
     return $c->carrier_longname eq 'EZweb' ? 1 : 0;
@@ -60,6 +65,7 @@ DoCoMo 端末かどうかを判定します。
 =item is_j_phone
 =item is_vodafone
 =item is_softbank
+=item is_thirdforce
 
 SoftBank 端末かどうかを判定します。
 
