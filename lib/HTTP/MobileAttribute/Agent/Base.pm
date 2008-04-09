@@ -20,7 +20,7 @@ sub import {
     }
     Class::Component::Implement->init($pkg);
 
-    $pkg->load_components(qw/DisableDynamicPlugin Autocall::InjectMethod/);
+    $pkg->load_components(qw/DisableDynamicPlugin Autocall::InjectMethod AutoloadPlugin/);
 }
 
 sub _no_match {

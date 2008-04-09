@@ -2,7 +2,7 @@ use inc::Module::Install;
 name 'HTTP-MobileAttribute';
 all_from 'lib/HTTP/MobileAttribute.pm';
 
-requires 'Class::Component'         => '0.14';
+requires 'Class::Component'         => '0.15';
 
 build_requires 'YAML';
 build_requires 'Test::Warn';
