@@ -1,5 +1,10 @@
 Revision history for Perl extension HTTP::MobileAttribute
 
+0.07
+
+    - added Plugin::Encoding.
+    - added plugin dependency auto resolver(thanks to yappo++).
+
 0.06
 
     No changes.

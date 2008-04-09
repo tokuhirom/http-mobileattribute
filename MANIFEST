@@ -15,6 +15,7 @@ inc/Test/Base/Filter.pm
 inc/Test/Builder.pm
 inc/Test/Builder/Module.pm
 inc/Test/More.pm
+inc/Test/Warn.pm
 inc/YAML.pm
 lib/HTTP/MobileAttribute.pm
 lib/HTTP/MobileAttribute/Agent/AirHPhone.pm
@@ -29,6 +30,7 @@ lib/HTTP/MobileAttribute/Plugin.pm
 lib/HTTP/MobileAttribute/Plugin/CarrierLetter.pm
 lib/HTTP/MobileAttribute/Plugin/Core.pm
 lib/HTTP/MobileAttribute/Plugin/Display.pm
+lib/HTTP/MobileAttribute/Plugin/Encoding.pm
 lib/HTTP/MobileAttribute/Plugin/GPS.pm
 lib/HTTP/MobileAttribute/Plugin/IS.pm
 lib/HTTP/MobileAttribute/Plugin/IS/DoCoMo.pm
@@ -54,6 +56,8 @@ t/07_airh.t
 t/09_vodafone_3gc.t
 t/10_softbank.t
 t/11_softbank_base.t
+t/12_no_match.t
 t/Plugins/assets/DoCoMoDisplayMap.yaml
 t/Plugins/Display.t
+t/Plugins/Encoding.t
 t/Plugins/GPS.t
