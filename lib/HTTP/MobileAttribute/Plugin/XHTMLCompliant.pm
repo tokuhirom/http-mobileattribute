@@ -3,6 +3,8 @@ use strict;
 use warnings;
 use base qw/HTTP::MobileAttribute::Plugin/;
 
+__PACKAGE__->depends([qw/IS::DoCoMo IS::ThirdForce/]);
+
 sub docomo :CarrierMethod('DoCoMo', 'xhtml_compliant') {
     my ($self, $c) = @_;
 
