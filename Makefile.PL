@@ -13,6 +13,7 @@ features(
 
 build_requires 'YAML';
 build_requires 'Test::Warn';
+tests 't/*.t t/Plugins/*t';
 use_test_base;
 auto_include;
 WriteAll;
