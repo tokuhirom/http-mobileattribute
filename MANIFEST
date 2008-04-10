@@ -33,6 +33,7 @@ lib/HTTP/MobileAttribute/Plugin/Core.pm
 lib/HTTP/MobileAttribute/Plugin/Display.pm
 lib/HTTP/MobileAttribute/Plugin/Encoding.pm
 lib/HTTP/MobileAttribute/Plugin/GPS.pm
+lib/HTTP/MobileAttribute/Plugin/ID.pm
 lib/HTTP/MobileAttribute/Plugin/IS.pm
 lib/HTTP/MobileAttribute/Plugin/IS/DoCoMo.pm
 lib/HTTP/MobileAttribute/Plugin/IS/EZweb.pm
@@ -66,3 +67,6 @@ t/Plugins/CIDR-yaml.t
 t/Plugins/Display.t
 t/Plugins/Encoding.t
 t/Plugins/GPS.t
+t/Plugins/ID-base.t
+t/Plugins/ID-fallback-card.t
+t/Plugins/ID-fallback.t
