@@ -8,3 +8,4 @@ __DATA__
 Tokuhiro Matsuno
 HTTP::MobileAttribute
 UserAgent
+Kazuhiro Osawa

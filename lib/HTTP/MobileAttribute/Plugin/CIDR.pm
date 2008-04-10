@@ -28,7 +28,7 @@ __END__
 
 =encoding UTF-8
 
-=for stopwords DoCoMo
+=for stopwords DoCoMo TODO CIDR
 
 =head1 NAME
 
@@ -45,7 +45,7 @@ HTTP::MobileAttribute::Plugin::CIDR - キャリヤのCIDRの含まれるIPアド
 
     my $hma = HTTP::MobileAttribute->new($ua)
     if ($hma->isa_cidr('222.7.56.248')) {
-        # キャリヤのCIDRに含まれたIPアドレスだよ
+        # キャリヤの CIDR に含まれたIPアドレスだよ
     }
 
 例えば運用中のアプリケーションを止めずにCIDRの定義を reload することができる。
@@ -55,9 +55,9 @@ HTTP::MobileAttribute::Plugin::CIDR - キャリヤのCIDRの含まれるIPアド
 
 =head1 DESCRIPTION
 
-'isa_cidr'メソッドに調べたいIPアドレスを引数として呼ぶと、L<Net::CIDR::MobileJP>を使って、キャリヤのCIDRに含まれるIPアドレスかが分かります。
+'isa_cidr'メソッドに調べたいIPアドレスを引数として呼ぶと、L<Net::CIDR::MobileJP>を使って、キャリヤの CIDR に含まれるIPアドレスかが分かります。
 
-各キャリヤのCIDR情報はマシンリーダブルな形式では提供されていないのでL<Net::CIDR::MobileJP>に付属するnet-cidr-mobilejp-scraper.plを用いて各キャリアのCIDR情報をまとめたYAMLファイルを作る必要があります。
+各キャリヤの CIDR 情報はマシンリーダブルな形式では提供されていないのでL<Net::CIDR::MobileJP>に付属するnet-cidr-mobilejp-scraper.plを用いて各キャリアの CIDR 情報をまとめたYAMLファイルを作る必要があります。
 
 =head1 TODO
 
