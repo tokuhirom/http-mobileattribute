@@ -39,7 +39,7 @@ sub docomo_guid :CarrierMethod('DoCoMo', 'guid') {
     $c->request->get('x-dcmguid');
 }
 
-sub supportes_user_id :Method {
+sub supports_user_id :Method {
     my ($self, $c) = @_;
 
     return ( $c->is_ezweb || ($c->is_thirdforce && !$c->is_type_c) || $c->is_docomo )  ? 1 : 0;

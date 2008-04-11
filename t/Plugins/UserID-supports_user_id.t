@@ -9,14 +9,14 @@ use HTTP::MobileAttribute plugins => [
 plan tests => 1*blocks;
 
 filters {
-    input => [qw/supportes_user_id/],
+    input => [qw/supports_user_id/],
 };
 
 run_is 'input' => 'expected';
 
-sub supportes_user_id {
+sub supports_user_id {
     my $ua = shift;
-    HTTP::MobileAttribute->new( $ua )->supportes_user_id ? 'supported' : 'not supported';
+    HTTP::MobileAttribute->new( $ua )->supports_user_id ? 'supported' : 'not supported';
 }
 
 __END__
