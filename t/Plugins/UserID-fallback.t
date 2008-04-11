@@ -2,7 +2,13 @@ use strict;
 use warnings;
 use Test::Base;
 
-use HTTP::MobileAttribute plugins => [qw/ Core ID /];
+use HTTP::MobileAttribute plugins => [
+    'Core',
+    +{
+        module => 'UserID',
+        config => { fallback => 1 },
+    }
+];
 
 plan tests => 1*blocks;
 
@@ -23,7 +29,7 @@ sub get_display {
         $param = bless { %{ $env->{param} } }, __PACKAGE__;
     }
     +{
-        id => $hma->id($param) || '',
+        id => $hma->user_id($param) || '',
     };
 }
 
@@ -70,7 +76,13 @@ id: 0123456789ab
 --- input
 HTTP_USER_AGENT: DoCoMo/2.0 N2001(c10;ser0123456789abcde;icc01234567890123456789)
 --- expected
-id:
+id: 0123456789abcde
+
+===
+--- input
+HTTP_USER_AGENT: DoCoMo/1.0/P503i/c10/serNMABH200331
+--- expected
+id: NMABH200331
 
 ===
 --- input
@@ -96,5 +108,4 @@ id: 0123456789abcdef
 --- input
 HTTP_USER_AGENT: J-PHONE/4.0/J-SH51/SNXXXXXXXXX SH/0001a Profile/MIDP-1.0 Configuration/CLDC-1.0 Ext-Profile/JSCL-1.1.0
 --- expected
-id: 
-
+id: XXXXXXXXX

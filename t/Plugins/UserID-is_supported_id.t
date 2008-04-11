@@ -3,7 +3,7 @@ use warnings;
 use Test::Base;
 
 use HTTP::MobileAttribute plugins => [
-    qw/ID/
+    qw/UserID/
 ];
 
 plan tests => 1*blocks;

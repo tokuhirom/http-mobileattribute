@@ -1,23 +1,23 @@
-package HTTP::MobileAttribute::Plugin::ID;
+package HTTP::MobileAttribute::Plugin::UserID;
 use strict;
 use warnings;
 use base qw/HTTP::MobileAttribute::Plugin/;
 
 __PACKAGE__->depends([qw/IS IS::ThirdForce/]);
 
-sub thirdforce :CarrierMethod('ThirdForce', 'id') {
+sub thirdforce :CarrierMethod('ThirdForce', 'user_id') {
     my ($self, $c) = @_;
     my $id;
     $id = $c->serial_number if $self->config->{fallback};
     $c->request->get('x-jphone-uid') || $id;
 }
 
-sub ezweb :CarrierMethod('EZweb', 'id') {
+sub ezweb :CarrierMethod('EZweb', 'user_id') {
     my ($self, $c) = @_;
     $c->request->get('x-up-subno');
 }
 
-sub docomo_default :CarrierMethod('DoCoMo', 'id') {
+sub docomo_default :CarrierMethod('DoCoMo', 'user_id') {
     my ($self, $c, $req) = @_;
     my $id;
     if ($self->config->{fallback}) {
@@ -56,11 +56,11 @@ $r->param('uid') L<Apache::DoCoMoUID>
 
 =for stopwords DoCoMo
 
-=head1 NAME HTTP::MobileAttribute::Plugin::ID - ユーザIDや端末IDを返す
+=head1 NAME HTTP::MobileAttribute::Plugin::UserID - ユーザIDや端末IDを返す
 
 =head1 DESCRIPTION
 
-    use HTTP::MobileAttribute plugins => [qw/ ID /];
+    use HTTP::MobileAttribute plugins => [qw/ UserID /];
     my $hma = HTTP::MobileAttribute->new($ua);
     $hma->id;
 
@@ -120,4 +120,4 @@ Kazuhiro Osawa
 
 =head1 SEE ALSO
 
-L<HTTP::MobileAttribute>, L<Net::CIDR::MobileJP>
+L<HTTP::MobileAttribute>

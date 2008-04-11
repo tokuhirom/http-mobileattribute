@@ -5,8 +5,8 @@ use Test::Base;
 use HTTP::MobileAttribute plugins => [
     'Core',
     +{
-        module => 'ID',
-        config => { fallback => 1 },
+        module => 'UserID',
+        config => { fallback => 1, fallback_with_cardid => 1 },
     }
 ];
 
@@ -29,7 +29,7 @@ sub get_display {
         $param = bless { %{ $env->{param} } }, __PACKAGE__;
     }
     +{
-        id => $hma->id($param) || '',
+        id => $hma->user_id($param) || '',
     };
 }
 
@@ -76,36 +76,10 @@ id: 0123456789ab
 --- input
 HTTP_USER_AGENT: DoCoMo/2.0 N2001(c10;ser0123456789abcde;icc01234567890123456789)
 --- expected
-id: 0123456789abcde
+id: 0123456789abcde,01234567890123456789
 
 ===
 --- input
 HTTP_USER_AGENT: DoCoMo/1.0/P503i/c10/serNMABH200331
 --- expected
 id: NMABH200331
-
-===
---- input
-HTTP_USER_AGENT: UP.Browser/3.04-TST4 UP.Link/3.4.5.6
-HTTP_X_UP_SUBNO: 012_345678.9abcd
---- expected
-id: 012_345678.9abcd
-
-===
---- input
-HTTP_USER_AGENT: UP.Browser/3.04-TST4 UP.Link/3.4.5.6
---- expected
-id: 
-
-===
---- input
-HTTP_USER_AGENT: J-PHONE/4.0/J-SH51/SNXXXXXXXXX SH/0001a Profile/MIDP-1.0 Configuration/CLDC-1.0 Ext-Profile/JSCL-1.1.0
-HTTP_X_JPHONE_UID: 0123456789abcdef
---- expected
-id: 0123456789abcdef
-
-===
---- input
-HTTP_USER_AGENT: J-PHONE/4.0/J-SH51/SNXXXXXXXXX SH/0001a Profile/MIDP-1.0 Configuration/CLDC-1.0 Ext-Profile/JSCL-1.1.0
---- expected
-id: XXXXXXXXX
