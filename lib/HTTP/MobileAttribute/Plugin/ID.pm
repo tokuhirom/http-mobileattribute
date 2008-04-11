@@ -42,6 +42,8 @@ __END__
 
 $r->param('uid') L<Apache::DoCoMoUID>
 
+=for stopwords FOMA guid fallback
+
 =encoding UTF-8
 
 =for stopwords DoCoMo
@@ -66,7 +68,7 @@ $r->param('uid') L<Apache::DoCoMoUID>
     my $hma = HTTP::MobileAttribute->new($ua);
     $hma->id;
 
-FOMAの場合にはカードIDも付与する
+FOMA の場合にはカードIDも付与する
 
     use HTTP::MobileAttribute plugins => [
         'Core',
