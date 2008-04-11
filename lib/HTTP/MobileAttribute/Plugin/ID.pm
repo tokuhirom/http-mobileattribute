@@ -3,6 +3,8 @@ use strict;
 use warnings;
 use base qw/HTTP::MobileAttribute::Plugin/;
 
+__PACKAGE__->depends([qw/IS IS::ThirdForce/]);
+
 sub thirdforce :CarrierMethod('ThirdForce', 'id') {
     my ($self, $c) = @_;
     my $id;
@@ -35,6 +37,12 @@ sub docomo_uid :CarrierMethod('DoCoMo', 'uid') {
 sub docomo_guid :CarrierMethod('DoCoMo', 'guid') {
     my ($self, $c) = @_;
     $c->request->get('x-dcmguid');
+}
+
+sub is_supported_id :Method {
+    my ($self, $c) = @_;
+
+    return ( $c->is_ezweb || ($c->is_thirdforce && !$c->is_type_c) || $c->is_docomo )  ? 1 : 0;
 }
 
 1;
