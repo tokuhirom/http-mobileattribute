@@ -70,4 +70,4 @@ t/Plugins/GPS.t
 t/Plugins/UserID-base.t
 t/Plugins/UserID-fallback-card.t
 t/Plugins/UserID-fallback.t
-t/Plugins/UserID-is_supported_id.t
+t/Plugins/UserID-is_supported_user_id.t

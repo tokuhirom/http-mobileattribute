@@ -1,7 +1,7 @@
 package HTTP::MobileAttribute;
 use strict;
 use warnings;
-our $VERSION = '0.09';
+our $VERSION = '0.10';
 use HTTP::MobileAttribute::Request;
 use HTTP::MobileAttribute::CarrierDetector;
 use UNIVERSAL::require;

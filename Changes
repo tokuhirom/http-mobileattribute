@@ -1,5 +1,9 @@
 Revision history for Perl extension HTTP::MobileAttribute
 
+0.10
+
+    - Plugin::UserID->is_supported_id => Plugin::UserID->is_supported_user_id
+
 0.09
 
     - renamed plugin: Plugin::ID => Plugin::UserID.
