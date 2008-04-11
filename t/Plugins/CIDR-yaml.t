@@ -1,6 +1,15 @@
 use strict;
 use warnings;
 use Test::Base;
+
+BEGIN {
+    eval {
+        require Net::CIDR::MobileJP;
+        Net::CIDR::MobileJP->import( -profile => 't/perlcriticrc' );
+    };
+    plan skip_all => "Net::CIDR::MobileJP is not installed." if $@;
+};
+
 use File::Spec::Functions;
 use HTTP::MobileAttribute plugins => [
     'Core',
