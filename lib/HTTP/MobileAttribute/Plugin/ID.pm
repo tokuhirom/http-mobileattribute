@@ -20,7 +20,7 @@ sub docomo_default :CarrierMethod('DoCoMo', 'id') {
     my $id;
     if ($self->config->{fallback}) {
         $id = $c->serial_number;
-        $id .= ',' . $c->card_id if $self->config->{fallback} =~ /with_cardid/ && $c->card_id;
+        $id .= ',' . $c->card_id if $self->config->{fallback_with_cardid} && $c->card_id;
     }
     $self->docomo_uid($c, $req) || $self->docomo_guid($c) || $id;
 }
@@ -74,7 +74,7 @@ FOMA の場合にはカードIDも付与する
         'Core',
         +{
             module => 'ID',
-            config => { fallback => 'with_cardid' },
+            config => { fallback => 1, fallback_with_cardid => 1 },
         }
     ];
     my $hma = HTTP::MobileAttribute->new($ua);
@@ -98,7 +98,7 @@ guidのみを直接取得する(DoCoMoのみ)
 'id'メソッド呼ぶと、キャリヤより送信されてくるユーザIDを取得できます。
 
 ユーザの設定によりキャリアからユーザIDが送られてこないときには undef が変えされますが、 load_plugin 時に fallback => 1 と config を追加すると、ユーザIDが取れないときには端末IDを取得するようになります。
-また、 FOMA の時には fallback => 'with_cardid' と設定すると '端末ID,カードID'という形式でIDが戻されます。
+また、 FOMA の時には fallback_with_cardid => 1 と設定すると '端末ID,カードID'という形式でIDが戻されます。
 
 fallback オプションを利用すると、ユーザIDなのか端末IDなのかを気にしたい時に煩雑になりがちなので、 fallback オプションの利用は控えた方が良いでしょう。
 

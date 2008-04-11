@@ -6,7 +6,7 @@ use HTTP::MobileAttribute plugins => [
     'Core',
     +{
         module => 'ID',
-        config => { fallback => 'with_cardid' },
+        config => { fallback => 1, fallback_with_cardid => 1 },
     }
 ];
 
