@@ -48,15 +48,15 @@ sub supports_user_id :Method {
 1;
 __END__
 
-$r->param('uid') L<Apache::DoCoMoUID>
-
 =for stopwords FOMA guid fallback
-
-=encoding UTF-8
 
 =for stopwords DoCoMo
 
-=head1 NAME HTTP::MobileAttribute::Plugin::UserID - ユーザIDや端末IDを返す
+=encoding UTF-8
+
+=head1 NAME
+
+HTTP::MobileAttribute::Plugin::UserID - ユーザIDや端末IDを返す
 
 =head1 DESCRIPTION
 
