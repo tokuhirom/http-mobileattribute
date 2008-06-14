@@ -2,7 +2,7 @@ use inc::Module::Install;
 name 'HTTP-MobileAttribute';
 all_from 'lib/HTTP/MobileAttribute.pm';
 
-requires 'Class::Component'         => '0.15';
+requires 'Class::Component'         => '0.17';
 
 features(
     'Plugin::CIDR' => [
@@ -11,8 +11,8 @@ features(
     ],
 );
 
-build_requires 'YAML';
-build_requires 'Test::Warn';
+test_requires 'YAML';
+test_requires 'Test::Warn';
 tests 't/*.t t/Plugins/*t';
 use_test_base;
 auto_include;
