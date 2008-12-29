@@ -1,5 +1,9 @@
 Revision history for Perl extension HTTP::MobileAttribute
 
+0.12
+
+    - support apache2
+
 0.11.1
 
     - supportes_user_id => supports_user_id

@@ -41,6 +41,7 @@ lib/HTTP/MobileAttribute/Plugin/UserID.pm
 lib/HTTP/MobileAttribute/Plugin/XHTMLCompliant.pm
 lib/HTTP/MobileAttribute/Request.pm
 lib/HTTP/MobileAttribute/Request/Apache.pm
+lib/HTTP/MobileAttribute/Request/APRTable.pm
 lib/HTTP/MobileAttribute/Request/Env.pm
 lib/HTTP/MobileAttribute/Request/HTTPHeaders.pm
 Makefile.PL
