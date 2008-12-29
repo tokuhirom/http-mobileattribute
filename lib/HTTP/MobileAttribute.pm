@@ -76,6 +76,9 @@ HTTP::MobileAttribute - Yet Another HTTP::MobileAgent
   $agent->is_supported_flash();
   $agent->is_supported_gif();
 
+  # in apache2
+  my $agent = HTTP::MobileAttribute->new($r->headers_in);
+
 =head1 WARNINGS
 
 WE ARE NOW TESTING THE CONCEPT.

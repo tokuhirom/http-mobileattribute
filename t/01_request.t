@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use Test::More tests => 9;
+use Test::More tests => 11;
 
 BEGIN { use_ok 'HTTP::MobileAttribute::Request' }
 
@@ -46,4 +46,18 @@ SKIP: {
     my $req = HTTP::MobileAttribute::Request->new($r);
     isa_ok $req, 'HTTP::MobileAttribute::Request::Apache';
     is $req->get('User-Agent'), $ua;
+}
+
+SKIP: {
+    skip "this test requires APR", 2 unless eval " use APR::Pool; use APR::Table; 1; ";
+
+    my $pool = APR::Pool->new;
+    my $table = APR::Table::make($pool, 2);
+    $table->set('User-Agent', $ua);
+
+    my $req = HTTP::MobileAttribute::Request->new($table);
+    isa_ok $req, 'HTTP::MobileAttribute::Request::APRTable';
+    is $req->get('user-agent'), $ua;
+
+    $pool->destroy();
 }
