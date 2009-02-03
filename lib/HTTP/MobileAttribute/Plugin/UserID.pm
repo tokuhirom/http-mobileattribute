@@ -56,7 +56,7 @@ __END__
 
 =head1 NAME
 
-HTTP::MobileAttribute::Plugin::UserID - ユーザIDや端末IDを返す
+HTTP::MobileAttribute::Plugin::UserID - ユーザ ID や端末 ID を返す
 
 =head1 DESCRIPTION
 
@@ -64,7 +64,7 @@ HTTP::MobileAttribute::Plugin::UserID - ユーザIDや端末IDを返す
     my $hma = HTTP::MobileAttribute->new($ua);
     $hma->id;
 
-ユーザIDが送信されていなければ端末IDを返す
+ユーザ ID が送信されていなければ端末 ID を返す
 
     use HTTP::MobileAttribute plugins => [
         'Core',
@@ -76,7 +76,7 @@ HTTP::MobileAttribute::Plugin::UserID - ユーザIDや端末IDを返す
     my $hma = HTTP::MobileAttribute->new($ua);
     $hma->id;
 
-FOMA の場合にはカードIDも付与する
+FOMA の場合にはカード ID も付与する
 
     use HTTP::MobileAttribute plugins => [
         'Core',
@@ -103,16 +103,16 @@ guidのみを直接取得する(DoCoMoのみ)
 
 =head1 DESCRIPTION
 
-'id'メソッド呼ぶと、キャリヤより送信されてくるユーザIDを取得できます。
+'id'メソッド呼ぶと、キャリヤより送信されてくるユーザ ID を取得できます。
 
-ユーザの設定によりキャリアからユーザIDが送られてこないときには undef が変えされますが、 load_plugin 時に fallback => 1 と config を追加すると、ユーザIDが取れないときには端末IDを取得するようになります。
-また、 FOMA の時には fallback_with_cardid => 1 と設定すると '端末ID,カードID'という形式でIDが戻されます。
+ユーザの設定によりキャリアからユーザ ID が送られてこないときには undef が変えされますが、 load_plugin 時に fallback => 1 と config を追加すると、ユーザ ID が取れないときには端末 ID を取得するようになります。
+また、 FOMA の時には fallback_with_cardid => 1 と設定すると '端末 ID ,カード ID 'という形式で ID が戻されます。
 
-fallback オプションを利用すると、ユーザIDなのか端末IDなのかを気にしたい時に煩雑になりがちなので、 fallback オプションの利用は控えた方が良いでしょう。
+fallback オプションを利用すると、ユーザ ID なのか端末 ID なのかを気にしたい時に煩雑になりがちなので、 fallback オプションの利用は控えた方が良いでしょう。
 
 なおL<Apache::DoCoMoUID>などにより、 HTTP_X_DOCOMO_UID 環境変数が設定されている場合には uid の取得は HTTP_X_DOCOMO_UID を利用します。
 
-DoCoMo の場合のみ、IDを取得する優先順位は uid -> guid -> fallback の順になります。
+DoCoMo の場合のみ、ID を取得する優先順位は uid -> guid -> fallback の順になります。
 
 =head1 AUTHORS
 

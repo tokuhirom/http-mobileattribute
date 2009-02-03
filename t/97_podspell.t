@@ -9,3 +9,4 @@ Tokuhiro Matsuno
 HTTP::MobileAttribute
 UserAgent
 Kazuhiro Osawa
+YAML
