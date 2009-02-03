@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use Test::More tests => 11;
+use Test::More tests => 13;
 
 BEGIN { use_ok 'HTTP::MobileAttribute::Request' }
 
@@ -26,6 +26,18 @@ SKIP: {
     skip "no HTTP::Headers", 2 if $@;
 
     my $header = HTTP::Headers->new;
+    $header->header('User-Agent' => $ua);
+
+    my $req = HTTP::MobileAttribute::Request->new($header);
+    isa_ok $req, 'HTTP::MobileAttribute::Request::HTTPHeaders';
+    is $req->get('user_agent'), $ua;
+}
+
+SKIP: {
+    eval { require HTTP::Headers::Fast; };
+    skip "no HTTP::Headers::Fast", 2 if $@;
+
+    my $header = HTTP::Headers::Fast->new;
     $header->header('User-Agent' => $ua);
 
     my $req = HTTP::MobileAttribute::Request->new($header);
