@@ -81,6 +81,8 @@ HTTP::MobileAttribute::Plugin::Display - ディスプレイサイズの情報を
 DoCoMo は、HTTP Header 等からこの情報をうけとることができないので、データをプラグインにわたす必要があります。
 この情報は、 DoCoMo からマシンリーダブルな形式では提供されていないので L<WWW::MobileCarrierJP> 等を駆使してスクレイピングする必要があります。
 
+これを行うスクリプトは tools/make-docomo-display-map.pl として同梱してあります。
+
 =head1 AUTHORS
 
 Tokuhiro Matsuno
