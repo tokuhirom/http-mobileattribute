@@ -11,7 +11,9 @@ sub dump_it {
     my $dat = WWW::MobileCarrierJP::DoCoMo::Display->scrape;
     my %map;
     for my $phone (@$dat) {
-        $map{ uc $phone->{model} } = +{
+        my $model = uc $phone->{model};
+        $model =~ s/-//; # $ma->model は - をふくまないものがおくられてきてる
+        $map{ $model } = +{
             width  => $phone->{width},
             height => $phone->{height},
             color  => $phone->{is_color},
