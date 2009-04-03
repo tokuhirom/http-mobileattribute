@@ -1,5 +1,11 @@
 Revision history for Perl extension HTTP::MobileAttribute
 
+0.15
+    
+    - i miss'ed packaging.
+      added bin/make-docomo-display-map.pl
+      (reported by ZIGUZAGU++)
+
 0.14
 
     - N-02A みたいな端末のときに端末の横幅がとれない問題に対応

@@ -1,7 +1,7 @@
 package HTTP::MobileAttribute;
 use strict;
 use warnings;
-our $VERSION = '0.14';
+our $VERSION = '0.15';
 use HTTP::MobileAttribute::Request;
 use HTTP::MobileAttribute::CarrierDetector;
 use UNIVERSAL::require;
@@ -141,6 +141,7 @@ Daisuke Maki
     Tatsuhiko Miyagawa(original author of HTTP::MobileAgent)
     Satoshi Tanimoto
     Yoshiki Kurihara(Current mentainer of HTTP::MobileAgent)
+    ZIGUZAGU
 
 =head1 SEE ALSO
 
