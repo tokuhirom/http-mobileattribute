@@ -104,3 +104,12 @@ depth: 262144
 height: 270
 width: 240
 
+===
+--- input
+HTTP_USER_AGENT: DoCoMo/2.0 N04A(c100;TB;W24H16)
+--- expected
+color: 1
+depth: 262144
+height: 320
+width: 240
+
