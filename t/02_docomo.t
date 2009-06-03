@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use Test::More tests => 555;
+use Test::More tests => 561;
 use HTTP::MobileAttribute plugins => [qw/Core XHTMLCompliant IS IS::DoCoMo CarrierLetter/];
 
 my @Tests = (
@@ -215,3 +215,6 @@ DoCoMo/2.0/N502i
 DoCoMo/2.0/N502it
 DoCoMo/2.0/N503i
 DoCoMo/3.0/N503
+DoCoMo/2.0 N06A3(c500;TB;W24H16)
+DoCoMo/2.0 N04A(c100;TB;W24H16)
+DoCoMo/2.0 N08A(c500;TB;W24H16)
