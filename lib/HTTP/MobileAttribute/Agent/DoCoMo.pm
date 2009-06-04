@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use HTTP::MobileAttribute::Agent::Base;
 
-__PACKAGE__->mk_accessors(qw/version model status bandwidth serial_number card_id comment name/);
+__PACKAGE__->mk_accessors(qw/version model status bandwidth serial_number card_id comment name cache_size/);
 
 sub parse {
     my ( $self, ) = @_;
