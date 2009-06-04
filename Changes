@@ -1,5 +1,9 @@
 Revision history for Perl extension HTTP::MobileAttribute
 
+0.16
+
+    - added Plugin::DoCoMo::Browser for detect i-mode broser version
+
 0.15
     
     - i miss'ed packaging.

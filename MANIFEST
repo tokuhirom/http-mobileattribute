@@ -33,6 +33,7 @@ lib/HTTP/MobileAttribute/Plugin/CarrierLetter.pm
 lib/HTTP/MobileAttribute/Plugin/CIDR.pm
 lib/HTTP/MobileAttribute/Plugin/Core.pm
 lib/HTTP/MobileAttribute/Plugin/Display.pm
+lib/HTTP/MobileAttribute/Plugin/DoCoMo/Browser.pm
 lib/HTTP/MobileAttribute/Plugin/Encoding.pm
 lib/HTTP/MobileAttribute/Plugin/GPS.pm
 lib/HTTP/MobileAttribute/Plugin/IS.pm
@@ -68,6 +69,7 @@ t/Plugins/CIDR-base.t
 t/Plugins/CIDR-setter.t
 t/Plugins/CIDR-yaml.t
 t/Plugins/Display.t
+t/Plugins/DoCoMo/Browser.t
 t/Plugins/Encoding.t
 t/Plugins/GPS.t
 t/Plugins/UserID-base.t
