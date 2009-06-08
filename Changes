@@ -1,5 +1,10 @@
 Revision history for Perl extension HTTP::MobileAttribute
 
+0.17
+
+    - specify the required perl version. we need 5.8.1 or later =)
+      (related with rt:#43166)
+
 0.16
 
     - added Plugin::DoCoMo::Browser for detect i-mode broser version
