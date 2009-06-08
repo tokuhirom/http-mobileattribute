@@ -1,5 +1,9 @@
 Revision history for Perl extension HTTP::MobileAttribute
 
+0.18
+
+    - cleanup code(no feature changes)
+
 0.17
 
     - specify the required perl version. we need 5.8.1 or later =)
