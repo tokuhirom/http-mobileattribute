@@ -20,6 +20,7 @@ features(
 test_requires 'YAML';
 test_requires 'Test::Warn';
 tests 't/*.t t/Plugins/*.t t/*/*/*.t';
+author_tests 'xt';
 use_test_base;
 auto_include;
 WriteAll;
