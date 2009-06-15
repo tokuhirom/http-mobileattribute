@@ -118,6 +118,40 @@ HTTP::MobileAttribute::Plugin::Locator - location support
 
 This module is copy & pasted from HTTP::MobileAgent::Plugin::Locator.
 
+=head1 METHODS
+
+=head2 get_location([params], $option_ref);
+
+return Geo::Coordinates::Converter::Point instance formatted if specify gps or basic location parameters sent from carrier. The parameters are different by each carrier.
+
+This method accept a Apache instance, CGI instance or hashref of query parameters.
+
+=over
+
+=item $option_ref->{locator}
+
+select locator class algorithm option.
+
+LOCATOR_AUTO_FROM_COMPLIANT
+    auto detect locator from gps compliant. This is I<default>.
+
+LOCATOR_AUTO
+    auto detect locator class from params.
+
+LOCATOR_GPS
+    select GPS class.
+
+LOCATOR_BASIC
+    select BasicLocation class.
+
+=back
+
+=head1 AUTHORS
+
+copy & pasted by Tokuhiro Matsuno
+
+L<HTTP::MobileAgent::Plugin::Locator> is written by Yoshiki Kurihara
+
 =head1 SEE ALSO
 
 L<HTTP::MobileAgent::Plugin::Locator>
