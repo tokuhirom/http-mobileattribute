@@ -10,3 +10,10 @@ HTTP::MobileAttribute
 UserAgent
 Kazuhiro Osawa
 YAML
+BasicLocation
+CGI
+GPS
+Kurihara
+Yoshiki
+gps
+params
