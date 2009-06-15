@@ -81,7 +81,8 @@ t/Plugins/CIDR-yaml.t
 t/Plugins/Display.t
 t/Plugins/DoCoMo/Browser.t
 t/Plugins/Encoding.t
-t/Plugins/GPS.t
+t/Plugins/GPS-gps_compliant.t
+t/Plugins/GPS-is_gps.t
 t/Plugins/Locator/00.load.t
 t/Plugins/Locator/01.get_location.t
 t/Plugins/Locator/02.gps_comliant.t

@@ -39,3 +39,30 @@ sub gc_h :CarrierMethod('AirHPhone', 'gps_compliant') {
 }
 
 1;
+__END__
+
+=head1 NAME
+
+HTTP::MobileAttribute::Plugin::GPS - gps compliant?
+
+=head1 METHODS
+
+=over 4
+
+=item $agent->gps_compliant()
+
+GPS対応機種かどうかを返します
+
+=item $agent->is_gps();
+
+HTTP::MobileAgent との互換性のためだけに実装されています。つかわないでください。
+
+=back
+
+=head1 AUTHORS
+
+nekokak
+
+Tokuhiro Matsuno
+
+=cut
