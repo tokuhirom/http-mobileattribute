@@ -3,17 +3,23 @@ name 'HTTP-MobileAttribute';
 all_from 'lib/HTTP/MobileAttribute.pm';
 
 requires 'Class::Component'         => '0.17';
+requires 'UNIVERSAL::require'       => 0.13;
 
 features(
     'Plugin::CIDR' => [
         -default => 0,
         recommends('Net::CIDR::MobileJP', 0.11),
     ],
+    'Plugin::Locator' => [
+        -default => 0,
+        recommends('Geo::Coordinates::Converter', 0.04),
+        recommends('Geo::Coordinates::Converter::iArea', 0.08),
+    ],
 );
 
 test_requires 'YAML';
 test_requires 'Test::Warn';
-tests 't/*.t t/Plugins/*t';
+tests 't/*.t t/Plugins/*.t t/*/*/*.t';
 use_test_base;
 auto_include;
 WriteAll;
