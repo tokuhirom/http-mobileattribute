@@ -1,5 +1,5 @@
 use strict;
-use Test::More tests => 27;
+use Test::More tests => 32;
 use HTTP::MobileAttribute plugins => [qw/Core IS CarrierLetter IS::ThirdForce/];
 
 my @Tests = (
@@ -47,12 +47,16 @@ while (<DATA>) {
     chomp;
     my($ua,$model) = split(/,/,$_);
     local $ENV{HTTP_USER_AGENT} = $ua;
+    my @warnings;
+    local $SIG{__WARN__} = sub { push @warnings, shift };
     my $agent = HTTP::MobileAttribute->new;
-    ok $agent->name && ($agent->name,'Vodafone' || $agent->name =~ /^MOT/);
+    ok $agent->name && ($agent->name,'Vodafone' || $agent->name =~ /^MOT/), $ua;
     ok !$agent->is_docomo && $agent->is_vodafone && !$agent->is_ezweb;
     ok $agent->is_type_3gc;
+    is "@warnings", "", 'no warnings';
 }
 
 
 __END__
 SoftBank/1.0/910T/TJ001/SNXXXXXXXXX Browser/NetFront/3.3 Profile/MIDP-2.0 Configuration/CLDC-1.1
+SoftBank/1.0/708SC/SCJ001/SNXXXXXXXXX Browser/NetFront/3.3

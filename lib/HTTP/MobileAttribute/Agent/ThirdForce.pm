@@ -79,8 +79,10 @@ sub _parse_3gc {
     }
 
     my($java_info) = $self->user_agent =~ /(Profile.*)$/;
-    my %java_info = map split(m!/!), split / /,$java_info;
-    $self->{java_info} = \%java_info;
+    if ($java_info) {
+        my %java_info = map split(m!/!), split / /,$java_info;
+        $self->{java_info} = \%java_info;
+    }
 }
 
 # for softbank 3gc
