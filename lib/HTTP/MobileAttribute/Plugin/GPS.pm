@@ -20,12 +20,12 @@ our $DOCOMO_GPS_COMPLIANT_MODELS = qr/(?:903i(?!TV|X)|(?:90[4-6]|SA[78]0[02])i)/
 
 sub gc_i :CarrierMethod('DoCoMo', 'gps_compliant') {
     my ($self, $c) = @_;
-    return $c->model =~ $DOCOMO_GPS_COMPLIANT_MODELS;
+    return $c->model && ($c->model =~ $DOCOMO_GPS_COMPLIANT_MODELS);
 }
 
 sub gc_e :CarrierMethod('EZweb', 'gps_compliant') {
     my ($self, $c) = @_;
-    my @specs = split //, $c->request->get('x-up-devcap-multimedia');
+    my @specs = split //, $c->request->get('x-up-devcap-multimedia') || '';
     return defined $specs[ 1 ] && $specs[ 1 ] =~ /^[23]$/;
 }
 
