@@ -14,5 +14,13 @@ my $agent = HTTP::MobileAttribute::Agent::AirHPhone->new(
     }
 );
 
-warnings_like { $agent->parse } qr{please contact the author};
+my $warn = do {
+    my $warn;
+    local $SIG{__WARN__} = sub {
+        $warn .= "@_";
+    };
+    $agent->parse();
+    $warn;
+};
+like $warn, qr{please contact the author};
 
