@@ -1,7 +1,6 @@
 use strict;
 use warnings;
 use Test::More tests => 1;
-use Test::Warn;
 use HTTP::MobileAttribute::Agent::AirHPhone;
 use HTTP::MobileAttribute::Request;
 
