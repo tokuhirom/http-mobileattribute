@@ -1,5 +1,9 @@
 Revision history for Perl extension HTTP::MobileAttribute
 
+0.21
+
+    - fixed deps RT#50588
+
 0.20
 
     - remove deps with Test::Warn
