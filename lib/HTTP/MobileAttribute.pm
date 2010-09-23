@@ -65,7 +65,7 @@ __END__
 
 =head1 NAME
 
-HTTP::MobileAttribute - Yet Another HTTP::MobileAgent
+HTTP::MobileAttribute - Yet Another HTTP::MobileAgent(DEPRECATRED)
 
 =head1 SYNOPSIS
 
@@ -80,11 +80,10 @@ HTTP::MobileAttribute - Yet Another HTTP::MobileAgent
   # in apache2
   my $agent = HTTP::MobileAttribute->new($r->headers_in);
 
-=head1 WARNINGS
+=head1 DEPRECATED WARNINGS
 
-WE ARE NOW TESTING THE CONCEPT.
-
-DO NOT USE THIS MODULE.
+THIS MODULE WAS DEPRECATED. THIS MODULE IS NO LONGER MAINTAIN.
+PLEASE USE L<HTTP::MobileAgent> INSTEAD.
 
 =head1 DESCRIPTION
 
