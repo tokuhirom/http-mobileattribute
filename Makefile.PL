@@ -26,5 +26,4 @@ test_requires 'YAML';
 tests 't/*.t t/Plugins/*.t t/*/*/*.t';
 author_tests 'xt';
 use_test_base;
-auto_include;
 WriteAll;
