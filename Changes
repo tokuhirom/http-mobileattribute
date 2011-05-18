@@ -1,5 +1,9 @@
 Revision history for Perl extension HTTP::MobileAttribute
 
+0.23
+
+    - Use of qw(...) as parentheses is deprecated
+
 0.22
 
     - deprecated.
