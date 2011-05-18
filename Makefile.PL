@@ -17,6 +17,11 @@ features(
     ],
 );
 
+if ($Module::Install::AUTHOR) {
+	test_requires 'Geo::Coordinates::Converter';
+	test_requires 'Geo::Coordinates::Converter::iArea';
+}
+
 test_requires 'YAML';
 tests 't/*.t t/Plugins/*.t t/*/*/*.t';
 author_tests 'xt';
